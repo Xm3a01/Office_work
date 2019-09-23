@@ -19,7 +19,7 @@ class CreateSubSpecialsTable extends Migration
             $table->integer('special_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('special_id')->references('id')->on('specials')->OnDelete('cascade'); //references
+            $table->foreign('specials_id')->references('id')->on('specials')->OnDelete('cascade'); //references
         });
     }
 

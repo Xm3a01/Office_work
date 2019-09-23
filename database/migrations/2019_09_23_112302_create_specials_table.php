@@ -16,10 +16,11 @@ class CreateSpecialsTable extends Migration
         Schema::create('specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('role_id')->unsigned();
+            $table->integer('roles_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles')->OnDelete('cascade');
+            $table->foreign('roles_id')->references('id')->on('roles')->OnDelete('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade'); //specials
         });
     }
 
