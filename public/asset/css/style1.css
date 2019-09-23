@@ -305,9 +305,7 @@ input {
     font-family: Raleway;
     border: 1px solid #aaaaaa;
 }
-input[type="text"], input[type="password"], input[type="email"], textarea {
-    background: #e4e4e4 none repeat scroll 0 0;
-    border: medium none; 
+input[type="text"], input[type="password"], input[type="email"], textarea { 
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 20px;
