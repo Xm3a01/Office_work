@@ -19,7 +19,7 @@ class CreateSubSpecialsTable extends Migration
             $table->unsignedBigInteger('special_id');
             $table->timestamps();
 
-            $table->foreign('special_id')->references('id')->on('specials')->OnDelete('cascade'); //references
+            $table->foreign('special_id')->references('id')->on('specials')->dropForeign('sub_specials_special_id_foreign'); //references
         });
     }
 
@@ -31,5 +31,7 @@ class CreateSubSpecialsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('sub_specials');
+        Schema::disableForeignKeyConstraints();
+        
     }
 }
