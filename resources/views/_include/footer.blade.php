@@ -2,7 +2,7 @@
     <div class="container">
        <div class="row">
         <div class="col-md-4">
-          <h3 class="footer-heading mb-4 text-white">عن الشركة</h3>
+          <h3 class="footer-heading mb-4 text-white">    عن الشركة  </h3>
           <p>هو ببساطة نص شكلي ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف </p>
           <p><a href="#" class="btn btn-primary pill text-white">المزيـد</a></p>
         </div>    

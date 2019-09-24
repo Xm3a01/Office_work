@@ -21,7 +21,7 @@
   
     <link rel="stylesheet" href=" {{asset('asset/css/aos.css')}} ">
     <link rel="stylesheet" href=" {{asset('asset/css/style.css')}} ">
-    <link rel="stylesheet" href=" {{asset('asset/css/style1.css')}} ">
+    {{-- <link rel="stylesheet" href=" {{asset('asset/css/style1.css')}} "> --}}
     <link rel="stylesheet" href=" {{asset('asset/css/filepond.css')}} ">
 </head>
 <body>
@@ -34,15 +34,15 @@
             </div>
             <div class="site-mobile-menu-body"></div>
         </div>
-@include('include.navbar')
+@include('_include.navbar')
 
     @yield('content')
  
 
-@include('include.footer') 
+@include('_include.footer') 
 
    
-@include('include.jsfile') 
+@include('_include.jsfile') 
 </div> 
 </body>
 </html>
