@@ -453,13 +453,14 @@ color: #fff;
 font-size: 30px;
 }
 
-
+.shadow{
+      box-shadow: 0 9px 10px -5px rgba(0, 0, 0, .09) !important;
+}
 /* Style the input fields */
 input {
   padding: 10px;
   width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
+  font-size: 17px; 
   border: 1px solid #c1c1c1;
   border-radius: 3px;
 }
@@ -522,9 +523,14 @@ input.invalid {
   }
 }
 .post-list .single-post {
-  padding: 20px 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 20px ;
   background-color: #f9f9ff;
   margin-bottom: 30px;
+}
+.details p{
+  font-size: 14px;
+  margin: 2px;
 }
 .single-post {
   margin-bottom: 30px;
@@ -543,17 +549,18 @@ input.invalid {
 .btns a { 
     color: #fff;
     background-color: #fb236a;
-    padding: 10px 15px;
+    padding: 5px 15px;
     border-radius: 30px;
     border: 2px solid #fb236a;
     box-shadow: 0 5px 20px -11px rgba(0, 0, 0, 0.9) !important;
-
+  
 }
 .btns a:hover { 
   color: #fb236a;
   background-color: #ffffff;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border-radius: 30px;
+  transition: .3s all ease;
   border: 2px solid #fb236a;
   box-shadow: 0 5px 20px -11px rgba(255, 255, 255, 255) !important;
 
@@ -1726,7 +1733,7 @@ a:hover {
 }
 
 .unit-5 {
-  padding-top: 50px;
+  padding-top: 9rem;
   padding-bottom: 50px;
   background-size: cover;
   background-position: center center;
@@ -1951,7 +1958,8 @@ a:hover {
 }
 
 .team .person img {
-  max-width: 100%;
+  max-width: 100%; 
+  height: 145px;
   margin-bottom: 20px;
 }
 
