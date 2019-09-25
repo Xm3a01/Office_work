@@ -1,6 +1,5 @@
-@extends('layouts.defult')
+@extends('layouts.defultinside')
 @section('content')
-
 
 
 <div class="site-section bg-light  " style="padding: 120px 5px;">
@@ -118,7 +117,7 @@
          </div>  
 
     <div class="col-md-4 col-lg-4 mb-5">  
-        <form action="#" class="px-3 py-2 m-3 bg-white"> 
+        <form action="#" class="px-3 py-2 my-3 bg-white"> 
                 <h5 class="p-2">أنشئ تنبيهاً وظيفياً</h5>
                   <div class="row form-group">
                     <div class="col-md-12">

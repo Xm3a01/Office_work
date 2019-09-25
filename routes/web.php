@@ -24,8 +24,7 @@ Route::get('/home-d', function () {
 });
 route::get('/', function(){
     return view('pages.home');
- 
 });
 route::get('/owner', function(){
-    return view('pages.owner');
+    return view('pages.uncompleteCV');
 });

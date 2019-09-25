@@ -1,4 +1,4 @@
-@extends('layouts.defult')
+@extends('layouts.defultinside')
 @section('content')
 
 
