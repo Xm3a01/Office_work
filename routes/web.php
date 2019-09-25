@@ -12,6 +12,7 @@
 */
 
 
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -20,6 +21,7 @@ Route::get('tests','Test@index');
 Route::get('two', 'Test@testtow');
 Route::post('tests/one', 'Test@store')->name('one.store');
 Route::post('tests/two', 'Test@store2')->name('two.store');
+
 
 Auth::routes();
 
@@ -40,6 +42,7 @@ route::get('/', function(){
     return view('pages.home');
 });
 
+
 //test Route
 
 route::get('/datas/{id}', 'Test@select');
@@ -56,4 +59,8 @@ route::get('/about', function(){
 });
 route::get('/owner', function(){
     return view('pages.login');
+});
+
+route::get('/', function(){
+    return view('pages.uncompleteCV');
 });

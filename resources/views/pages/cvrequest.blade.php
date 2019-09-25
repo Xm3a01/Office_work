@@ -8,7 +8,7 @@
                 السيرة الذاتية</span></p>
     </div>
 </div>
-
+ 
 <!-- Start post Area -->
 <section class="post-area section-gap">
         <div class="container bg-light">

@@ -1,41 +1,33 @@
 @extends('layouts.defult')
 @section('content')
 
-<div class="pt-5 bg-light" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class=" ">
-            <div class="modal-header  text-center">
-              <h5 class="modal-title" id="exampleModalLabel">    تسجيل الدخول</h5>
+<div class="bg-light modeltop " id="login" >
+    <div class="container  justify-content-center mb-3" role="document">
+        <div class=" row bg-white justify-content-center mb-5">
+          <div class="col-md-6 ">
+            <div class="">
+                <strong> <h5 class="text-center pt-5 pb-3" id="exampleModalLabel">  تسجيل الدخول</h5></strong>
             </div>
-        <div class="modal-body">  
-            <form action="#" class="p-2 bg-white">
+            <div class="pt-2">  
+               <form action="#" class="p-2 ">
                 <div class="form-row">
-                <div class="form-group col-md-12 mb-1">
+                 <div class="form-group col-md-12 mb-1">
                     <label for="inputEmail4">البريد اللإلكتروني</label>
-                    <input type="text" class="form-control" id="" placeholder="">
-                </div> 
+                    <input type="text" class="form-control bg-light" id="" placeholder="">
+                   </div> 
                 <div class="form-group col-md-12 mb-1">
                     <label for="inputEmail4">كلمة السر</label>
-                    <input type="password" class="form-control" id="" placeholder="">
+                    <input type="password" class="form-control bg-light" id="" placeholder="">
                 </div>  
-                <div class="d-flex flex-row justify-content-between">
-                    <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck" style="width: unset;">
-                        <label class="form-check-label" for="gridCheck">
-                        تذكرني
-                        </label>
-                    </div> 
-                    </div>  
-                <a href="#" class="text-underline">forgrt password</a>
+                <div class="d-flex flex-row justify-content-between">  
+                    <u> <a href="#" class="text-underline">forgrt password</a> </u>
              </div>
                     </div>
-            </form> 
-    
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-              <button type="button" class="btn btn-primary">دخول</button>
+            </form>  
+            <div class="p-3"> 
+                 <button type="button" class="btn btn-primary btn-block">دخول</button>
+                  </div>
+                  <p class="text-center p-5"> <u><a href="#" class="text-center">ليس لديك حساب؟ سجل الان</a></u></p>
             </div>
           </div>
         </div>

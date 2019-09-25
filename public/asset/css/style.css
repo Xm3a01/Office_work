@@ -147,6 +147,10 @@ a:hover {
 .card-body {
   padding: 10px 20px;
 }
+.modeltop {
+  padding-top: 9rem;
+  margin-bottom: 10px;
+}
 .modal{    overflow: hidden;}
 .modal-full {
   min-width: 100%;
@@ -1352,7 +1356,7 @@ a:hover {
 .site-section .section-heading .btn {
   COLOR: #fb236a;
   border: 2px solid #fb236a;
-  padding: 10px 20px;
+  padding: 5px 20px;
 }
 
 .site-section .btn:hover {

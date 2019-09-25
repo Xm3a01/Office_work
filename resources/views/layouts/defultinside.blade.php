@@ -15,7 +15,8 @@
              </div>
             <div class="site-mobile-menu-body"></div>
         </div>
-@include('_include.navbar')
+@include('_include.navsearcher')
+
 
     @yield('content')
    

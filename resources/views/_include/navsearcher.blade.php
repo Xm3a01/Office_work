@@ -19,9 +19,9 @@
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
                             <li><a href="index.html">الرئيسية</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#mycv">أضف سيرتك الذاتية</a></li> 
+                            <li><a href="#" data-toggle="modal" data-target="#mycv">سيرتي الذاتية</a></li> 
                             <li class="has-children">
-                              <a href="">الوظائف</a>
+                              <a href="">البحث عن وظائف</a>
                               <ul class="dropdown arrow-top text-center" style="width:30rem;">
                                   <table class="table table-borderless">
                                    <tr>
@@ -57,11 +57,17 @@
                                   </table>  
                               </ul>
                             </li>
-                            <li><a href="candidate.html">صاحب عمل؟</a></li>
-                            <li><a href="about.html">إتصل بنا</a></li>
-                            <li><a href="candidate.html" class="add"><span> + </span> أضف وظيفة جديدة</a></li>
-                            <li style="margin: 0 0 0 -65px;"><a href="#" style="margin: 0 6px 0 -18px"> <span class=""><img src=" {{asset('asset/images/login.png')}} " class="pl-1" alt=""></span>دخول/</a><a href="#">تسجيل جديد</a></li> 
-                           <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
+                            <li><a href="candidate.html">طلبات الوظائف</a></li>
+                            <li><a href="about.html">إتصل بنا</a></li> 
+                            <li><a href="candidate.html" class="add"><span> + </span> ابحث بالمسمي الوظيفي</a></li>
+                            <li class="has-children mr-2">
+                                    <a href="">حسابي</a>
+                                    <ul class="dropdown arrow-top">
+                                      <li><a href="#">اعدادات الحساب</a></li>
+                                      <li ><a href="contact.html" >  <img src="images/more-circular.png" alt="">تسجيل خروج</a></li>
+                                       </ul>
+                                  </li> 
+                                  <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
                           </ul> 
                         </div>
                       </nav>
