@@ -13,6 +13,7 @@
 <form action="{{route('two.store')}}" method="POST">
     @csrf
    <input type="text" name="name" id="">
+   <input type="text" name="ar_name" id="">
    <select name="country"    v-model = "select"  @change="getsub()" aria-placeholder="HEllo">
          <option value="" disabled selected>Select your option</option>
        @foreach ($countries as $country)   
@@ -28,11 +29,7 @@
    </datalist> --}}
    <button type="submit">Ok</button>
 </form>
-   <select name="city" id="" v-model ="sl">
-       {{-- <input list="browsers" name="browser">
-             <datalist id="browsers">
-               <option v-for ="su in sub" custom-value="su.name"></option>
-             </datalist> --}}
+   <select name="city" id="">
              <option value="" disabled selected>Select City ...</option>
             <option v-for ="su in sub" :value="su.name">@{{su.name}}</option>
    </select>

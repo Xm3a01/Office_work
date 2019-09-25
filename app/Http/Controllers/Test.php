@@ -48,6 +48,7 @@ class Test extends Controller
     {
         Country::create([
          'name'=> $request->name,
+         'ar_name'=> $request->ar_name,
         ]);
 
         return 'data saved';
@@ -57,6 +58,7 @@ class Test extends Controller
     {
         City::create([
          'name'=> $request->name,
+         'ar_name'=> $request->ar_name,
          'country_id' => $request->country
         ]);
         return "Data saved";
@@ -66,6 +68,11 @@ class Test extends Controller
         $countries = Country::all();
         $countries->load('cities');
         return view('test.add')->withCountries($countries);
+    }
+
+    function search() {
+        $countries = Country::all();
+        return response()->json($countries);
     }
 
     /**

@@ -11,6 +11,7 @@
 <form action="{{route('one.store')}}" method="POST">
     @csrf
    <input type="text" name="name" id="">
+   <input type="text" name="ar_name" id="">
    <button type="submit">Ok</button>
 </form>
 {{-- <h1>City</h1>

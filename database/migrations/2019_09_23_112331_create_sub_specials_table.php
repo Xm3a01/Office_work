@@ -16,6 +16,7 @@ class CreateSubSpecialsTable extends Migration
         Schema::create('sub_specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('ar_name');
             $table->unsignedBigInteger('special_id');
             $table->timestamps();
 

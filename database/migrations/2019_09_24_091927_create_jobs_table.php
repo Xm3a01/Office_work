@@ -16,13 +16,20 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
+            $table->string('ar_company');
             $table->string('yearsOfExper');
             $table->string('role');
+            $table->string('ar_role');
             $table->string('special');
+            $table->string('ar_special');
             $table->string('sub_special');
+            $table->string('ar_sub_special');
             $table->string('selary')->default('-');
+            $table->string('selary_type');
             $table->longText('description')->nullable();
+            $table->longText('ar_description')->nullable();
             $table->string('job_type');
+            $table->string('ar_job_type');
             $table->timestamps();
 
             $table->foreign('company_id')

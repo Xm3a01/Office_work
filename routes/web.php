@@ -40,12 +40,15 @@ route::get('/', function(){
     return view('pages.home');
 });
 
+//test Route
 
 route::get('/datas/{id}', 'Test@select');
 
-route::get('/search', function(){
+route::get('/search/test', function(){
     return view('test.search');
 });
+
+route::get('/result', 'Test@search');
 
 
 route::get('/about', function(){

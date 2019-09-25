@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCvsTable extends Migration
+class CreateExpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,26 @@ class CreateCvsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cvs', function (Blueprint $table) {
+        Schema::create('exps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('role');
-            $table->string('country');
             $table->string('sub_special');
-            $table->string('ar_sub_special');
-            $table->string('salary');
-            $table->string('salary_type');
-            $table->string('ar_country');
-            $table->string('city');
-            $table->string('ar_city');
-            $table->string('level_of_work');
+            $table->string('country');
+            $table->unsignedBigInteger('start_years');
+            $table->unsignedBigInteger('start_month');
+            $table->unsignedBigInteger('end_years');
+            $table->unsignedBigInteger('end_month');
+            $table->string('company_name');
+            $table->string('section');
+            $table->string('size');
+            $table->string('last_salary');
             $table->timestamps();
 
             $table->foreign('user_id')
                ->references('id')->on('users')
                     ->onDelete('cascade');
+            
         });
     }
 
@@ -41,6 +43,6 @@ class CreateCvsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cvs');
+        Schema::dropIfExists('exps');
     }
 }

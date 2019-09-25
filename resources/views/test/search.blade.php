@@ -9,12 +9,13 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" name="" id="" v-model="serach">
-        <input type="checkbox" value="cl" id="" v-model="select"> CL
-        <input type="checkbox" value="bl" id="" v-model="select"> BL
-        <input type="checkbox" value="dl" id="" v-model="select"> DL
-        @{{ serach }}
-        @{{ select }}
+        <input type="text" name="" id="" v-model = "search">
+        {{-- <div v-for ="res in result"></div> --}}
+        <ul v-if ="">
+            <li v-for ="res in resu()">
+                  @{{ res.name }}
+            </li>
+        </ul>
     </div>
    <script src="{{asset('js/app.js')}}"></script>
     <script>
@@ -23,8 +24,28 @@
 
     data: {
 
-        serach: '',
-        select: ['cl']
+        search: '',
+        result: []
+    },
+    mounted(){
+           this.fetchData()
+        },
+    methods: {
+
+        resu(){
+                return this.result.filter(res =>{ return res.name.toLowerCase().includes(this.search.toLowerCase())});
+             },
+        fetchData() {
+            axios.get('/result')
+                .then((res)=>{
+                     this.result = res.data,
+                     console.log(this.result)
+                 })
+                 .catch((err)=>
+                 {
+                     console.log(err)
+                 })
+           }
     }
 
     })

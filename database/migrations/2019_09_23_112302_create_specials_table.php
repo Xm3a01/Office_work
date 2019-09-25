@@ -16,6 +16,7 @@ class CreateSpecialsTable extends Migration
         Schema::create('specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('ar_name');
             $table->unsignedBigInteger('role_id');
             $table->timestamps();
 

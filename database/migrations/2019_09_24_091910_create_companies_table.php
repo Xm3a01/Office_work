@@ -17,17 +17,17 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->string('ar_name');
             $table->string('logo');
             $table->longText('description')->nullable();
-            $table->unsignedBigInteger('role_id');
+            $table->longText('ar_description')->nullable();
+            $table->string('role');
+            $table->string('ar_role');
             $table->unsignedBigInteger('country_id');
+            $table->string('ar_country');
 
             $table->string('email');
             $table->timestamps();
-
-            $table->foreign('role_id')
-              ->references('id')->on('roles')
-                    ->onDelete('cascade');
 
             $table->foreign('user_id')
               ->references('id')->on('users')
