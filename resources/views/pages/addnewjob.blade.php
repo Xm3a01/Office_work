@@ -10,7 +10,7 @@
                     <h3 class="text-center pt-3 pb-3">بيانات الشركة</h3>
                     <label for="company_name">اسم الشركة</label>
                     <div class="field required-field">
-                        <input type="text" class="input-text" name="company_name" id="company_name" placeholder="أدخل اسم الشركة" value="" maxlength="" required="">
+                         <input type="text" class="input-text" name="company_name" id="company_name" placeholder="أدخل اسم الشركة" value="" maxlength="" required="">
                     </div>
                     <label for="job_location">الموقع <small>(اختياري)</small></label>
                     <div class="field ">
