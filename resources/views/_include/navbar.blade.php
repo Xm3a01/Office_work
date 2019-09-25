@@ -60,7 +60,7 @@
                             <li><a href="candidate.html">صاحب عمل؟</a></li>
                             <li><a href="about.html">إتصل بنا</a></li>
                             <li><a href="candidate.html" class="add"><span> + </span> أضف وظيفة جديدة</a></li>
-                            <li style="margin: 0 0 0 -65px;"><a href="#" style="margin: 0 6px 0 -18px" data-toggle="modal" data-target="#login"> <span class=""><img src=" {{asset('asset/images/login.png')}} " class="pl-1" alt=""></span>دخول/</a><a href="#" data-toggle="modal" data-target="#register">تسجيل جديد</a></li> 
+                            <li style="margin: 0 0 0 -65px;"><a href="#" style="margin: 0 6px 0 -18px"> <span class=""><img src=" {{asset('asset/images/login.png')}} " class="pl-1" alt=""></span>دخول/</a><a href="#">تسجيل جديد</a></li> 
                            <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
                           </ul> 
                         </div>

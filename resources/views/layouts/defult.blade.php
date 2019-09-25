@@ -21,22 +21,26 @@
   
     <link rel="stylesheet" href=" {{asset('asset/css/aos.css')}} ">
     <link rel="stylesheet" href=" {{asset('asset/css/style.css')}} ">
-    {{-- <link rel="stylesheet" href=" {{asset('asset/css/style1.css')}} "> --}}
+
+    {{--  --}}
     <link rel="stylesheet" href=" {{asset('asset/css/filepond.css')}} ">
+    @yield('stylesheet')
 </head>
 <body>
+   
     <div class="site-wrap">
         <div class="site-mobile-menu">
             <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
                 <span class="icon-close2 js-menu-toggle"></span>
-            </div>
-            </div>
+              </div>
+             </div>
             <div class="site-mobile-menu-body"></div>
         </div>
 @include('_include.navbar')
 
     @yield('content')
+   
  
 
 @include('_include.footer') 

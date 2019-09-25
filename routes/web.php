@@ -10,12 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+ 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -29,10 +24,8 @@ Route::get('/home-d', function () {
 });
 route::get('/', function(){
     return view('pages.home');
-});
-route::get('/about', function(){
-    return view('pages.about');
+ 
 });
 route::get('/owner', function(){
-    return view('pages.login');
+    return view('pages.owner');
 });
