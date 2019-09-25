@@ -13,18 +13,31 @@
 <form action="{{route('two.store')}}" method="POST">
     @csrf
    <input type="text" name="name" id="">
-   <select name="country" id="" v-model = "select">
+   <select name="country"    v-model = "select"  @change="getsub()" aria-placeholder="HEllo">
+         <option value="" disabled selected>Select your option</option>
        @foreach ($countries as $country)   
-          <option value="{{$country->id}}">{{$country->name}}</option>
+          <option  value="{{$country->id}}">{{$country->name}}</option>
        @endforeach
    </select>
-   <ul>
-       <li v-for="su in sub">
-          @{{ su }}
-       </li>
-   </ul>
+   {{-- <input name="country"  list="country"   v-model = "select"  @change="getsub()" >
+   <datalist id="country">
+        <option value="" disabled selected>Select your option</option>
+        @foreach ($countries as $country)   
+          <option  value="{{$country->id}}">{{$country->name}}</option>
+        @endforeach
+   </datalist> --}}
+   <button type="submit">Ok</button>
+</form>
+   <select name="city" id="" v-model ="sl">
+       {{-- <input list="browsers" name="browser">
+             <datalist id="browsers">
+               <option v-for ="su in sub" custom-value="su.name"></option>
+             </datalist> --}}
+             <option value="" disabled selected>Select City ...</option>
+            <option v-for ="su in sub" :value="su.name">@{{su.name}}</option>
+   </select>
+   @{{sl}}
 </div>
-
 
 
 <script src="{{asset('js/app.js')}}"></script>
@@ -37,13 +50,16 @@ data: {
     serach: '',
     select:'',
     sub: [],
+    sl: '',
 },
 methods: {
     mounted() {
-        this.getsub();
-    }
+        
+    },
     getsub() {
-        axios.get(`datas/${this.select}`).then((res)=>{
+        if(this.select != '') {
+        axios.get(`datas/${this.select}`)
+                .then((res)=>{
                      this.sub = res.data,
                      console.log(this.sub)
                  })
@@ -52,6 +68,7 @@ methods: {
                      console.log(err)
                  })
              }
+            }
 }
 
 })

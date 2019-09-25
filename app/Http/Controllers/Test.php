@@ -30,12 +30,12 @@ class Test extends Controller
     }
 
 
-    public function select($sel)
+    public function select($id)
     {
-        $country = Country::findOrfail($sel);
+        $country = Country::findOrfail($id);
         $country->load('cities');
 
-        return response()->json(['data'=>$country]);
+        return response()->json($country->cities);
     }
 
     /**
