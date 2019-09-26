@@ -1,21 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
+//whole Wedsite url
+Route::get('/','BrowseController@index');
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('tests','Test@index');
 Route::get('two', 'Test@testtow');
@@ -38,9 +26,9 @@ Route::get('/home-d', function () {
 
     return view('layouts.defult');
 });
-route::get('/', function(){
-    return view('pages.home');
-});
+// route::get('/', function(){
+//     return view('pages.home');
+// });
 
 
 //test Route
@@ -61,6 +49,6 @@ route::get('/owner', function(){
     return view('pages.login');
 });
 
-route::get('/', function(){
-    return view('pages.uncompleteCV');
-});
+// route::get('/', function(){
+//     return view('pages.uncompleteCV');
+// });
