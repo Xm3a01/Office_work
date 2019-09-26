@@ -1,6 +1,5 @@
 
     <div class="site-navbar-wrap js-site-navbar bg-white">
-
             <div class="container-fluid">
               <div class="site-navbar bg-light">
                 <div class="py-1">
@@ -30,7 +29,7 @@
                                         <th scope="col">المدينة</th>
                                         <th scope="col">اخرى</th> 
                                        </tr> 
-                                      <tr>
+                                      <tr> 
                                           <td>السودان(15)</td>
                                           <td> تقانةالمعلومات</td> 
                                           <td>الخرطوم</td> 

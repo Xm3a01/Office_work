@@ -252,8 +252,7 @@ nav .site-menu .add:hover {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
-  left: 50%;
-  margin-left: -65px;
+  left: 44%; 
 }
 
 .fa-arrow-down:before {

@@ -15,7 +15,7 @@
              </div>
             <div class="site-mobile-menu-body"></div>
         </div>
-@include('_include.navbar')
+@include('_include.navowner')
 
     @yield('content')
    
@@ -23,8 +23,8 @@
 
 @include('_include.footer') 
 
-</div> 
+   
 @include('_include.jsfile') 
-
+</div> 
 </body>
 </html>

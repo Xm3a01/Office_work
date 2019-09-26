@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  <div class="scroll-to">
+  <div class="scroll-to align-content-center">
     <a href="#scroll-here" title=""><img src=" {{asset('asset/images/down-arrow (1).png')}} " alt=""></a>
   </div>
 </div>
