@@ -16,10 +16,11 @@ class CreateSubSpecialsTable extends Migration
         Schema::create('sub_specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('ar_name');
             $table->unsignedBigInteger('special_id');
             $table->timestamps();
 
-            $table->foreign('special_id')->references('id')->on('specials')->OnDelete('cascade'); //references
+            $table->foreign('special_id')->references('id')->on('specials')->dropForeign('sub_specials_special_id_foreign'); //references
         });
     }
 
@@ -31,5 +32,7 @@ class CreateSubSpecialsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('sub_specials');
+        Schema::disableForeignKeyConstraints();
+        
     }
 }

@@ -16,12 +16,12 @@ class CreateSpecialsTable extends Migration
         Schema::create('specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('ar_name');
             $table->unsignedBigInteger('role_id');
             $table->timestamps();
 
             $table->foreign('role_id')
-                 ->references('id')->on('roles')
-                   ->onDelete('cascade');
+                 ->references('id')->on('roles')->dropForeign('specials_role_id_foreign');
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade'); //specials
         });
     }
@@ -34,5 +34,6 @@ class CreateSpecialsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('specials');
+        // $table->dropForeign('role_id');
     }
 }
