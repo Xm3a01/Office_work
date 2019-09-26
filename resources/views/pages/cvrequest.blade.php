@@ -17,7 +17,7 @@
                     <div class="single-post justify-content-between">
                         <div class="thumb d-flex flex-row justify-content-between">
                         <div class="title d-flex flex-row">
-                            <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" pl-1" alt=""> 
+                            <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" py-1" alt=""> 
                               <div class="titles"> 
                                  <p class="m-0">لينة <span>-</span><span> مطور برمجيات </span></p>
                                   <h6>الجنسية: السودان</h6>
@@ -43,7 +43,7 @@
                     <div class="single-post justify-content-between">
                             <div class="thumb d-flex flex-row justify-content-between">
                             <div class="title d-flex flex-row">
-                                <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" pl-1" alt=""> 
+                                <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" py-1" alt=""> 
                                   <div class="titles"> 
                                      <p class="m-0">لينة <span>-</span><span> مطور برمجيات </span></p>
                                       <h6>الجنسية: السودان</h6>
@@ -69,7 +69,7 @@
                         <div class="single-post justify-content-between">
                                 <div class="thumb d-flex flex-row justify-content-between">
                                 <div class="title d-flex flex-row">
-                                    <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" pl-1" alt=""> 
+                                    <img src=" {{asset('asset/images/person_2.jpg')}} " width="110px" class=" py-1" alt=""> 
                                       <div class="titles"> 
                                          <p class="m-0">احمد <span>-</span><span> مطور برمجيات </span></p>
                                           <h6>الجنسية: السودان</h6>

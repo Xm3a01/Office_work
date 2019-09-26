@@ -125,68 +125,7 @@
         </div>
         <div class="col-md-3  mb-5 pl-0 section-heading overflow-auto">
           <h3 class="mb-4">آخر الأخبار</h3>
-          <div class="overflow-auto mt-4" data-aos="fade-up" data-aos-delay="50" >
-           
-            <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-              <div class="company-logo blank-logo text-center text-md-left">
-                <img src=" {{asset('asset/images/person_2.jpg')}} " alt="Image" class="img-fluid mx-auto" width="200px" height="100px">
-              </div>
-              <div class="job-details pr-2"> 
-                  <div class="d-block d-lg-flex">
-                    <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أليايت,سيت دو أيوسمود</p>
-                  </div>
-                </div>  
-            </a>
-
-            <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-              <div class="company-logo blank-logo text-center text-md-left">
-                <img src=" {{asset('asset/images/person_3.jpg')}} " alt="Image" class="img-fluid mx-auto" width="200px"
-                  height="100px">
-              </div>
-              <div class="job-details pr-1"> 
-                  <div class="d-block d-lg-flex">
-                    <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أليايت,سيت دو أيوسمود</p>
-                  </div>
-                </div> 
-            </a>
-
-            <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-              <div class="company-logo blank-logo text-center text-md-left">
-                <img src=" {{asset('asset/images/company_logo_blank.png')}} " alt="Image" class="img-fluid mx-auto" width="200px"
-                  height="100px">
-              </div>
-              <div class="job-details pr-1"> 
-                  <div class="d-block d-lg-flex">
-                    <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أليايت,سيت دو أيوسمود</p>
-                  </div>
-                </div> 
-            </a>
-
-            <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-              <div class="company-logo blank-logo text-center text-md-left">
-                <img src=" {{asset('asset/images/company_logo_blank.png')}}" alt="Image" class="img-fluid mx-auto" width="200px"
-                  height="100px">
-              </div>
-              <div class="job-details pr-1"> 
-                  <div class="d-block d-lg-flex">
-                    <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أليايت,سيت دو أيوسمود</p>
-                  </div>
-                </div> 
-            </a>
-
-            <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-                <div class="company-logo blank-logo text-center text-md-left">
-                  <img src="{{asset('asset/images/person_3.jpg')}}" alt="Image" class="img-fluid mx-auto" width="200px" height="100px">
-                </div>
-                <div class="job-details pr-2"> 
-                    <div class="d-block d-lg-flex">
-                      <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أليايت,سيت دو أيوسمود</p>
-                    </div>
-                  </div>  
-              </a>
-
           </div>
-        </div>
       </div>
     </div>
   </div>

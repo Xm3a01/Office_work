@@ -19,7 +19,9 @@
   src: url('../fonts/Tajawal-Bold.ttf');
 }
 
-
+.marg {
+   margin: 0 6px 0 -18px;
+}
 /*bootstrap edit*/
 .bg-primary {
   background-color: #01a0c7 !important;
@@ -101,8 +103,8 @@ a:hover {
   line-height: 26px;
 }
 .steps>li {
-   position: relative;  
-  padding-right: 36px;
+  position: relative;  
+  padding-left: 36px;
   padding-bottom: 10px;
 }
 .steps>li:before {
@@ -119,7 +121,7 @@ a:hover {
 .steps>li:after {
   content: none;
   position: absolute;
-  right: 11px;
+  left: 11px;
   top: 6px;
   width: 6px;
   height: 12px;
@@ -133,6 +135,7 @@ a:hover {
   position: absolute;
 }
 
+
 .card {
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.0;
@@ -145,10 +148,6 @@ a:hover {
 }
 .card-body {
   padding: 10px 20px;
-}
-.modeltop {
-  padding-top: 9rem;
-  margin-bottom: 10px;
 }
 .modal{    overflow: hidden;}
 .modal-full {
@@ -222,6 +221,8 @@ nav .site-menu .add:hover {
 
 .search-category b {
   color: #fb236a;
+  float: left;
+  padding-right: 5px;
 }
 
 .search-category p {
@@ -251,7 +252,8 @@ nav .site-menu .add:hover {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
-  left: 44%; 
+  left: 50%;
+  margin-left: -65px;
 }
 
 .fa-arrow-down:before {
@@ -455,14 +457,13 @@ color: #fff;
 font-size: 30px;
 }
 
-.shadow{
-      box-shadow: 0 9px 10px -5px rgba(0, 0, 0, .09) !important;
-}
+
 /* Style the input fields */
 input {
   padding: 10px;
   width: 100%;
-  font-size: 17px; 
+  font-size: 17px;
+  font-family: Raleway;
   border: 1px solid #c1c1c1;
   border-radius: 3px;
 }
@@ -525,14 +526,9 @@ input.invalid {
   }
 }
 .post-list .single-post {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 20px ;
+  padding: 20px 30px;
   background-color: #f9f9ff;
   margin-bottom: 30px;
-}
-.details p{
-  font-size: 14px;
-  margin: 2px;
 }
 .single-post {
   margin-bottom: 30px;
@@ -551,18 +547,17 @@ input.invalid {
 .btns a { 
     color: #fff;
     background-color: #fb236a;
-    padding: 5px 15px;
+    padding: 10px 15px;
     border-radius: 30px;
     border: 2px solid #fb236a;
     box-shadow: 0 5px 20px -11px rgba(0, 0, 0, 0.9) !important;
-  
+
 }
 .btns a:hover { 
   color: #fb236a;
   background-color: #ffffff;
-  padding: 5px 15px;
+  padding: 10px 15px;
   border-radius: 30px;
-  transition: .3s all ease;
   border: 2px solid #fb236a;
   box-shadow: 0 5px 20px -11px rgba(255, 255, 255, 255) !important;
 
@@ -927,7 +922,7 @@ a:hover {
 
 .input-wrap .icon {
   position: absolute;
-  left: 20px;
+  right: 20px;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -1010,7 +1005,7 @@ a:hover {
 }
 
 .site-navbar .site-navigation .site-menu>li>a {
-  padding: 10px 10px;
+  padding: 10px 9px;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.6);
   font-size: 15px;
@@ -1354,7 +1349,7 @@ a:hover {
 .site-section .section-heading .btn {
   COLOR: #fb236a;
   border: 2px solid #fb236a;
-  padding: 5px 20px;
+  padding: 10px 20px;
 }
 
 .site-section .btn:hover {
@@ -1735,7 +1730,7 @@ a:hover {
 }
 
 .unit-5 {
-  padding-top: 9rem;
+  padding-top: 50px;
   padding-bottom: 50px;
   background-size: cover;
   background-position: center center;
@@ -1960,8 +1955,7 @@ a:hover {
 }
 
 .team .person img {
-  max-width: 100%; 
-  height: 145px;
+  max-width: 100%;
   margin-bottom: 20px;
 }
 
@@ -2033,7 +2027,8 @@ a:hover {
     opacity: 1;
     transform: scale(1);
 }
+
 .site-navbar .site-navigation .site-menu>li {
-  display: inline-block;
-  padding: 0;
+    display: inline-block;
+    padding: 0;
 }

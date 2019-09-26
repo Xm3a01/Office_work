@@ -58,7 +58,7 @@ route::get('/about', function(){
     return view('pages.about');
 });
 route::get('/owner', function(){
-    return view('pages.login');
+    return view('pages.searchjob');
 });
 
 route::get('/', function(){
