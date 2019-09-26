@@ -1,4 +1,3 @@
-
   <script src=" {{asset('asset/js/jquery-3.3.1.min.js')}} "></script>
   <script src=" {{asset('asset/js/jquery-migrate-3.0.1.min.js')}} "></script>
   <script src=" {{asset('asset/js/jquery-ui.js')}} "></script>

@@ -1,4 +1,4 @@
-@extends('layouts.defult')
+@extends('layouts.defultclient')
 @section('content')
     
 <div class="site-section bg-light  " style="padding-top:160px;"> 
