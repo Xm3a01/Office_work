@@ -124,7 +124,31 @@
           </div>
         </div>
         <div class="col-md-3  mb-5 pl-0 section-heading overflow-auto">
-          <h3 class="mb-4">آخر الأخبار</h3>
+            <div class=" m-3 ">
+                <div class="card p-3 text-center" style="border-radius: 5px; background: linear-gradient(124.25deg, #b8efef 0%, #ecfafe 100%);">
+                    <div class="card-head h4  py-3">
+                        طلب العلاج بالخارج 
+                            </div>
+                            <div class="card-content is-stretched t-inverse">
+                                <i class="icon is-research is-48 t-light"></i>
+                                <h6 class="t-inverse m20y">تنظيم عملية واجراءات العلاج بالخارج وفقا للوائح والقرارات والأحكام المنظمة لذلك .
+
+                                    اتخاذ الترتيبات المتعلقة بسفر المرضى للعلاج في الخارج ومرافقيهم.</h6>
+                               <h5 class="t-inverse py-3">تخفيضات وعروض جديدة في الانتظار</h5>
+                               <p class="text-left">-طلب اعتماد الاجازات المرضية .
+<br>
+                                  -طلبات الضمان الاجتماعي .
+                                  <br>
+                                  -طلب تحديد نسب العجز الناتج عن اصابات العمل .
+                                  <br>
+                                  -طلبات الصلاحية في العمل . 
+                                  </p>
+                        <form name="process_cart5117" id="checkout-form5117" method="post"   class="p20y">
+                             <button type="submit"  class="btn btn-primary text-white">اتصل بنا </button>
+                        </form>
+                      </div>
+                 </div> 
+            </div>
           </div>
       </div>
     </div>

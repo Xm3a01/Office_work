@@ -17,50 +17,40 @@
 //     return view('welcome');
 // });
 
-Route::get('tests','Test@index');
-Route::get('two', 'Test@testtow');
-Route::post('tests/one', 'Test@store')->name('one.store');
-Route::post('tests/two', 'Test@store2')->name('two.store');
+// Route::get('tests','Test@index');
+// Route::get('two', 'Test@testtow');
+// Route::post('tests/one', 'Test@store')->name('one.store');
+// Route::post('tests/two', 'Test@store2')->name('two.store');
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('/home', function () {
-});
-Route::get('/home-d', function () {
-
-    return view('layouts.defult');
-});
-route::get('/', function(){
-    return view('pages.home');
-});
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
-//test Route
+// Route::get('/home', function () {
+// });
+// Route::get('/home-d', function () {
 
-route::get('/datas/{id}', 'Test@select');
-
-route::get('/search/test', function(){
-    return view('test.search');
-});
-
-route::get('/result', 'Test@search');
+//     return view('layouts.defult');
+// });
+// route::get('/', function(){
+//     return view('pages.home');
+// });
 
 
-route::get('/contact', function(){
-    return view('pages.contact');
-});
-route::get('/owner', function(){
-    return view('pages.searchjob');
-});
+// //test Route
 
-route::get('/', function(){
-    return view('pages.uncompleteCV');
-});
+// route::get('/datas/{id}', 'Test@select');
+
+// route::get('/search/test', function(){
+//     return view('test.search');
+// });
+
+// route::get('/result', 'Test@search');
+
+ 
