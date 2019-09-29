@@ -54,8 +54,8 @@ route::get('/search/test', function(){
 route::get('/result', 'Test@search');
 
 
-route::get('/about', function(){
-    return view('pages.about');
+route::get('/contact', function(){
+    return view('pages.contact');
 });
 route::get('/owner', function(){
     return view('pages.searchjob');
