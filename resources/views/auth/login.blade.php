@@ -1,5 +1,14 @@
 @extends('layouts.defult')
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login', app()->getLocale()) }}">
+                        @csrf
 
 <div class="bg-light modeltop " id="login" >
     <div class="container  justify-content-center mb-3" role="document">
@@ -62,6 +71,15 @@
                             </a>
                         @endif
                     </div>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request', app()->getLocale()) }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </form>  
             

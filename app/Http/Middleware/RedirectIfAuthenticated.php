@@ -17,9 +17,30 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+
+        switch ($guard) {
+            case 'admin':
+            if (Auth::guard($guard)->check()) {
+               return redirect()->route('admin.dashboard', app()->getLocale());
+            } 
+                break;
+
+            case 'owner':
+            if (Auth::guard($guard)->check()) {
+               return redirect()->route('owner.dashboard', app()->getLocale());
+            } 
+                break;
+            
+            default:
+            if (Auth::guard($guard)->check()) {
+              return redirect()->route('user.home', app()->getLocale());
+            }
+                break;
         }
+
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(url(app()->getLocale().'/home'));
+        // }
 
         return $next($request);
     }
