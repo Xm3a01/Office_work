@@ -1,4 +1,4 @@
-@extends('layouts.defult')
+@extends('layouts.defultowner')
 @section('content')
 
 <div class="container-fluid bg-light pt-5">
