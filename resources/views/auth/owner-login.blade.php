@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.owner')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('OWNER') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login', app()->getLocale()) }}">
+                    <form method="POST" action="{{ route('owner.login.submit', app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">

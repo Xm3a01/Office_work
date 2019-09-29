@@ -15,7 +15,7 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('country_id');
             $table->string('name');
             $table->string('ar_name');
             $table->string('logo');
@@ -23,15 +23,9 @@ class CreateCompaniesTable extends Migration
             $table->longText('ar_description')->nullable();
             $table->string('role');
             $table->string('ar_role');
-            $table->unsignedBigInteger('country_id');
             $table->string('ar_country');
-
             $table->string('email');
             $table->timestamps();
-
-            $table->foreign('user_id')
-              ->references('id')->on('users')
-                    ->onDelete('cascade');
                     
             $table->foreign('country_id')
                     ->references('id')->on('countries')

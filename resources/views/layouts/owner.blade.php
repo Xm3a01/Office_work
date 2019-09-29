@@ -47,11 +47,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login',app()->getLocale()) }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('owner.login',app()->getLocale()) }}">{{ __('OWNER') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register',app()->getLocale()) }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('owner.register',app()->getLocale()) }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
