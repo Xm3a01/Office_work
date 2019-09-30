@@ -124,7 +124,7 @@
           </div>
         </div>
         <div class="col-md-3  mb-5 pl-0 section-heading overflow-auto">
-            <div class=" m-3 ">
+            <div class=" m-3  ">
                 <div class="card p-3 text-center" style="border-radius: 5px; background: linear-gradient(124.25deg, #b8efef 0%, #ecfafe 100%);">
                     <div class="card-head h4  py-3">
                         طلب العلاج بالخارج 
@@ -134,8 +134,8 @@
                                 <h6 class="t-inverse m20y">تنظيم عملية واجراءات العلاج بالخارج وفقا للوائح والقرارات والأحكام المنظمة لذلك .
 
                                     اتخاذ الترتيبات المتعلقة بسفر المرضى للعلاج في الخارج ومرافقيهم.</h6>
-                               <h5 class="t-inverse py-3">تخفيضات وعروض جديدة في الانتظار</h5>
-                               <p class="text-left">-طلب اعتماد الاجازات المرضية .
+                               <h5 class="t-inverse py-3 m-4">تخفيضات وعروض جديدة في الانتظار</h5>
+                               <p class="text-left m-4">-طلب اعتماد الاجازات المرضية .
 <br>
                                   -طلبات الضمان الاجتماعي .
                                   <br>
@@ -143,7 +143,7 @@
                                   <br>
                                   -طلبات الصلاحية في العمل . 
                                   </p>
-                        <form name="process_cart5117" id="checkout-form5117" method="post"   class="p20y">
+                        <form name="process_cart5117" id="checkout-form5117" method="post"   class="py-3">
                              <button type="submit"  class="btn btn-primary text-white">اتصل بنا </button>
                         </form>
                       </div>
@@ -161,7 +161,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mb-5 mb-md-0" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="mb-5">وظائف جديدة</h3>
+          <h3 class="my-4">وظائف جديدة</h3>
           <div class="rounded border jobs-wrap">
              <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
               <div class="company-logo blank-logo text-center text-md-left pl-3">
@@ -269,61 +269,50 @@
 
           </div>
 
-          <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="50">
-            <a href="#" class="btn rounded p-3 mb-5"><span class="icon-plus-circle"></span>عرض المزيد من الوظائف</a>
+          <div class="col-md-12 text-center p-4" data-aos="fade-up" data-aos-delay="50">
+            <a href="#" class="btn rounded p-2 mb-1"><span class="icon-plus-circle"></span>عرض المزيد من الوظائف</a>
           </div>
         </div>
         <div class="col-md-4 block-16" data-aos="fade-up" data-aos-delay="200">
-          <div class="d-flex mb-0">
-            <h2 class="mb-5 h3 mb-0">وظائف مميزة</h2>
-            <div class="ml-auto mt-1"><a href="#" class="owl-custom-prev">قبل</a> / <a href="#"
-                class="owl-custom-next">بعد</a></div>
-          </div>
-
-          <div class="nonloop-block-16 owl-carousel">
-            <div class="border rounded p-4 bg-white">
-              <h2 class="h5">طاقم مطعم</h2>
-              <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
-              <p>
-                <span class="d-block"><span class="icon-suitcase"></span>Luxury Restaurant</span>
-                <span class="d-block"><span class="icon-room"></span> khartoum</span>
-                <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
-              </p>
-              <p class="mb-0">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
-
-                أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
-
-                أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات ,سيونت ان كيولبا
-
-                كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.</p>
+          <div class="d-flex">
+            <h2 class="mb-5 h3">وظائف مميزة</h2>
             </div>
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner pb-3">
 
-            <div class="border rounded p-4 bg-white">
-              <h2 class="h5">Javascript Fullstack Developer</h2>
-              <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
-              <p>
-                <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
-                <span class="d-block"><span class="icon-room"></span> Florida</span>
-                <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
-              </p>
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus accusamus
-                necessitatibus praesentium voluptate natus excepturi rerum, autem. Magnam laboriosam, quam sapiente
-                laudantium iure sit ea! Tenetur, quasi, praesentium. Architecto, eum.</p>
-            </div>
-
-            <div class="border rounded p-4 bg-white">
-              <h2 class="h5">Assistant Brooker, Real Estate</h2>
-              <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
-              <p>
-                <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
-                <span class="d-block"><span class="icon-room"></span> Florida</span>
-                <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
-              </p>
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus esse, quam
-                consectetur ipsum quibusdam ullam ab nesciunt, doloribus voluptatum neque iure perspiciatis vel vero
-                illo consequatur facilis, fuga nobis corporis.</p>
+                <div class="carousel-item active">
+                    <div class="border rounded p-4 bg-white" style="height:28rem">
+                        <h2 class="h5">Javascript Fullstack Developer</h2>
+                        <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                        <p>
+                          <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
+                          <span class="d-block"><span class="icon-room"></span> Florida</span>
+                          <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                        </p>
+                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus accusamus
+                          necessitatibus praesentium voluptate natus excepturi rerum, autem. Magnam laboriosam, quam sapiente
+                          laudantium iure sit ea! Tenetur, quasi, praesentium. Architecto, eum.</p>
+                      </div>
+                </div> 
+                
+                <div class="carousel-item">
+                    <div class="border rounded p-4 bg-white" style="height:28rem">
+                        <h2 class="h5">طاقم مطعم</h2>
+                        <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                        <p>
+                          <span class="d-block"><span class="icon-suitcase"></span>Luxury Restaurant</span>
+                          <span class="d-block"><span class="icon-room"></span> khartoum</span>
+                          <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                        </p>
+                        <p class="mb-0 align-right">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود
+                          تيمبور
+                          أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+                          كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم.
+                        </p>
+                    </div>
+                </div> 
+              </div> 
             </div> 
-          </div> 
         </div>
       </div>
     </div>
@@ -395,60 +384,28 @@
 
   <!-- our clients -->
   <div class="site-slide pb-5 ">
-    <div class="container">
+    <div class="container-fluid">
       <div class="text-center">
         <h3 class="pt-5 pb-1">شركاءنا في النجاح</h3>
         <p class="pb-3">انضم لأصحاب العمل المعينين حاليًا</p>
       </div>
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-             <div class="carousel-item  ">
-                <div class="row">
-                    <div class="col-md-2">
-                      <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                    </div>
-                    <div class="col-md-2">
-                        <img class="d-block w-50" src="images/22.png" alt="First slide"> 
-                      </div>
-                      <div class="col-md-2">
-                          <img class="d-block w-50" src="images/33.png" alt="First slide"> 
-                        </div>
-                        <div class="col-md-2">
-                            <img class="d-block w-50" src="images/44.png" alt="First slide"> 
-                          </div>
-                          <div class="col-md-2">
-                              <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                            </div>
-                            <div class="col-md-2">
-                                <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                              </div>
-                  </div>
-            </div>
-            <div class="carousel-item active">
-                <div class="row">
-                    <div class="col-md-2">
-                      <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                    </div>
-                    <div class="col-md-2">
-                        <img class="d-block w-50" src="images/22.png" alt="First slide"> 
-                      </div>
-                      <div class="col-md-2">
-                          <img class="d-block w-50" src="images/33.png" alt="First slide"> 
-                        </div>
-                        <div class="col-md-2">
-                            <img class="d-block w-50" src="images/44.png" alt="First slide"> 
-                          </div>
-                          <div class="col-md-2">
-                              <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                            </div>
-                            <div class="col-md-2">
-                                <img class="d-block w-50" src="images/11.png" alt="First slide"> 
-                              </div>
-                  </div>
-            </div>
-          </div> 
+      <div class="carousel-wrap">
+        <div class="owl-carousel">
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
+          <div class="item"><img src="http://placehold.it/150x150"></div>
         </div>
-        </div>
+      </div>
+    </div>
   </div>
 
 
