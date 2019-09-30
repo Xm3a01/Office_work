@@ -9,14 +9,8 @@
   <script src=" {{asset('asset/js/jquery.magnific-popup.min.js')}} "></script>
   <script src=" {{asset('asset/js/bootstrap-datepicker.min.js')}} "></script>
   <script src=" {{asset('asset/js/aos.js')}} "></script>
-
-  
-
   <script src=" {{asset('asset/js/mediaelement-and-player.min.js')}} "></script>
-
   <script src=" {{asset('asset/js/main.js')}} "></script>
-
-
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var mediaElements = document.querySelectorAll('video, audio'),
@@ -123,3 +117,27 @@
     // Create the FilePond instance
     var pond = FilePond.create(inputElement);
   </script>
+<script>
+$('.owl-carousel').owlCarousel({
+  loop: true,
+  margin: 10,
+  nav: true,
+  navText: [
+    "<i class='fa fa-caret-left'></i>",
+    "<i class='fa fa-caret-right'></i>"
+  ],
+  autoplay: true,
+  autoplayHoverPause: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 3
+    },
+    1000: {
+      items: 5
+    }
+  }
+})
+</script>
