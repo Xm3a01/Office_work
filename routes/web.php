@@ -103,5 +103,5 @@ Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm
 
 
 Route::get('/admin/met', function(){
-    return view('auth.adminlogin');
+    return view('dashboard.users.myaccount');
 });
