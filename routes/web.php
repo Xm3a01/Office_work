@@ -2,6 +2,16 @@
 
 
 
+Route::get('/', function () {
+    return redirect(app()->getLocale());
+});
+
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => '[a-zA-Z]{2}'], 
+    'middleware' => 'setlocale'], function() {
+
+
  
 Route::get('/', function () {
      return view('welcome');
@@ -25,5 +35,5 @@ Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm
 
 
 Route::get('/admin/met', function(){
-    return view('auth.adminlogin');
+    return view('dashboard.users.myaccount');
 });
