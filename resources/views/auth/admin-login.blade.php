@@ -1,73 +1,86 @@
-@extends('layouts.app')
+<html lang="en" dir="rtl">
+<!-- BEGIN HEAD -->
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('ADMIN') }}</div>
+<head>
+    <meta charset="utf-8">
+    <title>AdminPanel | Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author"> 
+    @include('dashboard.includes._head')
+    
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('admin.login.submit', app()->getLocale()) }}">
-                        @csrf
+</head>
+<!-- END HEAD -->
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request', app()->getLocale()) }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+<body class=" login">
+  @include('dashboard.includes._messages')
+        <!-- BEGIN LOGIN FORM -->
+        <!-- BEGIN LOGIN -->
+        <div class="content m-t-10">
+            <!-- BEGIN LOGIN FORM -->
+            <form class="login-form" action="{{route('admin.login.submit' , app()->getLocale())}}" method="POST">
+                @csrf
+                <div class="form-title">
+                    <span class="form-title">{{__('مرحبا')}}.</span>
+                    <span class="form-subtitle">{{__('ارجو التسجيل')}}.</span>
                 </div>
-            </div>
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    <span> ادخل البريد اللاكتروني او كلمة المرور </span>
+                </div>
+                <div class="form-group">
+                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                    <label class="control-label visible-ie8 visible-ie9">البريد اللاكتروني</label>
+                    <input class="form-control form-control-solid placeholder-no-fix {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"   placeholder="البريد اللاكتروني" name="email" /> </div>
+                    @if ($errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                       </span>
+                     @endif
+                    <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">كلمة المرور</label>
+                    <input class="form-control form-control-solid placeholder-no-fix  {{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" autocomplete="off" placeholder="كلمة المرور" name="password" />
+                    @if ($errors->has('password'))
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                       </span>
+                     @endif
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn red btn-block uppercase">د خـول</button>
+                </div>
+                <div class="form-actions">
+                    <div class="pull-left">
+                        <label class="rememberme mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" name="remember" value="1" /> كن مسجلا
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="pull-right forget-password-block">
+                        <a href="javascript:;" id="forget-password" class="forget-password">هل نسية كلمة المرور؟</a>
+                    </div>
+                </div>
+            </form>
+            <!-- END LOGIN FORM -->
+            <!-- BEGIN FORGOT PASSWORD FORM -->
+            <form class="forget-form" action="index.html" method="post">
+                <div class="form-title">
+                    <span class="form-title">هل نسية كلمة المرور؟</span><br>
+                    <span class="form-subtitle">ادخل البريد اللاكتروني.</span>
+                </div>
+                <div class="form-group">
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="البريد اللاكتروني" name="email" /> </div>
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="btn btn-default">رجوع</button>
+                    <button type="submit" class="btn btn-primary uppercase pull-right">ارســال</button>
+                </div>
+            </form>
+            <!-- END FORGOT PASSWORD FORM -->
         </div>
-    </div>
-</div>
-@endsection
+    @include('dashboard.includes._javascript')
+
+</body>
+
+</html>

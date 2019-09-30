@@ -9,7 +9,7 @@
                 <strong> <h5 class="text-center pt-5 pb-3" id="exampleModalLabel">   {{ __('Login') }}  </h5></strong>
             </div>
             <div class="pt-2">  
-               <form action="{{ route('login') }}" class="p-2 ">
+               <form action="{{ route('admin.login.submit', app()->getLocale()) }}" class="p-2 ">
                 @csrf
             <div class="form-row">
                 <div class="form-group">
@@ -57,7 +57,7 @@
                         </button>
 
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            <a class="btn btn-link" href="{{ route('password.request', app()->getLocale()) }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif

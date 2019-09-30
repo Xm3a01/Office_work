@@ -1,51 +1,29 @@
 <?php
 
 
-//whole Wedsite url
-// Route::get('/','BrowseController@index');
-
-
- Route::get('/', function () {
-   return view('welcome');
- });
-
- Route::get('tests','Test@index');
- Route::get('two', 'Test@testtow');
- Route::post('tests/one', 'Test@store')->name('one.store');
- Route::post('tests/two', 'Test@store2')->name('two.store');
-
-
- Auth::routes();
-
- Route::get('/home', 'HomeController@index')->name('home');
-
- Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// route::get('/search/test', function(){
-//     return view('test.search');
-// });
-
-// Route::get('/home', function () {
-// });
-// Route::get('/home-d', function () {
-
-//     return view('layouts.defult');
-// });
-// route::get('/', function(){
-//     return view('pages.home');
-// });
-
-
-// //test Route
-
-// route::get('/datas/{id}', 'Test@select');
-
- route::get('/home', function(){
-  return view('pages.home');
-});
-
-// route::get('/result', 'Test@search');
 
  
+Route::get('/', function () {
+     return view('welcome');
+});
+     
+Auth::routes();
+
+Route::get('home', 'TestController@index')->name('user.home');
+
+Route::get('admins', 'AdminController@index')->name('admin.dashboard');
+Route::get('admins/add', 'AdminController@store')->name('admin.add');
+Route::get('admins/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('admins/login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+Route::get('owners', 'OwnerController@index')->name('owner.dashboard');
+Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
+Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('owner.login.submit');
+Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
+
+});
+
+
+Route::get('/admin/met', function(){
+    return view('auth.adminlogin');
+});

@@ -34,6 +34,7 @@ class AdminLoginController extends Controller
         if(Auth::guard('admin')->attempt($data , $request->remember)) {
             return \redirect()->intended(route('admin.dashboard', app()->getLocale()));
         } else {
+            \Session::flash('error' , 'البريد او كلمة المرور غير صحيحه');
             return \redirect()->back()->withInput($request->only('email' , 'remember'));
         }
     }
