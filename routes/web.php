@@ -61,3 +61,7 @@ Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('own
 Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
 
 });
+
+Route::get('/admin/met', function(){
+    return view('auth.adminlogin');
+});
