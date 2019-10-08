@@ -75,8 +75,6 @@
                                     <a class="dropdown-item" href="{{ route('users.logout',app()->getLocale()) }}">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    <
                                 </div>
                             </li>
                            @endguest

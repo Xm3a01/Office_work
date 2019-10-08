@@ -17,10 +17,10 @@
                             </div>
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li><a href="index.html">الرئيسية</a></li>  
-                            <li><a href="#" data-toggle="modal" data-target="#mycv">ابحث عن السير الذاتية</a></li>
+                            <li><a href="index.html">{{__('Home')}}</a></li>  
+                            <li><a href="#" data-toggle="modal" data-target="#mycv">{{ __('Search for CV')}}</a></li>
                             <li class="has-children">
-                              <a href="">الوظائف</a>
+                              <a href="">{{__('Jobs')}}</a>
                               <ul class="dropdown arrow-top text-center" style="width:30rem;">
                                   <table class="table table-borderless">
                                    <tr>
@@ -56,15 +56,27 @@
                                   </table>  
                               </ul>
                             </li>
-                            <li><a href="about.html">إتصل بنا</a></li>
-                            <li><a href="candidate.html" class="add"><span> + </span> أضف وظيفة جديدة</a></li> 
-                            <li><a href="ownerdashboard.html">باحث عن عمل؟</a></li>
-                            <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
+                            <li><a href="about.html">{{__('Contact us')}}</a></li>
+                            <li ><a href="ownerdashboard.html">{{__('Search for job')}}</a></li>
+                            @foreach (config('app.available_locales') as $locale)
+                              <li>
+                                  <a class="text-right"
+                                      href="{{ route(Route::currentRouteName(), $locale) }}"
+                                      @if (app()->getLocale() == $locale) style="display:none;" @endif>
+                                       @if($locale == 'en') 
+                                       {{ strtoupper($locale) }} <img SRC="{{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light">
+                                       @else 
+                                       {{ strtoupper($locale) }}
+                                       <img  SRC="{{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light" alt="Lang">
+                                       @endif
+                                    </a> 
+                              </li>
+                            @endforeach
                             <li class="has-children mr-2">
-                                    <a href="">حسابي</a>
+                                  <a href="">{{Auth::user()->ar_name}}</a>
                                     <ul class="dropdown arrow-top">
-                                      <li><a href="#">اعدادات الحساب</a></li>
-                                      <li ><a href="contact.html" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">تسجيل خروج</a></li>
+                                      <li><a href="#">{{__('Account setting')}}</a></li>
+                                      <li ><a href="{{route('users.logout',app()->getLocale())}}" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">تسجيل خروج</a></li>
                                        </ul>
                                   </li>
                         </ul> 

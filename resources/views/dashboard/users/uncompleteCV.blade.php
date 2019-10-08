@@ -1,4 +1,4 @@
-@extends('layouts.defultinside')
+@extends('layouts.defaultclient')
 @section('content')
 
 

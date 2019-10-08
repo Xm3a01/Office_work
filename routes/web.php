@@ -4,25 +4,11 @@
 
 Route::get('/', function () {return redirect(app()->getLocale());});
 
-Route::group(['prefix' => '{locale}','where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], 
-    function() {
-
-     Route::get('/', function () {return view('welcome');});   
-     Auth::routes();
-     Route::get('home', 'UserController@index')->name('users.home');
-     Route::get('users/logout', 'Auth\LoginController@logout')->name('users.logout');
-
-     Route::get('owners', 'OwnerController@index')->name('owner.dashboard');
-     Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
-     Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('owner.login.submit');
-     Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
-
-});
 
 
 
 Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function(){
-//about browes
+    //about browes
     Route::get('/', 'Dashboard\Admin\AdminController@index')->name('admin.dashboard');
     Route::get('abouts/company','Dashboard\Admin\AboutController@create')->name('about.company');
     Route::get('abouts/whyus','Dashboard\Admin\AboutController@createwhyUs')->name('about.whyus');
@@ -56,9 +42,25 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function
 });
 
 Route::group(['prefix' => 'admins'], function(){
-    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+        Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 });
 
+
+Route::group(['prefix' => '{locale}','where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], 
+    function() {
+
+     Route::get('/', function () {return view('welcome');});   
+     Auth::routes();
+     Route::get('users/logout', 'Auth\LoginController@userlogout')->name('users.logout');
+     Route::resource('users', 'Dashboard\User\UserController');
+
+     Route::resource('owners', 'Dashboard\User\OwnersController');
+     Route::get('owners', 'OwnerController@index')->name('owner.dashboard');
+     Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
+     Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('owner.login.submit');
+     Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
+
+});

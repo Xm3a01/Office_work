@@ -4,5 +4,18 @@
     "Password": "كلمة مرور",
     "Remember Me": "حفظ",
     "Forgot Your Password?": "نسية كلمة المرور",
-    "Register": "تسجيل"
+    "Register": "تسجيل",
+    "Logout" : "تسجيل خروج",
+    "Home" : "الرئيسيه",
+    "Jobs" : "الوظائف",
+    "Search for CV" : "البحث عن سير ذاتيه",
+    "Search for job" : "البحث عن عمل",
+    "Account setting" : "اعدادات الحساب",
+    "Contact us" : "اتصل بنا",
+    "You maye interest" : "وظائف قدتهمك",
+    "Make job notification" : "أنشأ تنبيها لوظيفه",
+    "More" : "المزيد",
+    "Job name" : "المسمى الوظيفي",
+    "Country" : "البلد",
+    "Send now" : "انشأ الان"
   }

@@ -27,7 +27,7 @@ class LoginController extends Controller
      * @var string
      */
     public function redirectTo() {
-        return redirect()->route('users.home' ,app()->getLocale());
+        return app()->getLocale().'/users';
     }
 
     /**
@@ -37,10 +37,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except(['logout']);
+        $this->middleware('guest')->except(['userlogout']);
     }
 
-    public function logout()
+    public function userlogout()
     {
         Auth::guard('web')->logout();
 

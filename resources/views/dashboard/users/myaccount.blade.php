@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
         <div class="col-md-8 col-lg-8 mb-5"> 
-            <h3 class="py-3">وظائف قد تهمك</h3> 
+          <h3 class="py-3">{{__('You maye interest')}}</h3> 
                     <div class="modrn-joblist"> 
                          <div class="rounded jobs-wrap">
                                 <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
@@ -106,7 +106,7 @@
                                               </a> 
             
                                   <div class="text-center pt-5" data-aos="fade-up" data-aos-delay="50"><a class="btn"
-                                    href="new-post.html">المزيد</a>
+                                    href="new-post.html">{{__('More')}}</a>
                                 </div>
                          
                                 </div> 
@@ -118,15 +118,15 @@
 
     <div class="col-md-4 col-lg-4 mb-5">  
         <form action="#" class="px-3 py-2 my-3 bg-white"> 
-                <h5 class="p-2">أنشئ تنبيهاً وظيفياً</h5>
+                <h5 class="p-2">{{__('Make job notification')}}</h5>
                   <div class="row form-group">
                     <div class="col-md-12">
-                      <label class="font-weight-bold" for="email">المسمي الوظيفي</label>
+                      <label class="font-weight-bold" for="email">{{__('Job name')}}</label>
                       <input type="email" id="email" class="form-control" placeholder="مثال: مدير الموارد البشرية">
                     </div>
                
                   <div class="form-group col-md-12">
-                        <label for="inputState" style="font-weight: 600;">البلد</label>
+                        <label for="inputState" style="font-weight: 600;">{{__('Country')}}</label>
                         <select id="inputState" class="form-control">
                           <option>الامارات</option>
                           <option>السعودية</option>
@@ -135,7 +135,7 @@
                     </div>
                   <div class="row form-group">
                     <div class="col-md-12">
-                      <input type="submit" value="انشئ الان" class="btn btn-primary btn-block px-3">
+                      <input type="submit" value="{{__('Send now')}}" class="btn btn-primary btn-block px-3">
                     </div>
                   </div> 
                 </form>

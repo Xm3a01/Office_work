@@ -12,7 +12,9 @@
 <link rel="stylesheet" href=" {{asset('asset/css/owl.theme.default.min.css')}} ">
 <link rel="stylesheet" href=" {{asset('asset/css/bootstrap-datepicker.css')}} ">
 <link rel="stylesheet" href=" {{asset('asset/css/animate.css')}} ">
+@if(app()->getLocale() == 'ar')
 <link rel="stylesheet" href=" {{asset('asset/css/bootstrap-rtl.css')}} ">
+@endif
 <link rel="stylesheet" href=" {{asset('asset/css/fontawesome.min.css')}} ">  
 <link rel="stylesheet" href=" {{asset('asset/fonts/flaticon/font/flaticon.css')}} ">
 
