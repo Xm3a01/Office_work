@@ -1,3 +1,4 @@
+</div>
 <footer class="site-footer" style="font-size: 14px;">
     <div class="container">
        <div class="row">
@@ -63,4 +64,3 @@
       </div>
     </div>
   </footer>
-</div>

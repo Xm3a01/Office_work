@@ -1,17 +1,23 @@
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{asset('vendor/js/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/bootstrap.min.js')}}" type="text/javascript"></script>
+
+<script src="{{asset('vendor/js/bootstrap-table.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/js.cookie.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/jquery.blockui.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
-
+ 
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{asset('vendor/js/app.min.js')}}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 
+{{-- <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script> --}}
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="{{asset('vendor/js/layout.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('vendor/js/demo.min.js')}}" type="text/javascript"></script>

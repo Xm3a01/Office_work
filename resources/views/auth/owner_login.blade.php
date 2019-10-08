@@ -2,14 +2,14 @@
 @section('content')
 
 <div class="bg-light modeltop " id="login" >
-    <div class="container  justify-content-center mb-3" role="document">
-        <div class=" row  justify-content-center mb-5">
-          <div class="col-md-4 bg-white">
-            <div class="">
+    <div class="container  justify-content-center " role="document">
+        <div class=" row  justify-content-center ">
+          <div class="col-md-4 bg-white shadow1 mb-5">
+            <div class="border-bottom">
                 <strong> <h5 class="text-center pt-5 pb-3" id="exampleModalLabel">   {{ __('Register') }}  </h5></strong>
             </div>
             <div class="pt-2">  
-               <form action="{{ route('login') }}" class="p-2 ">
+               <form action="{{ route('login', app()->getLocale()) }}" class="p-2 ">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -33,34 +33,33 @@
                             </span>
                         @enderror
                   </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <div class="form-group col-md-6">
+                       <div class="form-check float-left p-0 mx-3">
+                            <input class="form-check-input" style="margin-right: -27px;" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                            <label class="form-check-label" for="remember">
+                            <label class="form-check-label " for="remember">
                                 {{ __('Remember Me') }}
                             </label>
-                        </div>
-                    </div>
-                </div>
+                      </div>
+                  </div>
 
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Login') }}
-                        </button>
-
+                <div class="form-group col-md-6"> 
                         @if (Route::has('password.request'))
-                            <a class="text-left" href="{{ route('password.request') }}">
+                            <a class="text-left" href="{{ route('password.request', app()->getLocale()) }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
-                        @endif
+                        @endif 
                     </div>
+
+                <div class="form-group col-md-12 text-center"> 
+                    <button type="submit" class="btn btn-primary btn-block">
+                        {{ __('Login') }}
+                    </button>
+                        </div>
                 </div>
             </form>  
             
-                  <p class="text-center p-5"> <u><a href="#" class="text-center">{{ __(' Dont have account? register now') }} </a></u></p>
+                  <p class="text-center p-3"> <u><a href="#" class="text-center">{{ __(' Dont have account? register now') }} </a></u></p>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ class JobOwnerTable extends Migration
      */
     public function up()
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('jobs', function (Blueprint $table) {
             $table->unsignedBigInteger('owner_id');
 
             $table->foreign('owner_id')
@@ -29,7 +29,7 @@ class JobOwnerTable extends Migration
      */
     public function down()
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('jobs', function (Blueprint $table) {
             //
         });
     }

@@ -1,5 +1,78 @@
 
+
 .login .content {
+     border: 1px solid #5984cc;
+    padding: 5em;
+    background-color: #609cc3;
     margin-top: 141px;
-    width: 290px;
+    width: 400px;
 }
+.login .content .form-control{
+    border-radius: 5px!important;
+}
+.modal-dialog{
+    width: 100%!important;
+    margin: 0!important;
+}
+@media (min-width: 768px){
+.modal-dialog {
+    width: 100%!important;
+}
+}
+@media (min-width: 768px){
+.modal-dialog {
+    width: 100%;
+    margin: 0;
+}
+}
+.modal-open .modal{
+    padding-right: 0!important;
+  }
+  .modal .modal-content{
+    height: -webkit-fill-available;
+    border-radius: 0;
+  }
+  
+  .modal-footer {
+    text-align: center;
+  }
+  .form .form-actions, .portlet-form .form-actions{
+      border-top: 0!important;
+  }
+
+  .modal-dialog {
+      height:auto;
+  }
+  /* .clos{ 
+    float: left;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;  
+    -webkit-appearance: none;
+    display: inline-block; 
+    margin-left: 0;
+    width: 9px;
+    height: 9px;
+    background-repeat: no-repeat!important;
+    text-indent: -10000px;
+    outline: 0;
+    background-image: url({{asset('vendor/img/remove-icon-small.png')}})!important;
+    font-size: 21px;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+} */
+
+.coustm-modal {
+    height: 100%!important;
+  }
+  
+  @media (min-height: 994px) {
+    .coustm-modal {
+      height: 0%;
+    }
+  }
+     
+  

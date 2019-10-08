@@ -21,7 +21,7 @@ class CreateSpecialsTable extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')
-                 ->references('id')->on('roles')->dropForeign('specials_role_id_foreign');
+                 ->references('id')->on('roles')->onDelete('cascade');
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade'); //specials
         });
     }

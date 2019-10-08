@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getUserApi(Request $request)    
+    public function __construct() {
+        $this->middleware('auth:web');
+    }
+    public function index()
     {
-        return $request->user();
+        return view('pages.home');
     }
 }

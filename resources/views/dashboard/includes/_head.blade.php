@@ -10,11 +10,15 @@
 <!-- BEGIN THEME GLOBAL STYLES -->
 <link href="{{asset('vendor/css/components-rtl.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
 <link href="{{asset('vendor/css/plugins-rtl.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('vendor/css/bootstrap-table.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('vendor/css/components-md-rtl.min.css')}}" rel="stylesheet" type="text/css" />
+
+<link href="{{asset('vendor/css/plugins-md-rtl.min.css')}}" rel="stylesheet" type="text/css" /> 
 <!-- END THEME GLOBAL STYLES -->
 
 <!-- BEGIN THEME LAYOUT STYLES -->
 <link href="{{asset('vendor/css/layout-rtl.min.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('vendor/css/darkblue-rtl.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
+<link href="{{asset('vendor/css/light-rtl.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
 <link href="{{asset('vendor/css/custom-rtl.min.css')}}" rel="stylesheet" type="text/css" />
 <!-- END THEME LAYOUT STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -28,6 +32,6 @@
 <!-- END PAGE LEVEL STYLES -->
 {{-- coustome --}}
 <link href="{{asset('vendor/css/main.css')}}" rel="stylesheet" type="text/css" />
-
+<link rel="shortcut icon" href="favicon.ico" />
 {{-- <link rel="stylesheet" href="vendor/css/main.css"> --}}
 

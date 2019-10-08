@@ -58,8 +58,28 @@
                             </li>
                             <li><a href="ownerdashboard.html">صاحب عمل؟</a></li>
                             <li><a href="about.html">إتصل بنا</a></li>
-                            <li><a href="#" class="add">تسجيل جديد</a></li>
-                            <li><a href="#" style="margin: 0 6px 0 -18px;border: 1px solid #fb236a; border-radius:25px"> <span></span>دخول </a></li> 
+                            @guest
+                            <li><a class="add" href="{{ route('login',app()->getLocale()) }}">{{ __('Login') }}</a></li>
+                            @if (Route::has('register'))
+                                <li >
+                                    <a style="margin: 0 6px 0 -18px;border: 1px solid #fb236a; border-radius:25px" href="{{ route('register',app()->getLocale()) }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->ar_name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users.logout',app()->getLocale()) }}">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <
+                                </div>
+                            </li>
+                           @endguest
                            <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
                           </ul> 
                         </div>
@@ -70,4 +90,3 @@
               </div>
             </div>
           </div>
-      

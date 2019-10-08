@@ -65,16 +65,16 @@ class Handler extends ExceptionHandler
 
         switch ($guard) {
           case 'admin':
-            $login ='admin.login';
+            return redirect()->guest(route('admin.login'));
             break;
-            case 'owner':
+          case 'owner':
             $login = 'owner.login';
             break;
           default:
             $login = 'login';
             break;
         }
-
+    
         return redirect()->guest(route($login,app()->getLocale()));
     }
 }

@@ -19,16 +19,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        // 'role',
-        // 'country',
-        // 'sub_special',
-        // 'ar_sub_special',
-        // 'salary',
-        // 'salary_type',
-        // 'ar_country',
-        // 'city',
-        // 'ar_city',
-        // 'level_of_work'
+        'role',
+        'country',
+        'sub_special',
+        'ar_sub_special',
+        'salary',
+        'salary_type',
+        'ar_country',
+        'city',
+        'ar_city',
+        'level_of_work',
+        'ar_level_of_work',
+        'visit_count',
+        'available'
     ];
 
     /**
@@ -48,4 +51,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    public function owner()
+    {
+        return $this->hasbelongsTo(Owner::class);
+    }
+
+    public function exps()
+    {
+        return $this->hasMany(Exp::class);
+    }
 }

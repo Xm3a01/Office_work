@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -20,4 +20,11 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}
+
+@foreach ($all as $al)
+   {{-- @if($al->employee_name != null)  --}}
+     <h2>Hello</h2>
+     {{$al->employee_name}}
+   {{-- @endif --}}
+@endforeach

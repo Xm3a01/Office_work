@@ -17,16 +17,22 @@ class CreateExpsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('role');
-            $table->string('sub_special');
-            $table->string('country');
-            $table->unsignedBigInteger('start_years');
+            $table->string('ar_role');
+            $table->string('sub_special'); 
+            $table->string('ar_sub_special');
+            $table->string('expert_year');
+            $table->string('ar_level');
+            $table->string('level');
+            $table->string('name');
+            $table->string('ar_name');
+            $table->string('expert_pdf');
+            $table->string('ar_summary')->nullable();
+            $table->string('summary')->nullable();;
+            $table->unsignedBigInteger('start_year');
             $table->unsignedBigInteger('start_month');
-            $table->unsignedBigInteger('end_years');
+            $table->unsignedBigInteger('end_year');
             $table->unsignedBigInteger('end_month');
-            $table->string('company_name');
-            $table->string('section');
-            $table->string('size');
-            $table->string('last_salary');
+            
             $table->timestamps();
 
             $table->foreign('user_id')

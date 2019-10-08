@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
         switch ($guard) {
             case 'admin':
             if (Auth::guard($guard)->check()) {
-               return redirect()->route('admin.dashboard', app()->getLocale());
+               return redirect()->route('admin.dashboard');
             } 
                 break;
 
@@ -33,14 +33,12 @@ class RedirectIfAuthenticated
             
             default:
             if (Auth::guard($guard)->check()) {
-              return redirect()->route('user.home', app()->getLocale());
+                return redirect(url(app()->getLocale().'/home'));
             }
                 break;
         }
 
-        // if (Auth::guard($guard)->check()) {
-        //     return redirect(url(app()->getLocale().'/home'));
-        // }
+        
 
         return $next($request);
     }

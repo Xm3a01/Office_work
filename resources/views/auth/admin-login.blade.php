@@ -20,7 +20,7 @@
         <!-- BEGIN LOGIN -->
         <div class="content m-t-10">
             <!-- BEGIN LOGIN FORM -->
-            <form class="login-form" action="{{route('admin.login.submit' , app()->getLocale())}}" method="POST">
+            <form class="login-form" action="{{route('admin.login.submit')}}" method="POST">
                 @csrf
                 <div class="form-title">
                     <span class="form-title">{{__('مرحبا')}}.</span>

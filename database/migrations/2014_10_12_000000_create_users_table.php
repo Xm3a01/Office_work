@@ -8,30 +8,56 @@ class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 
      * @return void
      */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('ar_name')->nullable();
             $table->string('email')->unique();
-            // $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
-            // $table->string('password');
-            // $table->string('role');
-            // $table->string('country');
-            // $table->string('sub_special');
-            // $table->string('ar_sub_special');
-            // $table->string('salary');
-            // $table->string('salary_type');
-            // $table->string('ar_country');
-            // $table->string('city');
-            // $table->string('ar_city');
-            // $table->string('level_of_work');
+            $table->string('phone');
+            $table->string('phone_key')->default('00249');
+            $table->string('password');
+            $table->string('birthdate')->nullable();
+            $table->string('idint_1')->nullable();
+            $table->string('idint_2')->nullable();
+            $table->string('language')->nullable();
+            $table->string('language_level')->nullable();
+            $table->string('ar_language')->nullable();
+            $table->string('ar_language_level')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('ar_religion')->nullable();
+            $table->string('social_status')->nullable();
+            $table->string('ar_social_status')->nullable();
+            $table->string('qualification')->nullable();
+            $table->string('ar_qualification')->nullable();
+            $table->string('grade_date')->nullable();
+            $table->string('grade')->nullable();
+            $table->string('ar_university')->nullable();
+            $table->string('university')->nullable();
+            $table->string('ar_brith')->nullable();
+            $table->string('brith')->nullable();
+            $table->bigInteger('visit_count')->default(0);
+            $table->string('role')->nullable()->nullable();
+            $table->string('ar_role')->nullable();
+            $table->string('country')->nullable();
+            $table->string('ar_country')->nullable();
+            $table->string('sub_special')->nullable();
+            $table->string('ar_sub_special')->nullable();
+            $table->string('expect_salary')->nullable();
+            $table->string('salary_type')->default('SD');
+            $table->string('city')->nullable();
+            $table->string('ar_city')->nullable();
+            $table->string('level_of_work')->nullable();
+            $table->string('ar_level_of_work')->nullable();
             $table->rememberToken();
             $table->timestamps();
+   
+
         });
     }
 

@@ -11,7 +11,7 @@ class OwnerLoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:owner')->except('logout');
+        $this->middleware('guest:owner')->except('ownerLogout');
     }
 
     public function showLoginForm()
@@ -36,6 +36,13 @@ class OwnerLoginController extends Controller
         } else {
             return \redirect()->back()->withInput($request->only('email' , 'remember'));
         }
+    }
+
+    public function ownerLogout()
+    {
+        Auth::guard('owner')->logout();
+
+        return  redirect('/');
     }
 }
 
