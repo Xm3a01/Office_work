@@ -16,7 +16,7 @@ class OwnerLoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.owner-login');
+        return view('auth.owner_login');
     }
 
     public function login(Request $request)
@@ -32,7 +32,7 @@ class OwnerLoginController extends Controller
         ];
 
         if(Auth::guard('owner')->attempt($data , $request->remember)) {
-            return \redirect()->intended(route('owner.dashboard', app()->getLocale()));
+            return \redirect()->intended(route('owners.index', app()->getLocale()));
         } else {
             return \redirect()->back()->withInput($request->only('email' , 'remember'));
         }
@@ -42,7 +42,7 @@ class OwnerLoginController extends Controller
     {
         Auth::guard('owner')->logout();
 
-        return  redirect('/');
+        return  redirect(app()->getLocale().'owners/login');
     }
 }
 

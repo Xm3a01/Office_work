@@ -55,7 +55,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar pull-left">
                             <div class="btn-group">
-                                <a  href="{{route('owners.create')}}" id="sample_editable_1_new" class="btn green">  اضف صاحب عمل
+                                <a  href="{{route('companies.create')}}" id="sample_editable_1_new" class="btn green">  اضف صاحب عمل
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -92,7 +92,7 @@
                 <td data-search="true"> {{$owner->ar_gender}} </td>
                 <td data-search="true" class="center"> {{$owner->created_at}} </td>
                 <td data-search="true" class="center"> 
-                    <a class="" href="{{route('owners.edit',$owner->id)}}"><i class="fa fa-edit"></i></a>
+                    <a class="" href="{{route('companies.edit',$owner->id)}}"><i class="fa fa-edit"></i></a>
 
                     <a  onclick="event.preventDefault();
                             document.getElementById('delete-owner').submit();">
@@ -100,7 +100,7 @@
                     </a>
 
                     <a class="" href="{{route('jobs.create',$owner->id)}}"><i class="fa fa-plus">اضافة عمل</i></a>
-                    <form method="POST"  action="{{route('owners.destroy' , $owner->id)}}" id="delete-owner">
+                    <form method="POST"  action="{{route('companies.destroy' , $owner->id)}}" id="delete-owner">
                       @csrf
                       @method('delete')
                     </form>

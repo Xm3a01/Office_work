@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Owner;
+namespace App\Http\Controllers;
 
+use App\City;
+use App\Country;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class OwnerController extends Controller
+class SearchController extends Controller
 {
-    
-    public function __construct()
-    {
-        $this->middleware('auth:owner');
-    }
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-       return "Owner Dashbaord <a href =".route('owners.logout' , app()->getLocale())."  Click To Login Out.. </a>";
+        $a= 'list-di';
+        $c = str_replace('-',',',$a);
+        $b= preg_split("/[,]/",$c);
+        
+
+        return $b[1];
     }
 
     /**
@@ -29,6 +33,15 @@ class OwnerController extends Controller
         //
     }
 
+
+    public function select($id)
+    {
+        $country = Country::findOrfail($id);
+        $country->load('cities');
+
+        return response()->json($country->cities);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +50,33 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Country::create([
+         'name'=> $request->name,
+         'ar_name'=> $request->ar_name,
+        ]);
+
+        return 'data saved';
+    }
+
+    public function store2(Request $request)
+    {
+        City::create([
+         'name'=> $request->name,
+         'ar_name'=> $request->ar_name,
+         'country_id' => $request->country
+        ]);
+        return "Data saved";
+    }
+
+    function testtow() {
+        $countries = Country::all();
+        $countries->load('cities');
+        return view('test.add')->withCountries($countries);
+    }
+
+    function search() {
+        $countries = Country::all();
+        return response()->json($countries);
     }
 
     /**

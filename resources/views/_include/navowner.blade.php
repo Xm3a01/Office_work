@@ -76,7 +76,7 @@
                                   <a href="">{{Auth::user()->ar_name}}</a>
                                     <ul class="dropdown arrow-top">
                                       <li><a href="#">{{__('Account setting')}}</a></li>
-                                      <li ><a href="{{route('users.logout',app()->getLocale())}}" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">تسجيل خروج</a></li>
+                                      <li ><a href="{{route('users.logout',app()->getLocale())}}" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">{{__('Logout')}}</a></li>
                                        </ul>
                                   </li>
                         </ul> 

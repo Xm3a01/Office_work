@@ -18,7 +18,7 @@
 </a>
 <ul class="sub-menu">
     <li class="nav-item ">
-        <a href="{{route('users.index')}}" class="nav-link ">
+        <a href="{{route('cv.index')}}" class="nav-link ">
             <span class="title">عرض جميع السير</span>
         </a>
     </li>
@@ -26,7 +26,7 @@
 </li>  
 
 <li class="nav-item">
-<a href="{{route('owners.index')}}" class="nav-link nav-toggle">
+<a href="{{route('companies.index')}}" class="nav-link nav-toggle">
     <i class="icon-settings"></i>
     <span class="title"> اصحاب العمل</span>
 </a>

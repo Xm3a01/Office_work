@@ -34,7 +34,7 @@
                     </div>
                  </div>
         <div class="portlet-body form">
-             <form class="form-horizontal" id="user-form" role="form" method="POST" action="{{route('users.update' , $user->id)}}">
+             <form class="form-horizontal" id="user-form" role="form" method="POST" action="{{route('cv.update' , $user->id)}}">
                 @csrf
                 @method('PUT')
                 <div class="form-body">

@@ -82,9 +82,9 @@
                                             <td>{{$user->ar_name}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>
-                                                <form action="{{route('users.destroy', $user->id)}}" method="POST">
+                                                <form action="{{route('cv.destroy', $user->id)}}" method="POST">
                                                     @csrf {{ method_field('DELETE') }}
-                                                    <a href="{{route('users.edit', $user->id)}}"
+                                                    <a href="{{route('cv.edit', $user->id)}}"
                                                         class="btn dark btn-sm btn-outline sbold uppercase">
                                                         <i class="fa fa-edit"> تعديل </i>
                                                     </a>
@@ -120,7 +120,7 @@
                     <!-- BEGIN SAMPLE FORM PORTLET-->
             <div class="p-3"> 
             <div class="portlet-body form">
-             <form class="form-horizontal" id="user-form" role="form" method="POST" action="{{route('users.store')}}">
+             <form class="form-horizontal" id="user-form" role="form" method="POST" action="{{route('cv.store')}}">
                 @csrf
                 <div class="form-body">
                     <h4 class="text-left m-3">البيانات الشخصية</h4><br>

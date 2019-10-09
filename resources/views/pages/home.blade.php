@@ -14,22 +14,49 @@
           <h1 class="h3 text-center">الطريقة الأفضل للحصول على وظيفتك الجديدة</h1>
           <h3 class="h5 text-center">أعثر علي وظائف، موظفين، وفرص عمل</h3>
         </div>
-        <form action="#">
+        <form action="#" id="app">
           <div class="row mb-3">
             <div class="col-md-9">
               <div class="row">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <div class="input-wrap">
                     <span class="icon icon-keyboard"></span>
-                    <input type="text" class=" form-control border-0 px-3"
-                      placeholder="المسمى الوظيفي أو اسم الشركة">
+                    <input v-model="special" list="special" type="text" class=" form-control border-0 px-3" placeholder="المسمى الوظيفي أو اسم الشركة">
+                    <datalist id="special" v-if="special">
+                      @foreach ($sub_specials as $sub)   
+                       @if(app()->getLocale() == 'en')
+                         <option  value="{{$sub->name}} ">
+                          @else
+                         <option value="{{$sub->ar_name}} ">
+                       @endif
+                        @endforeach
+                        @foreach ($owners as $owner)   
+                          <option  value="{{$owner->company_name}} ">
+                        @endforeach
+                     </datalist>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3 mb-md-0">
                   <div class="input-wrap">
                     <span class="icon icon-room"></span>
-                    <input type="text" class="form-control border-0 px-3" id="autocomplete"
-                      placeholder="المدينة أو المقاطعة أو المنطقة" onFocus="geolocate()">
+                    <input  v-model = "country" list="country" type="text" class="form-control border-0 px-3"  placeholder="المدينة أو المقاطعة أو المنطقة">
+                    <datalist id="country" v-if="country">
+                        @foreach ($countries as $county)
+                          @foreach ($county->cities as $city)
+                           @if(app()->getLocale() == 'ar')
+                           <option value="{{$county->ar_name.'-'.$city->ar_name}} ">
+                              @else
+                           <option value="{{$county->name.'-'.$city->name}} ">
+                          @endif
+                          @endforeach
+                          @if(app()->getLocale() == 'ar')
+                            <option value="{{$county->ar_name}} ">
+                           @else
+                           <option value="{{$county->name}} ">
+                          @endif
+                           
+                        @endforeach
+                  </datalist> 
                   </div>
                 </div>
               </div>
@@ -537,4 +564,19 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script src ="{{asset('js/app.js')}}"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+  
+    data: {
+  
+        country: '',
+        special: ''
+    }
+  });
+</script>
 @endsection

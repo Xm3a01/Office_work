@@ -1,11 +1,14 @@
 <?php
+use App\Country;
 
+Route::get('test' , function(){
+    $all = Country::all();
+    return view('test.search',compact('all'));
+});
 
+Route::get('search' , 'SearchController@index')->name('search');
 
 Route::get('/', function () {return redirect(app()->getLocale());});
-
-
-
 
 Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function(){
     //about browes
@@ -18,12 +21,8 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function
 //about store
     Route::resource('abouts','Dashboard\Admin\AboutController')->only(['store']);
 
-//owners job
-    // Route::get('jobs/role','Dashboard\Admin\BrowseController@role_index')->name('owners.job_role');
-    // Route::get('jobs/level','Dashboard\Admin\BrowseController@level_index')->name('owners.job_level');
-
     Route::resource('admins','Dashboard\Admin\AdminController')->except(['delete','create']);
-    Route::resource('owners','Dashboard\Admin\OwnerController');
+    Route::resource('companies','Dashboard\Admin\OwnerController');
     Route::resource('jobs','Dashboard\Admin\JobController')->except('create');
     Route::resource('locations','Dashboard\Admin\LocationController');
     Route::resource('roles','Dashboard\Admin\RoleController');
@@ -31,7 +30,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function
     Route::resource('subspecials','Dashboard\Admin\SubSpecialController');
     Route::resource('experiences','Dashboard\Admin\ExperienceController');
     Route::resource('levels','Dashboard\Admin\LevelController');
-    Route::resource('users','Dashboard\Admin\UserController');
+    Route::resource('user/cv','Dashboard\Admin\UserController');
     Route::get('jobs/create/{id}','Dashboard\Admin\JobController@create')->name('jobs.create');
     Route::get('cities','Dashboard\Admin\LocationController@cityIndex')->name('cities.index');
     Route::get('cities/{id}/edit','Dashboard\Admin\LocationController@cityEdit')->name('cities.edit');
@@ -50,17 +49,19 @@ Route::group(['prefix' => 'admins'], function(){
 
 
 Route::group(['prefix' => '{locale}','where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], 
-    function() {
-
-     Route::get('/', function () {return view('welcome');});   
+function() {
+    
+     Route::get('/','Browse\BrowseController@home_page');  
      Auth::routes();
-     Route::get('users/logout', 'Auth\LoginController@userlogout')->name('users.logout');
+     Route::get('users/logout', 'Auth\LoginController@userLogout')->name('users.logout');
      Route::resource('users', 'Dashboard\User\UserController');
 
-     Route::resource('owners', 'Dashboard\User\OwnersController');
-     Route::get('owners', 'OwnerController@index')->name('owner.dashboard');
      Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
      Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('owner.login.submit');
      Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
+     Route::get('owners/logout', 'Auth\OwnerLoginController@ownerLogout')->name('owners.logout');
+     Route::resource('owners', 'Dashboard\Owner\OwnerController');
 
 });
+
+Route::view('test' , 'test.search');

@@ -1,7 +1,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title> {{ config('app.name', 'office work' )  }} </title> 
+@if(app()->getLocale() == 'ar')
+<title> {{ config('app.ar_name' )}} </title>
+@else
+<title> {{ config('app.name' )}} </title>
+@endif 
 <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Work+Sans:300,400,700" rel="stylesheet">
 <link rel="stylesheet" href=" {{asset('asset/fonts/icomoon/style.css')}} ">
 

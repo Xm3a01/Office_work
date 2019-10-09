@@ -27,13 +27,13 @@ class RedirectIfAuthenticated
 
             case 'owner':
             if (Auth::guard($guard)->check()) {
-               return redirect()->route('owner.dashboard', app()->getLocale());
+               return redirect()->route('owners.index', app()->getLocale());
             } 
                 break;
             
             default:
             if (Auth::guard($guard)->check()) {
-                return redirect(url(app()->getLocale().'/home'));
+                return redirect(url(app()->getLocale().'/users'));
             }
                 break;
         }

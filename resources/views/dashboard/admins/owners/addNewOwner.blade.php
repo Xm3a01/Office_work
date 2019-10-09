@@ -38,7 +38,7 @@
                     </div>
                  </div> 
         <div class="portlet-body form">
-            <form class="form-horizontal" role="form" method="POST" action="{{route('owners.store')}}" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="POST" action="{{route('companies.store')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="label" value="admin">
                 <input type="hidden" name="select" value="owner">

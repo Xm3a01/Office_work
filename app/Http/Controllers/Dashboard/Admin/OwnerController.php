@@ -34,7 +34,7 @@ class OwnerController extends Controller
         $cities = City::all();
         $countries = Country::all();
 
-        return view('dashboard.admins.owners.AddNewOwner', compact(['roles' , 'cities','countries']));
+        return view('dashboard.admins.owners.addNewOwner', compact(['roles' , 'cities','countries']));
     }
 
     /**
@@ -88,7 +88,7 @@ class OwnerController extends Controller
 
             if($owner->save()) {
             \Session::flash('success', 'تمت الاضافه بنجاح');
-            return redirect()->route('owners.index');
+            return redirect()->route('companies.index');
             }
     }
 
@@ -178,7 +178,7 @@ class OwnerController extends Controller
 
             if($owner->save()) {
             \Session::flash('success', 'تم التعديل بنجاح');
-            return redirect()->route('owners.index');
+            return redirect()->route('companies.index');
             }
     }
 
@@ -195,6 +195,6 @@ class OwnerController extends Controller
         $owner->delete();
         
         \Session::flash('success', 'تم الحذف بنجاح');
-        return redirect()->route('owners.index');
+        return redirect()->route('companies.index');
     }
 }

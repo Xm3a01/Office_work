@@ -9,7 +9,7 @@
                 <strong> <h5 class="text-center pt-5 pb-3" id="exampleModalLabel">   {{ __('Register') }}  </h5></strong>
             </div>
             <div class="pt-2">  
-               <form action="{{ route('login', app()->getLocale()) }}" class="p-2 ">
+               <form action="{{ route('owner.login.submit', app()->getLocale()) }}" class="p-2 " method="POST">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-12">
