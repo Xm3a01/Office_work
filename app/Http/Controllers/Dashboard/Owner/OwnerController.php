@@ -16,7 +16,7 @@ class OwnerController extends Controller
     
     public function index()
     {
-       return "Owner Dashbaord <a href =".route('owners.logout' , app()->getLocale())."  Click To Login Out.. </a>";
+       return view('test.add');
     }
 
     /**

@@ -22,6 +22,11 @@
             <span class="title">عرض جميع السير</span>
         </a>
     </li>
+    <li class="nav-item ">
+        <a href="{{route('experiences.index')}}" class="nav-link ">
+            <span class="title">الخبرات</span>
+        </a>
+    </li>
 </ul>
 </li>  
 

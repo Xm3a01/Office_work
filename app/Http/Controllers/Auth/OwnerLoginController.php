@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Owner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,10 @@ class OwnerLoginController extends Controller
             'password' => $request->password
         ];
 
+        $owner = Owner::where('email','=',$data['email'])->first();
         if(Auth::guard('owner')->attempt($data , $request->remember)) {
+            $owner->visit_count +=1;
+            $owner->save();
             return \redirect()->intended(route('owners.index', app()->getLocale()));
         } else {
             return \redirect()->back()->withInput($request->only('email' , 'remember'));
@@ -42,7 +46,7 @@ class OwnerLoginController extends Controller
     {
         Auth::guard('owner')->logout();
 
-        return  redirect(app()->getLocale().'owners/login');
+        return  redirect(app()->getLocale().'/owners/login');
     }
 }
 

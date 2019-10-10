@@ -18,7 +18,7 @@
                             </div>
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li><a href="index.html">الرئيسية</a></li>
+                            <li><a href="{{route('home',app()->getLocale())}}">{{__('Home')}}</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#mycv">سيرتي الذاتية</a></li> 
                             <li class="has-children">
                               <a href="">البحث عن وظائف</a>
@@ -57,14 +57,13 @@
                                   </table>  
                               </ul>
                             </li>
-                            <li><a href="candidate.html">طلبات الوظائف</a></li>
                             <li><a href="about.html">إتصل بنا</a></li> 
                             <li><a href="candidate.html" class="add"><span> + </span> ابحث بالمسمي الوظيفي</a></li>
                             <li class="has-children mr-2">
-                                    <a href="">حسابي</a>
+                                    <a href="">{{(app()->getLocale() == 'ar') ? Auth::user()->ar_name : Auth::user()->name}}</a>
                                     <ul class="dropdown arrow-top">
                                       <li><a href="#">اعدادات الحساب</a></li>
-                                      <li ><a href="contact.html" >  <img src="images/more-circular.png" alt="">تسجيل خروج</a></li>
+                                      <li ><a href="{{route('users.logout',app()->getLocale())}}" >  <img src="{{asset('images/more-circular.png')}}" alt="">تسجيل خروج</a></li>
                                        </ul>
                                   </li> 
                                   <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>

@@ -19,20 +19,10 @@ class Owner extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'ar_name',
         'email',
         'password',
         'phone',
         'visit_count',
-        'company_name',
-        'company_ar_name',
-        'logo',
-        'description',
-        'ar_description', 
-        'role',
-        'ar_role',
-        'ar_country',
-        'company_email'
 
     ];
 
@@ -58,5 +48,9 @@ class Owner extends Authenticatable
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
     }
 }

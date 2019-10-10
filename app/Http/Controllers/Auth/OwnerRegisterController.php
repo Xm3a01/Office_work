@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Role;
 use App\Owner;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// use Illuminate\Foundation\Auth\RegistersUsers;
 
 class OwnerRegisterController extends Controller
 {
@@ -22,19 +25,17 @@ class OwnerRegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
 
 
     public function showRegistrationForm()
     {
-        return view('auth.owner-register');
+        $roles = Role::all();
+        return view('auth.owner_register',compact('roles'));
     }
     /**
      * Create a new controller instance.
@@ -52,11 +53,11 @@ class OwnerRegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data ,$table)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.$table],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'max:255'],
         ]);
@@ -68,13 +69,32 @@ class OwnerRegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    public function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
+        $this->validator($request->all(), 'owners')->validate();
+
+
+        if(app()->getLocale() == 'ar') {
+          $owner = Owner::create([
+            'ar_name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'ar_role' => $request->ar_role,
+            'visit_count' => 1,
+            'password' => Hash::make($request->password),            
         ]);
+        } else {
+           $owner =  Owner::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'visit_count' =>1,
+            'password' => Hash::make($request->password),
+        ]);   
+        }
+          // $this->guard()->login($owner);
+
+        return redirect()->route('owner.login',app()->getLocale());
     }
 }

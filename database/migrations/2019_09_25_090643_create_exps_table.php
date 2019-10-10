@@ -27,7 +27,7 @@ class CreateExpsTable extends Migration
             $table->string('ar_name');
             $table->string('expert_pdf');
             $table->string('ar_summary')->nullable();
-            $table->string('summary')->nullable();;
+            $table->string('summary')->nullable();
             $table->unsignedBigInteger('start_year');
             $table->unsignedBigInteger('start_month');
             $table->unsignedBigInteger('end_year');

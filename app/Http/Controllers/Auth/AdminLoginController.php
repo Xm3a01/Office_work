@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AdminLoginController extends Controller
 {
+
+    use AuthenticatesUsers;
 
     public function __construct()
     {
@@ -19,8 +22,14 @@ class AdminLoginController extends Controller
         return view('auth.admin-login');
     }
 
+        public function redirectTo() {
+
+            return '/dashboard';
+        } 
+    
+
     public function login(Request $request)
-    {
+    {  
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:8'

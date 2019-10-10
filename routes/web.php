@@ -41,7 +41,7 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function
 });
 
 Route::group(['prefix' => 'admins'], function(){
-        Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::get('login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
@@ -51,17 +51,20 @@ Route::group(['prefix' => 'admins'], function(){
 Route::group(['prefix' => '{locale}','where' => ['locale' => '[a-zA-Z]{2}'], 'middleware' => 'setlocale'], 
 function() {
     
-     Route::get('/','Browse\BrowseController@home_page');  
+     Route::get('/','Browse\BrowseController@home_page')->name('home');  
+     Route::post('users/register', 'Auth\RegisterController@showRegistrationForm')->name('users.register');
      Auth::routes();
      Route::get('users/logout', 'Auth\LoginController@userLogout')->name('users.logout');
+     Route::post('users/register/submit', 'Auth\RegisterController@create')->name('users.register.submit');
      Route::resource('users', 'Dashboard\User\UserController');
 
      Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
      Route::post('owners/login/submit', 'Auth\OwnerLoginController@login')->name('owner.login.submit');
+     Route::post('owners/register/submit', 'Auth\OwnerRegisterController@create')->name('owners.register.submit');
      Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
      Route::get('owners/logout', 'Auth\OwnerLoginController@ownerLogout')->name('owners.logout');
      Route::resource('owners', 'Dashboard\Owner\OwnerController');
 
 });
 
-Route::view('test' , 'test.search');
+Route::view('test' , 'dashboard.users.edit_cv')->name('test');

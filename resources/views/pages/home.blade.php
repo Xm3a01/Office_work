@@ -14,7 +14,7 @@
           <h1 class="h3 text-center">الطريقة الأفضل للحصول على وظيفتك الجديدة</h1>
           <h3 class="h5 text-center">أعثر علي وظائف، موظفين، وفرص عمل</h3>
         </div>
-        <form action="#" id="app">
+        <form action="#" id="app" {{route('test')}}>
           <div class="row mb-3">
             <div class="col-md-9">
               <div class="row">

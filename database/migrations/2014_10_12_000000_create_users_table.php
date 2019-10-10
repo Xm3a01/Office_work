@@ -54,6 +54,8 @@ class CreateUsersTable extends Migration
             $table->string('ar_city')->nullable();
             $table->string('level_of_work')->nullable();
             $table->string('ar_level_of_work')->nullable();
+            $table->string('ar_gender')->nullable();
+            $table->string('gender')->nullable();
             $table->rememberToken();
             $table->timestamps();
    

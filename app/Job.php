@@ -8,8 +8,8 @@ class Job extends Model
 {
     protected $fillable = [];
 
-    public function compony()
+    public function owner()
     {
-        return $this->hasbelongsTo(Company::class);
+        return $this->hasbelongsTo(Owner::class);
     }
 }

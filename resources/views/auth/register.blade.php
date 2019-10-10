@@ -11,12 +11,13 @@
             <strong> <h5 class="text-center pt-5 pb-3" id="exampleModalLabel"> {{ __('أنشئ حسابك الان')}}</h5></strong>
             </div>
         <div class="py-2 ">  
-          <form action="#" class="p-2 ">
-             <div class="form-row">
+          <form class="p-2 " method="POST" action="{{route('users.register.submit',app()->getLocale())}}">
+            @csrf
+             <div class="form-row"> 
                 <div class="form-group col-md-12">
-                    <label for="name" > {{ __('First Name') }} </label>
+                    <label for="name" > {{ __(' Name') }} </label>
                             
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name" autofocus>
 
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -26,10 +27,10 @@
                         </div>
                     
                 <div class="form-group col-md-12">
-                    <label for="name"  > {{ __('Last Name') }} </label>
-                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <label for="name"  > {{ __('name') }} </label>
+                      <input id="name" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="name" autofocus>
 
-                @error('name')
+                @error('phone')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -48,11 +49,18 @@
                     @enderror
                 </div>
             
-            <div class="form-group col-md-12 mb-1">
+                <div class="form-group col-md-12 mb-1">
                     <label for="inputEmail4">{{ __(' Role ') }}</label>
-                    <select id="inputState" class="form-control">
-                        <option>الطب والرعاية الصحية</option> 
-                    </select>
+                    <input class="form-control" v-model="role" list="roles" placeholder="{{__('Role')}}" name = "role" autocomplete="off">
+                    <datalist id="roles" v-if="role">
+                        @foreach ($roles as $role) 
+                         @if(app()->getLocale() == 'ar')   
+                         <option value="{{$role->ar_name}}">
+                         @else
+                         <option value = "{{$role->name}}">
+                         @endif
+                         @endforeach 
+                    </datalist>
                     </div>
                     <div class="form-group  col-md-12">
                         <label for="password"  > {{ __('Password') }} </label>

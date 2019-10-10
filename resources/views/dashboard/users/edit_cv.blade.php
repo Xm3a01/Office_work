@@ -1,4 +1,4 @@
-@extends('layouts.defultinside')
+@extends('layouts.defaultclient')
 @section('content')
 
 
@@ -46,7 +46,7 @@
                     <h6 class="py-3">الوظائف التي قدمتها</h6> 
                     <div class="px-3"> 
                             <div class="text-center">
-                              <div style="padding: 0 100px"><svg class="gauge is-danger" aria-valuenow="20" data-gauge="" aria-valuemax="100" aria-valuemin="0" role="progressbar" data-bayt-gauge="24" viewBox="0 0 126 126" preserveAspectRatio="xMidYMid meet"><circle class="circle" cx="63" cy="63" r="58" stroke-width="5" fill="transparent"></circle><path class="arc" stroke-width="5" stroke-linecap="round" fill="transparent" d="M63 5 A58 58 0 1 1 59.358 120.886"></path><text class="dividend" x="63" y="50%" dy="10.5" text-anchor="middle" style="font-size:31.5px;line-height:1;">51%</text><text class="text" x="63" y="50%" dy="6.3" text-anchor="middle" style="font-size:18.9px;line-height:1;"></text><path class="path" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d=""></path></svg></div>
+                              <div style="padding: 0 100px"><svg class="gauge is-danger" aria-valuenow="20" data-gauge="" aria-valuemax="100" aria-valuemin="0" role="progressbar" data-bayt-gauge="24" viewBox="0 0 126 126" preserveAspectRatio="xMidYMid meet"><circle class="circle" cx="63" cy="63" r="58" stroke-width="5" fill="transparent"></circle><path class="arc" stroke-width="5" stroke-linecap="round" fill="transparent" d="M63 5 A58 58 0 1 1 59.358 120.886"></path><text class="dividend" x="63" y="50%" dy="10.5" text-anchor="middle" style="font-size:31.5px;line-height:1;">{{ number_format($count, '1', '.', '') }}%</text><text class="text" x="63" y="50%" dy="6.3" text-anchor="middle" style="font-size:18.9px;line-height:1;"></text><path class="path" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d=""></path></svg></div>
                              <p class="pt-3 pb-5">
                               
                                 نعتذر، لم نعثر على وظائف تناسب المعلومات التي أضفتها إلى سيرتك الذاتية. يرجى تعديل سيرتك الذاتية لتتمكن من العثور على نتائج تطابقها بشكل أفضل.
