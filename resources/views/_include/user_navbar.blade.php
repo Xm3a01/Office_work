@@ -19,7 +19,7 @@
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
                             <li><a href="{{route('home',app()->getLocale())}}">{{__('Home')}}</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#mycv">سيرتي الذاتية</a></li> 
+                            <li><a href="{{route('web.mycv' , app()->getLocale())}}">سيرتي الذاتية</a></li> 
                             <li class="has-children">
                               <a href="">البحث عن وظائف</a>
                               <ul class="dropdown arrow-top text-center" style="width:30rem;">
@@ -58,11 +58,11 @@
                               </ul>
                             </li>
                             <li><a href="about.html">إتصل بنا</a></li> 
-                            <li><a href="candidate.html" class="add"><span> + </span> ابحث بالمسمي الوظيفي</a></li>
+                            <li><a href="{{route('users.index' ,app()->getLocale())}}" class="add"><span> + </span> ابحث بالمسمي الوظيفي</a></li>
                             <li class="has-children mr-2">
                                     <a href="">{{(app()->getLocale() == 'ar') ? Auth::user()->ar_name : Auth::user()->name}}</a>
                                     <ul class="dropdown arrow-top">
-                                      <li><a href="#">اعدادات الحساب</a></li>
+                                      <li><a href="#">{{__('Account setting')}}</a></li>
                                       <li ><a href="{{route('users.logout',app()->getLocale())}}" >  <img src="{{asset('images/more-circular.png')}}" alt="">تسجيل خروج</a></li>
                                        </ul>
                                   </li> 

@@ -27,7 +27,7 @@ class CreateJobsTable extends Migration
             $table->string('ar_special');
             $table->string('sub_special');
             $table->string('ar_sub_special');
-            $table->string('selary')->default('-');
+            $table->string('selary')->default('-'); 
             $table->longText('description')->nullable();
             $table->longText('ar_description')->nullable();
             $table->string('status');

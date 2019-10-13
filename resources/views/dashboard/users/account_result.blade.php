@@ -9,27 +9,27 @@
             <h3 class="py-3">وظائف قد تهمك</h3> 
                     <div class="modrn-joblist"> 
                          <div class="rounded jobs-wrap">
-                       @foreach ($jobs as $job)
+                       @foreach ($jobs as $jo)
                           <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
                                  <div class="company-logo blank-logo text-center text-md-left pl-3">
                                    <img src="images/4.png" alt="Image" class="img-fluid mx-auto">
                                  </div>
                                  <div class="job-details h-100">
                                    <div class="p-3 align-self-center">
-                                    <h3>{{(app()->getLocale() == 'ar') ? $job->ar_role : $job->role}}</h3>
+                                    <h3>{{(app()->getLocale() == 'ar') ? $jo->ar_role : $jo->role}}</h3>
                                     <div class="d-block d-lg-flex">
-                                     <p class="m-0">{{(app()->getLocale() == 'ar') ? $job->ar_role : $job->role}}</p>
+                                     <p class="m-0">{{$jo->owner->company_name}}</p>
                                       <span class="mr-3">26Aug</span> 
                                         </div>
                                      <div class="d-block d-lg-flex"> 
-                                       <div ><span class="icon-suitcase mr-1 ml-2"></span>متوسط الخبرة</div>
-                                       <div class="mr-3" >3000USD-5000USD<span class="icon-money mr-1"></span></div>
+                                       <div ><span class="icon-suitcase mr-1 ml-2"></span>{{$jo->yearsOfExper}}</div>
+                                       <div class="mr-3" >{{$jo->selary}}<span class="icon-money mr-1"></span></div>
                                      </div>
                                      </div>
                                  </div>
                                  <div class="job-category align-self-center">
                                    <div class="p-3">
-                                     <span class="text-info p-2 rounded border border-info">Full Time</span>
+                                     <span class="text-info p-2 rounded border border-info">{{$jo->status}}</span>
                                    </div>
                                  </div>
                                </a> 

@@ -10,6 +10,6 @@ class Job extends Model
 
     public function owner()
     {
-        return $this->hasbelongsTo(Owner::class);
+        return $this->belongsTo(Owner::class);
     }
 }

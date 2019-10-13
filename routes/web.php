@@ -64,6 +64,9 @@ function() {
      Route::get('owners/register', 'Auth\OwnerRegisterController@showRegistrationForm')->name('owner.register');
      Route::get('owners/logout', 'Auth\OwnerLoginController@ownerLogout')->name('owners.logout');
      Route::resource('owners', 'Dashboard\Owner\OwnerController');
+    
+     Route::get('/','Browse\BrowseController@home_page')->name('home'); 
+     Route::get('my_cv','Browse\BrowseController@myCv')->name('web.mycv');
 
 });
 

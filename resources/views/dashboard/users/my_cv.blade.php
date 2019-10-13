@@ -24,8 +24,9 @@
                 </div>
                 <div class=" ">
                   <dt>التعليم</dt>
-                  <dd><a href="javascript:;" data-js-form="{&quot;name&quot;:&quot;education&quot;}">أضف معلومات
-                      التعليم</a></dd>
+                  <dd><a href="javascript:;" data-js-form="{&quot;name&quot;:&quot;education&quot;}">
+                     {{($user->university == null && $user->ar_university == null) ? 'أضف معلومات' : $user->university}}
+                  </a></dd>
                 </div>
                 <div class=" ">
                   <dt>الخبرة</dt>
@@ -211,35 +212,45 @@
               </div>
               <div class="modal-body p-4" id="result"> 
                   <div class="row justify-content-center">
-                      <div class="form-row col-md-6">
+                        <form class="form-row col-md-6" method="POST" action="{{route('users.update',[app()->getLocale() , $user->id])}}" >
+                          @csrf
+                          @method('PUT')
+                          <input type="hidden" name="user_id" value="{{$user->id}}">
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">الإسم الاول</label>
-                            <input type="text" class="form-control"   placeholder="ادخل الاسم الاول">
+                            <input type="text" class="form-control" value="{{$user->ar_name}}"  name="ar_name"  placeholder="ادخل الاسم الاول">
                           </div>
                           <div class="form-group col-md-6">
-                              <label for="inputEmail4">الإسم الاخير</label>
-                              <input type="text" class="form-control"   placeholder="ادخل الاسم الاخير">
+                              <label for="inputEmail4">الإسم بالغه الانجليزيه</label>
+                              <input type="text" class="form-control" name="name" value="{{$user->name}}"   placeholder="">
                             </div>
                             <div class="form-group col-md-6 pr-2">
                                 <label for="inputState"
                                   style="vertical-align:bottom; display: table; margin-bottom: 0.5rem;">الجنس</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                    value="option1">
-                                  <label class="form-check-label" for="inlineRadio1">ذكر</label>
+                                  <input {{($user->gender == 'Male') ? 'checked' : '' }}  class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                                    value="Male">
+                                  <label class="form-check-label" for="inlineRadio1">{{__('Male')}}</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
-                                  <label class="form-check-label" for="inlineRadio2">انثي</label>
+                                  <input {{($user->gender == 'Female') ? 'checked' : '' }} class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                                    value="Female">
+                                  <label class="form-check-label" for="inlineRadio2">{{__('Female')}}</label>
                                 </div>
                               </div>
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">الجنسية</label>
-                            <select id="inputState" class="form-control">
-                              <option>اختر بلدك</option>
-                              <option>السودان</option>
-                            </select>
+                            <input list="birth_country" id="inputState" class="form-control" name="brith_country">
+                            <datalist id="birth_country" dir="rtl" >
+                                @foreach ($countries as $country)
+                                @if(app()->getLocale() == 'ar')
+                                <option data-selected value="{{ ($country->ar_name == $user->ar_country) ? $country->ar_name :''}}" >
+                                  @else 
+                                <option selected value="{{($country->name == $user->country) ? $country->name : ''}}">    
+                                @endif     
+                                <option  data-value ="1"  value="Name">
+                                @endforeach
+                              </datalist>
                           </div> 
                           <div class="form-group col-md-6">
                             <label>تاريخ الميلاد</label>
@@ -247,26 +258,34 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">مكان الميلاد</label>
-                            <select id="inputState" class="form-control">
-                              <option>اختر البلد</option>
-                              <option>السودان</option>
-                            </select>
+                            <input list="country" name="country" id="inputState" class="form-control">
+                            <datalist id="country" dir="rtl" >
+                              @foreach ($countries as $country)
+                              @if(app()->getLocale() == 'ar')
+                              <option data-selected value="{{ ($country->ar_name == $user->ar_country) ? $country->ar_name :''}}" >
+                                @else 
+                              <option selected value="{{($country->name == $user->country) ? $country->name : ''}}">    
+                              @endif     
+                              <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
+                              @endforeach
+                            </datalist>
                           </div>
         
                           <div class="form-group col-md-6">
                             <label for="inputState">الديانة</label>
-                            <select id="inputState" class="form-control">
-                              <option>مسلم</option>
-                              <option>مسيحي</option>
-                              <option>اخرى</option>
+                            <select id="inputState" class="form-control" name="religion">
+                              <option value="Muslime">مسلم</option>
+                              <option value="Christian">مسيحي</option>
+                              <option value="Gushin">اخرى</option>
+                              <option value="Other">اخرى</option>
+
                             </select>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputState">الحالة الاجتماعية</label>
-                            <select id="inputState" class="form-control">
-                              <option>ممتزوج</option>
-                              <option>عازب</option>
-                              <option>اخرى</option>
+                            <select id="inputState" class="form-control" name="social_status">
+                              <option value="Married">متزوج</option>
+                              <option value="Single">عازب</option>
                             </select>
                           </div>
                          
@@ -281,12 +300,12 @@
                           
                           <div class="form-groub col-md-12">
                           <div class="text-center py-5">
-                              <a href="#" class="btn btn-primary px-3 "> حفظ </a> 
+                              <button  class="btn btn-primary px-3 " type="submit"> حفظ </button> 
                                 </div>
                             </div>
 
                         </div>
-                     </div>
+                      </form>
                   </div>
               </div> 
       </div>
@@ -304,43 +323,45 @@
                 </button>
             </div>
             <div class="modal-body p-4" id="result"> 
-                <div class="row justify-content-center">
-                    <div class="form-row col-md-6">
+            <div class="row justify-content-center">
+            <form  class="form-row col-md-6" action="#" method="post">
+              @csrf
+               @method('PUT')
+                   <input type="hidden" name="user_id" value="{{$user->id}}" id="">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">رقم الهاتف</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="ادخل الايميل">
+                            <input name="phone" type="text" class="form-control" id="inputAddress" value="{{$user->phone}}" placeholder="ادخل الايميل">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputAddress">الايميل</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="ادخل الايميل">
+                            <input name="email" type="text" class="form-control" id="inputAddress"  value="{{$user->email}}" placeholder="ادخل الايميل">
                           </div> 
                           <div class="form-group col-md-6">
                               <label for="inputAddress2">السكن الحالي</label>
-                              <select id="inputState" class="form-control">
-                                <option selected>اختار الدولة...</option>
-                                <option>الخرطوم</option>
-                                <option>الجزيرة</option>
-                                <option>بورتسودان</option>
-                              </select>
+                              <input  name="city" list="city" id="inputState" class="form-control" autocomplete="off">
+                              <datalist id="city">
+                               @foreach ($cities as $city)   
+                               <option value="{{ (app()->getLocale() == 'ar') ?  $city->ar_name : $city->name}}" >
+                               @endforeach
+                              </datalist>
                             </div>
           
                             <div class="form-group col-md-6">
                               <label for="inputCity">المدينة</label>
-                              <select id="inputState" class="form-control">
-                                <option>الخرطوم</option>
-                                <option>الجزيرة</option>
-                                <option>بورتسودان</option>
-                              </select>
+                              <input  name="" list="city" id="inputState" class="form-control">
+                              <datalist id="city" >
+                               @foreach ($cities as $city)   
+                               <option value="{{ (app()->getLocale() == 'ar') ?  $city->ar_name : $city->name}}" >
+                               @endforeach
+                              </datalist>
                             </div> 
-                       
-                    <div class="form-groub col-md-12">
-                    <div class="text-center py-5">
-                        <a href="#" class="btn btn-primary px-3 "> حفظ </a> 
+                            
+                          <div class="form-groub col-md-12">
+                          <div class="text-center py-5">
+                          <button class="btn btn-primary px-3 " type="submit"> حفظ </button> 
                           </div>
                       </div>
-
-                  </div>
-                </div>
+                  </form>
             </div>
         </div> 
     </div>

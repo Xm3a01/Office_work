@@ -6,6 +6,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\Registersuser;
@@ -77,7 +78,7 @@ class RegisterController extends Controller
     {
         $this->validator($request->all(), 'users')->validate();
         if(app()->getLocale() == 'ar') {
-            $role = Role::where('ar_name',$request->role)-first();
+            $role = Role::where('ar_name',$request->role)->first();
         } else {
             $role = Role::where('name',$request->role)->first();
         }
@@ -86,13 +87,14 @@ class RegisterController extends Controller
             'ar_name' => $request->name,
             'name' => $request->name,
             'email' => $request->email,
+            'visit_count' => 1,
             'phone' => $request->phone,
             'ar_role' => $role->ar_name,
             'role' => $role->name,
             'password' => Hash::make($request->password),            
         ]);
-         
-
-        return redirect()->route('users.index',app()->getLocale());
+        
+         Auth::guard('web')->login($user);
+         return redirect()->route('users.index' , app()->getLocale());
     }
 }
