@@ -36,7 +36,8 @@ class User extends Authenticatable
         'level_of_work',
         'ar_level_of_work',
         'visit_count',
-        'available'
+        'available',
+        'avatar'
     ];
 
     /**

@@ -15,8 +15,15 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-8 mb-5">
-            <form id="regForm" action="" class="p-5 bg-white shadow rounded"">
-
+            <form id="regForm" action="{{route('users.update', [ app()->getLocale(), $user->id ])}}" class="p-5 bg-white shadow rounded" method="POST">     
+                @csrf
+                @method('PUT')
+                @php
+                  $user =  App\User::findOrFail($user->id);
+                  $user->visit_count +=1;
+                  $user->save();
+                @endphp
+                <input type="hidden" name="user_id" value="{{$user->id}}">
               <!-- Circles which indicates the steps of the form: -->
               <div class="text-center">
                 <span class="step"></span>
@@ -26,106 +33,140 @@
               <!-- One "tab" for each step in the form: -->
               <div class="tab">
                 <div class="row form-group">
-                  <h3>البيانات الشخصية</h3>
+                  <h3>{{('Personal Info')}}</h3>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="inputEmail4">الجنسية</label>
-                    <select id="inputState" class="form-control">
-                      <option>اختر بلدك</option>
-                      <option>السودان</option>
-                    </select>
+                      <label for="inputEmail4">الإسم الاول</label>
+                      <input type="text" class="form-control" value="{{$user->ar_name}}"  name="ar_name"  placeholder="ادخل الاسم الاول">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">الإسم بالغه الانجليزيه</label>
+                        <input type="text" class="form-control" name="name" value="{{$user->name}}"   placeholder="">
+                      </div>
                   </div>
-                  
+                  <div class="form-row">
+                    <div class="form-group col-md-6 pr-2">
+                        <label for="inputState"
+                          style="vertical-align:bottom; display: table; margin-bottom: 0.5rem;">الجنس</label>
+                        <div class="form-check form-check-inline">
+                          <input {{($user->gender == 'Male') ? 'checked' : '' }}  class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                            value="Male">
+                          <label class="form-check-label" for="inlineRadio1">{{__('Male')}}</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input {{($user->gender == 'Female') ? 'checked' : '' }} class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                            value="Female">
+                          <label class="form-check-label" for="inlineRadio2">{{__('Female')}}</label>
+                        </div>
+                      </div>
                   <div class="form-group col-md-6">
-                    <label>تاريخ الميلاد</label>
-                    <input id="datepicker" width="276" class="form-control" />
+                    <label for="inputEmail4">الجنسية</label>
+                    <input list="identity" id="inputState" class="form-control" name="identity" autocomplete="off">
+                    <datalist id="identity" dir="rtl" >
+                        @foreach ($countries as $country)
+                        <option selected value="{{(app()->getLocale() == "ar") ? $country->ar_name : $country->country}}">      
+                        @endforeach
+                      </datalist>
+                  </div> 
+                </div>  
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>{{__('Brith Date')}}</label>
+                    <input type="date" id="datepicker" width="276" class="form-control" name="brithDate" />
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputEmail4">مكان الميلاد</label>
-                    <select id="inputState" class="form-control">
-                      <option>اختر البلد</option>
-                      <option>السودان</option>
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">{{__('Brith Place')}}</label>
+                    <input list="country" name="brith_country" id="inputState" class="form-control">
+                    <datalist id="country" dir="rtl" >
+                      @foreach ($countries as $country)    
+                      <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
+                      @endforeach
+                    </datalist>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                      <label for="inputEmail4">{{__('Country')}}</label>
+                      <input list="country" name="country" id="inputState" class="form-control">
+                      <datalist id="country" dir="rtl" >
+                        @foreach ($countries as $country)    
+                        <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
+                        @endforeach
+                      </datalist>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputState">{{('Religion')}}</label>
+                    <select id="inputState" class="form-control" name="religion">
+                      <option value="Muslime">{{__('Muslime')}}</option>
+                      <option value="Christian">{{__('Christian')}}</option>
+                      <option value="Gushin">{{__('Gushin')}}</option>
+                      <option value="Other">{{__('Other')}}</option>
                     </select>
                   </div>
 
-                  <div class="form-group col-md-4">
-                    <label for="inputState">الديانة</label>
-                    <select id="inputState" class="form-control">
-                      <option>مسلم</option>
-                      <option>مسيحي</option>
-                      <option>اخرى</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label for="inputState">الحالة الاجتماعية</label>
-                    <select id="inputState" class="form-control">
-                      <option>ممتزوج</option>
-                      <option>عازب</option>
-                      <option>اخرى</option>
+                    <select id="inputState" class="form-control" name="social_status">
+                      <option value="Married">{{__('Married')}}</option>
+                      <option value="Single">{{__('Single')}}</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-4 pr-2">
-                    <label for="inputState"
-                      style="vertical-align:bottom; display: table; margin-bottom: 0.5rem;">الجنس</label>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                        value="option1">
-                      <label class="form-check-label" for="inlineRadio1">ذكر</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                        value="option2">
-                      <label class="form-check-label" for="inlineRadio2">انثي</label>
-                    </div>
-                  </div>
+
                 </div>
-                <hr class="py-2">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputAddress2">الرقم الوطني</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="ادخل الرقم الوطني">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputAddress2">رقم الجواز</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="ادخل رقم الجواز">
-                  </div>
+
+                 <div class="form-row">
+
+                   <div class="form-group col-md-6">
+                   <label for="inputState">{{__('Passpord No')}}</label> 
+                   <input type="text" class="form-control"   placeholder="" name="idint_1" value="{{$user->idint_1}}">
+                     </div>
+                     <div class="form-group col-md-6">
+                       <label for="inputAddress2">{{__('Nationality No')}}</label>
+                       <input type="text" class="form-control" id="inputAddress2" placeholder="" name="idint_2" value="{{$user->idint_2}}">
+                     </div> 
+                 </div>
                   
                 </div>
-              </div>
+
 
               <div class="tab">
                 <div class="row form-group">
                   <h3>معلومات الاتصال</h3>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <label for="inputAddress">رقم الهاتف</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="ادخل الايميل">
+                    <input name="phone" type="text" class="form-control" id="inputAddress" value="{{$user->phone}}" placeholder="ادخل الايميل">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputAddress">الايميل</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="ادخل الايميل">
-                  </div>
+                    <input name="email" type="text" class="form-control" id="inputAddress"  value="{{$user->email}}" placeholder="ادخل الايميل">
+                  </div> 
                   <div class="form-group col-md-6">
-                    <label for="inputAddress2">السكن الحالي</label>
-                    <select id="inputState" class="form-control">
-                      <option selected>اختار الدولة...</option>
-                      <option>الخرطوم</option>
-                      <option>الجزيرة</option>
-                      <option>بورتسودان</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="inputCity">المدينة</label>
-                    <select id="inputState" class="form-control">
-                      <option>الخرطوم</option>
-                      <option>الجزيرة</option>
-                      <option>بورتسودان</option>
-                    </select>
-                  </div>
-
+                      <label for="inputAddress2">السكن الحالي</label>
+                      <input  name="city" list="city" id="inputState" class="form-control" autocomplete="off">
+                      <datalist id="city">
+                        @foreach ($cities as $city)   
+                        <option value="{{ (app()->getLocale() == 'ar') ?  $city->ar_name : $city->name}}" >
+                        @endforeach
+                      </datalist>
+                    </div>
+  
+                    <div class="form-group col-md-6">
+                      <label for="inputCity">المدينة</label>
+                      <input  name="" list="city" id="inputState" class="form-control">
+                      <datalist id="city" >
+                        @foreach ($cities as $city)   
+                        <option value="{{ (app()->getLocale() == 'ar') ?  $city->ar_name : $city->name}}" >
+                        @endforeach
+                      </datalist>
+                    </div>
                 </div>
               </div>
 
@@ -133,11 +174,11 @@
 
               <div style="overflow:auto;">
                 <div style="float:right;">
-                  <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">السابق</button>
-                  <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">التالي</button>
+                  <button type="button" class="btn btn-primary" id="prevBtn" onclick=" nextPrev(-1)">السابق</button>
+                  <button type="button" class="btn btn-primary" id="nextBtn" onclick=" event.preventDefault(); nextPrev(1)">التالي</button>
                 </div>
               </div>
-            </form>
+         </form>
           </div>
 
 

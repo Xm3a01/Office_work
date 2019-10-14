@@ -16,7 +16,7 @@ class OwnerController extends Controller
     
     public function index()
     {
-       return view('test.add');
+       return view('dashboard.owners.ownerdashboard');
     }
 
     /**

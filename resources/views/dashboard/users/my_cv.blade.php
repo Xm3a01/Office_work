@@ -6,7 +6,7 @@
           <div class="col-lg-4 col-md-4 col-sm-12 ">
             <div class="bg-white rounded shadow">
               <div class="text-center">
-                <img src=" {{asset('asset/images/person_1.jpg')}} " width="50%" class="rounded-circle p-2" alt="">
+                <img src="{{ Storage::url($user->avatar) }} " width="50%" class="rounded-circle p-2" alt="Image">
                 <img src=" {{asset('asset/images/edit.png')}} " alt="" class="cursor-pointer align-left float-left" width="4.5%" height="2.5%" style="position:relative; top: 15px; Right: 12rem;" >
                 
               </div>
@@ -44,9 +44,9 @@
           <div class="col-lg-8 col-md-8 col-sm-12 ">
             <div class="">
               <!--comlete your cv-->
-              <div class="{{(number_format($count, '0', '.', '') == 80) ? 'border-success' : 'border-danger' }} mb-3 text-center bg-white d-block d-md-flex rounded border-right">
+              <div class="{{(number_format($count, '0', '.', '') >= 80) ? 'border-success' : 'border-danger' }} mb-3 text-center bg-white d-block d-md-flex rounded border-right">
                 <div class="p-3">
-                   <span class="{{(number_format($count, '0', '.', '') == 80) ? 'text-success':'text-danger' }} display-4">{{ number_format($count, '0', '.', '')}}%</span>
+                   <span class="{{(number_format($count, '0', '.', '') >= 80) ? 'text-success':'text-danger' }} display-4">{{ number_format($count, '0', '.', '')}}%</span>
                 </div>
                 <p class="pt-4 mt-2">
                   أكمل سيرتك الذاتية بنسبة 80% لتكون من أبرز 10% من المستخدمين الأكثر ظهوراً. </p>
@@ -91,8 +91,8 @@
                     <td>{{(app()->getLocale() == 'ar') ? $user->ar_religion : $user->religion}}</td>
                   </tr>
                   <tr>
-                    <th scope="col">رقم الاثبات  </th> 
-                    <td>12345678945</td>
+                    <th scope="col">{{__('Identity No')}}  </th> 
+                    <td>{{$user->idint_1.' - '. $user->idint_2}}</td>
                   </tr>
               </table>
             </div>
@@ -392,7 +392,7 @@
                           <input type="file" name="cert_pdf">
                         </div>
                         
-                          <button class="btn btn-primary btn-outline" type="submit">save</button>
+                          <button class="btn btn-primary " type="submit">save</button>
                       </div>
                     </form>
 
@@ -487,7 +487,7 @@
               </div>
               <div class="modal-body p-4" id="result"> 
                   <div class="row justify-content-center">
-                        <form class="form-row col-md-6" method="POST" action="{{route('users.update',[app()->getLocale() , $user->id])}}" >
+                        <form class="form-row col-md-6" method="POST" action="{{route('users.update',[app()->getLocale() , $user->id])}}" enctype="multipart/form-data" >
                           @csrf
                           @method('PUT')
                           <input type="hidden" name="user_id" value="{{$user->id}}">
@@ -528,18 +528,23 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">{{__('Brith Place')}}</label>
-                            <input list="country" name="birth_country" id="inputState" class="form-control">
+                            <input list="country" name="brith_country" id="inputState" class="form-control">
                             <datalist id="country" dir="rtl" >
-                              @foreach ($countries as $country)
-                              @if(app()->getLocale() == 'ar')
-                              <option data-selected value="{{ ($country->ar_name == $user->ar_country) ? $country->ar_name :''}}" >
-                                @else 
-                              <option selected value="{{($country->name == $user->country) ? $country->name : ''}}">    
-                              @endif     
+                              @foreach ($countries as $country)    
                               <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
                               @endforeach
                             </datalist>
                           </div>
+
+                          <div class="form-group col-md-6">
+                              <label for="inputEmail4">{{__('Country')}}</label>
+                              <input list="country" name="country" id="inputState" class="form-control">
+                              <datalist id="country" dir="rtl" >
+                                @foreach ($countries as $country)    
+                                <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
+                                @endforeach
+                              </datalist>
+                            </div>
         
                           <div class="form-group col-md-6">
                             <label for="inputState">{{('Religion')}}</label>
@@ -567,6 +572,11 @@
                               <label for="inputAddress2">{{__('Nationality No')}}</label>
                               <input type="text" class="form-control" id="inputAddress2" placeholder="" name="idint_2" value="{{$user->idint_2}}">
                             </div> 
+
+                            <div class="col-md-12 mb-1">
+                              <label for="avatar">{{__('Personal photo')}}</label>
+                              <input type="file" name="avatar" class="form-control">
+                            </div>
                           
                           <div class="form-groub col-md-12">
                           <div class="text-center py-5">
@@ -594,7 +604,7 @@
             </div>
             <div class="modal-body p-4" id="result"> 
             <div class="row justify-content-center">
-            <form  class="form-row col-md-6" action="#" method="post">
+            <form  class="form-row col-md-6" action="{{route('users.update',[app()->getLocale() , $user->id])}}" method="post">
               @csrf
                @method('PUT')
                    <input type="hidden" name="user_id" value="{{$user->id}}" id="">

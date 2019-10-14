@@ -64,6 +64,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.$table],
             'phone' => ['required'],
             'role' => ['required'],
+            'gender' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -76,11 +77,23 @@ class RegisterController extends Controller
      */
     public function create(Request $request)
     {
+        $avatar = '';
+
+        $gender =  [
+            'Male' => 'ذكر',
+            'Female' => 'انثى'   
+        ];
+
         $this->validator($request->all(), 'users')->validate();
         if(app()->getLocale() == 'ar') {
             $role = Role::where('ar_name',$request->role)->first();
         } else {
             $role = Role::where('name',$request->role)->first();
+        }
+        if($request->gender == "Male") {
+            $avatar = 'public/avatar/male.png';
+        } elseif($request->gender == "Female") {
+            $avatar = 'public/avatar/female.png';
         }
 
           $user = User::create([
@@ -91,6 +104,9 @@ class RegisterController extends Controller
             'phone' => $request->phone,
             'ar_role' => $role->ar_name,
             'role' => $role->name,
+            'gender' => $request->gender,
+            'ar_gender' => $gender[$request->gender],
+            'avatar' => $avatar,
             'password' => Hash::make($request->password),            
         ]);
         

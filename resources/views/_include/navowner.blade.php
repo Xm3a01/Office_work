@@ -5,7 +5,7 @@
                 <div class="py-1">
                   <div class="row align-items-center">
                     <div class="col-3">
-                  <div class="mb-0 site-logo"><a href="index.html"><img src=" {{asset('asset/images/logo.png')}} " width="95%"></a></div>
+                  <div class="mb-0 site-logo"><a href="{{route('home' , app()->getLocale())}}"><img src=" {{asset('asset/images/logo.png')}} " width="95%"></a></div>
                     </div>
                     <div class="col-9">
                       <nav class="site-navigation" role="navigation">

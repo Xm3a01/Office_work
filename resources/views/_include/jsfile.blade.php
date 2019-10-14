@@ -48,7 +48,10 @@
       document.getElementById("prevBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
-      document.getElementById("nextBtn").innerHTML = "حفظ";
+      var dd = document.getElementById("nextBtn");
+      dd.innerHTML = "حفظ";
+      dd.setAttribute('type' ,'submit');
+      dd.removeAttribute('onclick');
     } else {
       document.getElementById("nextBtn").innerHTML = "التالي";
     }

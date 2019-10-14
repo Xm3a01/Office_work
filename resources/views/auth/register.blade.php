@@ -48,6 +48,21 @@
                         </span>
                     @enderror
                 </div>
+
+                <div class="form-group col-md-12 pr-2">
+                    <label for="inputState"
+                      style="vertical-align:bottom; display: table; margin-bottom: 0.5rem;">الجنس</label>
+                    <div class="form-check form-check-inline">
+                      <input checked  class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                        value="Male">
+                      <label class="form-check-label" for="inlineRadio1">{{__('Male')}}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                        value="Female">
+                      <label class="form-check-label" for="inlineRadio2">{{__('Female')}}</label>
+                    </div>
+                  </div>
             
                 <div class="form-group col-md-12 mb-1">
                     <label for="inputEmail4">{{ __(' Role ') }}</label>

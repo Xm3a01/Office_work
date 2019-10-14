@@ -59,7 +59,12 @@ class UserController extends Controller
         $jobs = Job::where('role', $user->role)->orWhere('country',$user->country)->get();
 
         if($user->visit_count == 1) {
-           return view('dashboard.users.add_new_cv',compact(['user']));
+            $cities = City::all();
+            $sub_specials = SubSpecial::all();
+            $levels = Level::all();
+            $roles = Role::all();
+            $countries = Country::all();
+           return view('dashboard.users.add_new_cv',compact(['user' , 'cities','countries','sub_specials','levels','roles']));
         } else {
             return view('dashboard.users.account_result',compact('jobs'));
         }
@@ -69,13 +74,18 @@ class UserController extends Controller
     {
         if(Auth::guard('web')->check()) {
         $user = User::findOrFail(Auth::user()->id);
+        $expert = Exp::where('user_id', Auth::user()->id)->first();
         $cities = City::all();
         $sub_specials = SubSpecial::all();
         $levels = Level::all();
         $roles = Role::all();
-        $count =  $this->pcount('users' ,'User', $user->id);
         $countries = Country::all();
-        return view('dashboard.users.my_cv' , compact(['user','count' , 'cities','countries','sub_specials','levels','roles']));
+        $count =  $this->pcount('users' ,'User', $user->id);
+        if($expert) {
+        $expcount =  $this->pcount('exps' ,'Exp', $expert->id);
+        $result = $count + $expcount - 70;
+        }
+        return view('dashboard.users.my_cv' , compact(['user','result', 'count' , 'cities','countries','sub_specials','levels','roles']));
         } else {
             return redirect()->route('login' ,app()->getLocale());
         }
@@ -201,17 +211,8 @@ class UserController extends Controller
    
     public function edit(Request $request)
     {
-        return view('dashboard.users.account_setting');
-
-        $user = User::findOrFail($request->segment(3));
-
-        if($request->has('email')) {
-            $user->email = $request->email;
-        }
-        if($request->has('password')) {
-            $user->password = Hash::make($request->password);
-        }
-       return redirect()->route('users.index');
+            $user = User::findOrFail($request->segment(3));
+            return view('dashboard.users.account_setting', compact('user'));
     }
 
    
@@ -234,7 +235,7 @@ class UserController extends Controller
                 'end_month' => 'required',
                 ''
             ]);
-     $expert = Exp::where('user_id',$request->user_id)->first();
+     $expert = Exp::where('user_id',$request->segment(3))->first();
      if($expert){
                  //Start experinece
         if($request->has('cert_pdf')) {
@@ -336,6 +337,7 @@ class UserController extends Controller
 
          $expert = new Exp();
 
+         $expert->user_id = $request->segment(3);
          if($request->has('cert_pdf')) {
             $expert->expert_pdf = $request->cert_pdf->store('public/certificate');
         }
@@ -441,8 +443,21 @@ class UserController extends Controller
         if($request->has('email')){
             $user->email = $request->email;
         }
+
+        if($request->has('password')){
+            $request->validate([
+                'password' => 'required|min:8|confirmed'
+            ]);
+            if($request->has('password')) {
+                $user->password = Hash::make($request->password);
+            }
+          }
+
         if($request->has('phone')) {
             $user->phone = $request->phone;
+        }
+        if($request->has('avatar')) {
+            $user->avatar = $request->avatar->store('public/avatar');
         }
 
         if($request->has('gender')) {
@@ -491,9 +506,17 @@ class UserController extends Controller
             $user->birthdate = $request->brithDate;
         }
 
+        if($request->has('idint_1')) {
+            $user->idint_1 = $request->idint_1;
+        }
+
+        if($request->has('idint_2')) {
+            $user->idint_2 = $request->idint_2;
+        }
+
         if(app()->getLocale() == 'ar') 
         { 
-            if($request->has('city')){
+            if($request->has('city') && $request->city !=""){
                 $city = City::where('ar_name' , $request->city)->first();
                 if($city) {
                     $user->ar_city = $city->ar_name;
@@ -503,7 +526,7 @@ class UserController extends Controller
                   $user->city = $request->city;
                 }
             } else
-            if($request->has('brith_country')) {
+            if($request->has('brith_country') && $request->brith_country !="" ) {
                 $country = Country::where('ar_name' , $request->brith_country)->first();
                 if($country) {
                     $user->ar_brith = $country->ar_name;
@@ -514,7 +537,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('country')) {
+            if($request->has('country') && $request->country !="") {
                 $country = Country::where('name' , $request->country)->first();
                 if($country) {
                     $user->ar_country = $country->ar_name;
@@ -525,7 +548,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('identity')) {
+            if($request->has('identity') && $request->identity != "") {
                 $country = Country::where('name' , $request->identity)->first();
                 if($country) {
                     $user->ar_country = $country->ar_name;
@@ -536,7 +559,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('subspecial')) {
+            if($request->has('subspecial') && $request->subspecial != "") {
                 $special = SubSpecial::where('ar_name' , $request->subspecial)->first();
                 if($special) {
                     $user->ar_sub_special = $special->ar_name;
@@ -549,7 +572,7 @@ class UserController extends Controller
 
         } else { // localication else
 
-            if($request->has('city')){
+            if($request->has('city') && $request->city !=""){
                 $city = City::where('name' , $request->city)->first();
                 if($city) {
                     $user->ar_city = $city->ar_name;
@@ -560,7 +583,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('brith_country')) {
+            if($request->has('brith_country') && $request->brith_country !="" ) {
                 $country = Country::where('name' , $request->brith_country)->first();
                 if($country) {
                     $user->ar_brith = $country->ar_name;
@@ -571,7 +594,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('country')) {
+            if($request->has('country') && $request->country !="" ) {
                 $country = Country::where('name' , $request->country)->first();
                 if($country) {
                     $user->ar_country = $country->ar_name;
@@ -582,7 +605,7 @@ class UserController extends Controller
                 }
             }
 
-            if($request->has('subspecial')) {
+            if($request->has('subspecial') && $request->subspecial !="") {
                 $special = SubSpecial::where('ar_name' , $request->subspecial)->first();
                 if($special){
                     $user->ar_sub_special = $special->ar_name;
@@ -595,9 +618,6 @@ class UserController extends Controller
         }
         $user->save();
             return redirect()->route('web.mycv',app()->getLocale());
-
-        
-
 
     }
 

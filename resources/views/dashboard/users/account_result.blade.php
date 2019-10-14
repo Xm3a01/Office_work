@@ -9,31 +9,31 @@
             <h3 class="py-3">وظائف قد تهمك</h3> 
                     <div class="modrn-joblist"> 
                          <div class="rounded jobs-wrap">
-                       @foreach ($jobs as $jo)
+                       @foreach ($jobs as $job)
                           <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
                                  <div class="company-logo blank-logo text-center text-md-left pl-3">
-                                   <img src="images/4.png" alt="Image" class="img-fluid mx-auto">
+                                   <img src="{{ Storage::url($job->owner->logo)}}" alt="Image" class="img-fluid mx-auto">
                                  </div>
                                  <div class="job-details h-100">
                                    <div class="p-3 align-self-center">
-                                    <h3>{{(app()->getLocale() == 'ar') ? $jo->ar_role : $jo->role}}</h3>
+                                    <h3>{{(app()->getLocale() == 'ar') ? $job->ar_role : $job->role}}</h3>
                                     <div class="d-block d-lg-flex">
-                                     <p class="m-0">{{$jo->owner->company_name}}</p>
+                                     <p class="m-0">{{$job->owner->company_name}}</p>
                                       <span class="mr-3">26Aug</span> 
                                         </div>
                                      <div class="d-block d-lg-flex"> 
-                                       <div ><span class="icon-suitcase mr-1 ml-2"></span>{{$jo->yearsOfExper}}</div>
-                                       <div class="mr-3" >{{$jo->selary}}<span class="icon-money mr-1"></span></div>
+                                       <div ><span class="icon-suitcase mr-1 ml-2"></span>{{$job->yearsOfExper}}</div>
+                                       <div class="mr-3" >{{$job->selary}}<span class="icon-money mr-1"></span></div>
                                      </div>
                                      </div>
                                  </div>
                                  <div class="job-category align-self-center">
                                    <div class="p-3">
-                                     <span class="text-info p-2 rounded border border-info">{{$jo->status}}</span>
+                                     <span class="text-info p-2 rounded border border-info">{{(app()->getLocale() == 'ar') ? $job->ar_status : $job->status}}</span>
                                    </div>
                                  </div>
                                </a> 
-                           @endforeach
+                            @endforeach
                                   <div class="text-center pt-5" data-aos="fade-up" data-aos-delay="50"><a class="btn"
                                     href="new-post.html">المزيد</a>
                                 </div>
@@ -87,4 +87,18 @@
 
 
 
+@endsection
+
+@section('scripts')
+    <script src="asset('js/app.js')"></script>
+    <script>
+    const app = new Vue({
+
+      el: '#app',
+
+      data: {
+
+      }
+    });
+    </script>
 @endsection

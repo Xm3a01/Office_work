@@ -5,7 +5,7 @@
                 <div class="py-1">
                   <div class="row align-items-center">
                     <div class="col-3">
-                  <div class="mb-0 site-logo"><a href="index.html"><img src=" {{asset('asset/images/logo.png')}} " width="95%"></a></div>
+                  <div class="mb-0 site-logo"><a href="{{route('home' , app()->getLocale())}}"><img src=" {{asset('asset/images/logo.png')}} " width="95%"></a></div>
                     </div>
                     <div class="col-9">
                       <nav class="site-navigation" role="navigation">
@@ -78,7 +78,20 @@
                                 </div>
                             </li>
                            @endguest
-                           <li ><a href="about.html" class="text-right" >Eng<img SRC=" {{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light"></a></li>
+                           @foreach (config('app.available_locales') as $locale)
+                           <li>
+                               <a class="text-right"
+                                   href="{{ route(Route::currentRouteName(), $locale) }}"
+                                   @if (app()->getLocale() == $locale) style="display:none;" @endif>
+                                    @if($locale == 'en') 
+                                    {{ strtoupper($locale) }} <img SRC="{{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light">
+                                    @else 
+                                    {{ strtoupper($locale) }}
+                                    <img  SRC="{{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light" alt="Lang">
+                                    @endif
+                                 </a> 
+                           </li>
+                         @endforeach
                           </ul> 
                         </div>
                       </nav>
