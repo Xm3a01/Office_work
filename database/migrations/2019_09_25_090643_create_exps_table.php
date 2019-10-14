@@ -23,8 +23,6 @@ class CreateExpsTable extends Migration
             $table->string('expert_year');
             $table->string('ar_level');
             $table->string('level');
-            $table->string('name');
-            $table->string('ar_name');
             $table->string('expert_pdf');
             $table->string('ar_summary')->nullable();
             $table->string('summary')->nullable();

@@ -26,6 +26,8 @@ class User extends Authenticatable
         'sub_special',
         'ar_sub_special',
         'salary',
+        'ar_brith',
+        'brith',
         'salary_type',
         'ar_country',
         'city',

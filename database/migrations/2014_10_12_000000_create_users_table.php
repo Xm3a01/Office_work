@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
             $table->string('ar_qualification')->nullable();
             $table->string('grade_date')->nullable();
             $table->string('grade')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('ar_university')->nullable();
             $table->string('university')->nullable();
             $table->string('ar_brith')->nullable();

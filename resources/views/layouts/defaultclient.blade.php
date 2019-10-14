@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     @include('_include.head')
+    @include('_include.message')
     @yield('stylesheet')
+
 </head>
 <body>
    
@@ -15,7 +17,7 @@
              </div>
             <div class="site-mobile-menu-body"></div>
         </div>
-@include('_include.user_navbar')
+ @include('_include.user_navbar')
 
     @yield('content')
    

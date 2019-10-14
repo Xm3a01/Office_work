@@ -6,6 +6,7 @@ use App\City;
 use App\User;
 use App\Owner;
 use App\Country;
+use App\Special;
 use App\SubSpecial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,9 +30,13 @@ class BrowseController extends Controller
         if(Auth::guard('web')->check()) {
         $user = User::findOrFail(Auth::user()->id);
         $cities = City::all();
+        $specials = Special::all();
+        $sub_specials = SubSpecial::all();
+        $levels = Level::all();
+        $roles = Role::all();
         $count =  $this->pcount('users' ,'User', $user->id);
         $countries = Country::all();
-        return view('dashboard.users.my_cv' , compact(['user','count' , 'cities','countries']));
+        return view('dashboard.users.my_cv' , compact(['user','count' , 'cities','countries','sub_specials','levels','roles']));
         } else {
             return redirect()->route('login' ,app()->getLocale());
         }

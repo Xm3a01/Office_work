@@ -62,7 +62,7 @@
                             <li class="has-children mr-2">
                                     <a href="">{{(app()->getLocale() == 'ar') ? Auth::user()->ar_name : Auth::user()->name}}</a>
                                     <ul class="dropdown arrow-top">
-                                      <li><a href="#">{{__('Account setting')}}</a></li>
+                                      <li><a href="{{route('users.edit',[app()->getLocale(),Auth::user()->id] )}}">{{__('Account setting')}}</a></li>
                                       <li ><a href="{{route('users.logout',app()->getLocale())}}" >  <img src="{{asset('images/more-circular.png')}}" alt="">تسجيل خروج</a></li>
                                        </ul>
                                   </li> 

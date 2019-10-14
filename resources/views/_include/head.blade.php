@@ -27,4 +27,4 @@
 <link rel="stylesheet" href=" {{asset('asset/css/style.css')}} ">
 
 {{--  --}}
-<link rel="stylesheet" href=" {{asset('asset/css/filepond.css')}} ">
+{{-- <link rel="stylesheet" href=" {{asset('asset/css/filepond.css')}} "> --}}

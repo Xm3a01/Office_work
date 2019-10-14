@@ -66,7 +66,7 @@ function() {
      Route::resource('owners', 'Dashboard\Owner\OwnerController');
     
      Route::get('/','Browse\BrowseController@home_page')->name('home'); 
-     Route::get('my_cv','Browse\BrowseController@myCv')->name('web.mycv');
+     Route::get('my_cv','Dashboard\User\UserController@myCv')->name('web.mycv');
 
 });
 

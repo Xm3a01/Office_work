@@ -183,8 +183,6 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&libraries=places&callback=initAutocomplete"
     async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-  <script src="https://unpkg.com/filepond-polyfill"></script>
-  <script src=" {{asset('asset/js/filepond.js')}} "></script>
   <script>
     // Get a reference to the file input element
     var inputElement = document.querySelector('input[type="file"]');
