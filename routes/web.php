@@ -56,6 +56,7 @@ function() {
      Auth::routes();
      Route::get('users/logout', 'Auth\LoginController@userLogout')->name('users.logout');
      Route::post('users/register/submit', 'Auth\RegisterController@create')->name('users.register.submit');
+     Route::get('my_cv','Dashboard\User\UserController@myCv')->name('web.mycv');
      Route::resource('users', 'Dashboard\User\UserController');
 
      Route::get('owners/login', 'Auth\OwnerLoginController@showloginForm')->name('owner.login');
@@ -65,9 +66,11 @@ function() {
      Route::get('owners/logout', 'Auth\OwnerLoginController@ownerLogout')->name('owners.logout');
      Route::resource('owners', 'Dashboard\Owner\OwnerController');
     
-     Route::get('/','Browse\BrowseController@home_page')->name('home'); 
-     Route::get('my_cv','Dashboard\User\UserController@myCv')->name('web.mycv');
+     Route::get('/','Browse\BrowseController@home_page')->name('home');
+     Route::get('contact','Browse\BrowseController@contact')->name('web.contact');
+     Route::get('job/owner','Browse\BrowseController@jobOwner')->name('job.owner');
+     Route::get('single/job','Browse\BrowseController@jobsingle')->name('single.job');
 
 });
 
-Route::view('test' , 'dashboard.users.edit_cv')->name('test');
+Route::view('test' , 'pages.contact')->name('test');

@@ -47,6 +47,12 @@ class UserController extends Controller
         'English' => 'الانجليزيه',
     ];
 
+    public $language_level = [
+        'Beginner' => 'مبتدئي',
+        'Intermediate' => 'متوسط',
+        'Mother tounge' => 'اللغه الاساسيه',
+    ];
+
 
     public function __construct() {
         $this->middleware('auth:web');
@@ -54,10 +60,10 @@ class UserController extends Controller
 
     public function index()
     {
+        $expert = '';
 
         $user = User::findOrFail(Auth::user()->id);
         $jobs = Job::where('role', $user->role)->orWhere('country',$user->country)->get();
-
         if($user->visit_count == 1) {
             $cities = City::all();
             $sub_specials = SubSpecial::all();
@@ -66,7 +72,7 @@ class UserController extends Controller
             $countries = Country::all();
            return view('dashboard.users.add_new_cv',compact(['user' , 'cities','countries','sub_specials','levels','roles']));
         } else {
-            return view('dashboard.users.account_result',compact('jobs'));
+            return view('dashboard.users.account_result',compact(['jobs','user']));
         }
     }
 
@@ -74,18 +80,18 @@ class UserController extends Controller
     {
         if(Auth::guard('web')->check()) {
         $user = User::findOrFail(Auth::user()->id);
-        $expert = Exp::where('user_id', Auth::user()->id)->first();
+        $expert = Exp::where('user_id', $user->id)->first();
         $cities = City::all();
         $sub_specials = SubSpecial::all();
         $levels = Level::all();
         $roles = Role::all();
         $countries = Country::all();
         $count =  $this->pcount('users' ,'User', $user->id);
-        if($expert) {
+        if(!is_null($expert)) {
         $expcount =  $this->pcount('exps' ,'Exp', $expert->id);
-        $result = $count + $expcount - 70;
+        $count = $count + $expcount - 79;
         }
-        return view('dashboard.users.my_cv' , compact(['user','result', 'count' , 'cities','countries','sub_specials','levels','roles']));
+        return view('dashboard.users.my_cv' , compact(['user','result', 'count' , 'cities','countries','sub_specials','levels','roles','expert']));
         } else {
             return redirect()->route('login' ,app()->getLocale());
         }
@@ -203,9 +209,15 @@ class UserController extends Controller
         }
 
     }
-    $expert->save();
+    if($expert->save()) {
+        if(app()->getLocale() == 'ar') {
+           \Session::flash('success' , 'تم الحفظ بنجاح');
+        } else {
+         \Session::flash('success' , ' Data saved successfully');
+        }
+        return redirect()->route('web.mycv',app()->getLocale());
+     }
 
-    return redirect()->route('web.mycv',app()->getLocale());
 
     }
    
@@ -434,7 +446,13 @@ class UserController extends Controller
         }
 
     }
-    $expert->save();
+    if($expert->save()) {
+       if(app()->getLocale() == 'ar') {
+          \Session::flash('success' , 'تم الحفظ بنجاح');
+       } else {
+        \Session::flash('success' , ' Data saved successfully');
+       }
+    }
 
     }
         
@@ -489,9 +507,14 @@ class UserController extends Controller
             $user->ar_university = $request->ar_university;
         }
 
-        if($request->has('language')) {
+        if($request->has('language') && $request->language !='') {
             $user->language = $request->language;
-            $user->ar_language = $this->qualification[$request->language];
+            $user->ar_language = $this->language[$request->language];
+        }
+
+        if($request->has('language_level') && $request->language_level !='' ) {
+            $user->language_level = $request->language_level;
+            $user->ar_language_level = $this->language_level[$request->language_level];
         }
 
         if($request->has('grade_date')) {
@@ -512,6 +535,10 @@ class UserController extends Controller
 
         if($request->has('idint_2')) {
             $user->idint_2 = $request->idint_2;
+        }
+
+        if($request->has('new_form')) {
+            $user->visit_count +=1;
         }
 
         if(app()->getLocale() == 'ar') 
@@ -616,7 +643,13 @@ class UserController extends Controller
                 }
             }
         }
-        $user->save();
+        if($user->save()) {
+            if(app()->getLocale() == 'ar') {
+               \Session::flash('success' , 'تم الحفظ بنجاح');
+            } else {
+             \Session::flash('success' , ' Data saved successfully');
+            }
+         }
             return redirect()->route('web.mycv',app()->getLocale());
 
     }

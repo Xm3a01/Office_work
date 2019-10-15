@@ -64,7 +64,7 @@
                 </div>
             </div> 
         </div>
-    </div>
-    <!-- end change password model -->
+</div>
+<!-- end change password model -->
   
     @endsection

@@ -60,19 +60,19 @@
           <div class="p-4 mb-3 bg-white">
             <h3 class="h5 text-black mb-3">معلومات الإتصال</h3>
             <p class="mb-0 font-weight-bold">العنوان</p>
-            <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            <p class="mb-4">{{$about->loaction}}</p>
 
             <p class="mb-0 font-weight-bold">الهاتف</p>
-            <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+            <p class="mb-4"><a href="#">{{$about->phone}}</a></p>
 
             <p class="mb-0 font-weight-bold">البريد الإلكتروني</p>
-            <p class="mb-0"><a href="#">youremail@domain.com</a></p>
+            <p class="mb-0"><a href="#">{{$about->email}}</a></p>
 
           </div>
           
           <div class="p-4 mb-3 bg-white">
             <h3 class="h5 text-black mb-3">المزيـد</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur? Fugiat quaerat eos qui, libero neque sed nulla.</p>
+            <p>{{$about->about}}.</p>
             <p><a href="#" class="btn btn-primary px-3 text-white pill">قراءة المزيد</a></p>
           </div>
         </div>
@@ -86,7 +86,7 @@
         <div class="col-md-4">
           <div>
             <h2 class="h4"><span class="icon-room"></span> الموقع </h2>
-            <p class="mb-0">New York - 2398 <br>  10 Hadson Carl Street</p>
+            <p class="mb-0">{{$about->location}}</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -99,8 +99,8 @@
         </div>
         <div class="col-md-4">
           <h2 class="h4"><span class="icon-comments" ></span> كن علي اتصال </h2>
-          <p class="mb-0">Email: info@yoursite.com <br>
-          Phone: (123) 3240-345-9348 </p>
+          <p class="mb-0">Email: {{$about->email}} <br>
+          Phone: {{$about->phone}} </p>
         </div>
       </div>
     </div>

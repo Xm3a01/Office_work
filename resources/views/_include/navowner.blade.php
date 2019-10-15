@@ -17,8 +17,8 @@
                             </div>
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li><a href="index.html">{{__('Home')}}</a></li>  
-                            <li><a href="#" data-toggle="modal" data-target="#mycv">{{ __('Search for CV')}}</a></li>
+                            <li><a href="{{route('home' ,app()->getLocale())}}">{{__('Home')}}</a></li>  
+                            <li><a href="{{route('job.owner' , app()->getLocale())}}">{{ __('Search for CV')}}</a></li>
                             <li class="has-children">
                               <a href="">{{__('Jobs')}}</a>
                               <ul class="dropdown arrow-top text-center" style="width:30rem;">
@@ -56,8 +56,8 @@
                                   </table>  
                               </ul>
                             </li>
-                            <li><a href="about.html">{{__('Contact us')}}</a></li>
-                            <li ><a href="ownerdashboard.html">{{__('Search for job')}}</a></li>
+                            <li><a href="{{route('home' ,app()->getLocale())}}">{{__('Contact us')}}</a></li>
+                            <li ><a href="{{route('users.index' , app()->getLocale())}}">{{__('Search for job')}}</a></li>
                             @foreach (config('app.available_locales') as $locale)
                               <li>
                                   <a class="text-right"
@@ -72,13 +72,19 @@
                                     </a> 
                               </li>
                             @endforeach
-                            <li class="has-children mr-2">
-                                  <a href="">{{Auth::user()->ar_name}}</a>
-                                    <ul class="dropdown arrow-top">
-                                      <li><a href="#">{{__('Account setting')}}</a></li>
-                                      <li ><a href="{{route('users.logout',app()->getLocale())}}" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">{{__('Logout')}}</a></li>
-                                       </ul>
-                                  </li>
+                            @if(Auth::guard('owner')->check())
+                          <li class="has-children mr-2">
+                                <a href="">{{Auth::user()->ar_name}}</a>
+                                  <ul class="dropdown arrow-top">
+                                    <li><a href="#">{{__('Account setting')}}</a></li>
+                                    <li ><a href="{{route('users.logout',app()->getLocale())}}" > <span><img src="images/logout.png" class="ml-1" alt=""></span><img src="images/more-circular.png" alt="">{{__('Logout')}}</a></li>
+                                      </ul>
+                                </li>
+                              @else
+                              <li><a href="{{route('owner.login' , app()->getLocale())}}">Login</a></li>
+                              <li><a href="{{route('owner.register' , app()->getLocale())}}">register</a></li>
+                              @endif
+
                         </ul> 
                         </div>
                       </nav>

@@ -18,7 +18,7 @@
       
                           <ul class="site-menu js-clone-nav d-none d-lg-block">
                             <li><a href="index.html">الرئيسية</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#mycv">أضف سيرتك الذاتية</a></li> 
+                            <li><a href="{{route('users.index' , app()->getLocale())}}">أضف سيرتك الذاتية</a></li> 
                             <li class="has-children">
                               <a href="">الوظائف</a>
                               <ul class="dropdown arrow-top text-center" style="width:30rem;">
@@ -56,8 +56,8 @@
                                   </table>  
                               </ul>
                             </li>
-                            <li><a href="ownerdashboard.html">صاحب عمل؟</a></li>
-                            <li><a href="about.html">إتصل بنا</a></li>
+                            <li><a href="{{route('job.owner' , app()->getLocale())}}">صاحب عمل؟</a></li>
+                            <li><a href="{{route('web.contact' , app()->getLocale())}}">إتصل بنا</a></li>
                             @guest
                             <li><a class="add" href="{{ route('login',app()->getLocale()) }}">{{ __('Login') }}</a></li>
                             @if (Route::has('register'))
