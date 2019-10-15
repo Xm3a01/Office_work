@@ -11,6 +11,8 @@
   <script src=" {{asset('asset/js/aos.js')}} "></script>
   <script src=" {{asset('asset/js/mediaelement-and-player.min.js')}} "></script>
   <script src=" {{asset('asset/js/main.js')}} "></script>
+  <script src="{{asset('vendor/js/toastr.min.js')}}" type="text/javascript"></script>
+  <script src="{{asset('vendor/js/ui-toastr.min.js')}}" type="text/javascript"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var mediaElements = document.querySelectorAll('video, audio'),

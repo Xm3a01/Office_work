@@ -62,11 +62,11 @@
                             <li class="has-children mr-2">
                                     <a href="">{{(app()->getLocale() == 'ar') ? Auth::user()->ar_name : Auth::user()->name}}</a>
                                     <ul class="dropdown arrow-top">
-                                      <li><a href="{{route('users.edit',[app()->getLocale(),Auth::user()->id] )}}">{{__('Account setting')}}</a></li>
+                                      <li><a href="" data-toggle="modal" data-target ="#changepassword" >{{__('Account setting')}}</a></li>
                                       <li ><a href="{{route('users.logout',app()->getLocale())}}" >  <img src="{{asset('images/more-circular.png')}}" alt="">تسجيل خروج</a></li>
                                        </ul>
                                   </li> 
-                                  {{-- @foreach (config('app.available_locales') as $locale)
+                                  @foreach (config('app.available_locales') as $locale)
                                   <li>
                                       <a class="text-right"
                                           href="{{ route(Route::currentRouteName(), $locale) }}"
@@ -78,8 +78,8 @@
                                            <img  SRC="{{asset('asset/images/en.png')}} " width="20%" class="rounded-circle border border-light" alt="Lang">
                                            @endif
                                         </a> 
-                                  </li> --}}
-                                {{-- @endforeach --}}
+                                  </li> 
+                              @endforeach
                           </ul> 
                         </div>
                       </nav>

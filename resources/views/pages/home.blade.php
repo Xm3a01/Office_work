@@ -89,62 +89,17 @@
         <div class="col-md-9 text-left mb-5 px-3 section-heading">
           <h3 class="mb-4">التصنيفات الأشهر</h3>
           <div class="row">
+
+            @foreach ($roles as $role)   
             <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="50">
               <a href="#" class="h-100 feature-item">
                 <span class="d-block icon flaticon-calculator mb-3"></span>
-                <h2>المحاسبة / المالية</h2>
-                <p>123</p>
+                <h2>{{$role->name}}</h2>
+                <p>{{$role->specials->count()}}</p>
               </a>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="200">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-wrench mb-3"></span>
-                <h2>وظائف السيارات</h2>
-                <p>219</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="300">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-worker mb-3"></span>
-                <h2>البناء / المرافق</h2>
-                <p>1,021</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="400">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-telecommunications mb-3"></span>
-                <h2>الاتصالات</h2>
-                <p>1,219</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="500">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-stethoscope mb-3"></span>
-                <h2>الرعاية الصحية</h2>
-                <p>148</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="600">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-computer-graphic mb-3"></span>
-                <h2>التصميم والفن / الوسائط المتعددة</h2>
-                <p>482</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="700">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-trolley mb-3 "></span>
-                <h2>النقل / الخدمات اللوجستية</h2>
-                <p>109</p>
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-3" data-aos="fade-up" data-aos-delay="800">
-              <a href="#" class="h-100 feature-item">
-                <span class="d-block icon flaticon-restaurant mb-3 "></span>
-                <h2>المطاعم / الخدمات الغذائية</h2>
-                <p>319</p>
-              </a>
-            </div>
+            @endforeach
+
           </div>
           <div class="text-center pt-5" data-aos="fade-up" data-aos-delay="50"><a class="btn"
               href="new-post.html">مزيد من التصنيفات</a>
@@ -190,26 +145,34 @@
         <div class="col-md-8 mb-5 mb-md-0" data-aos="fade-up" data-aos-delay="100">
           <h3 class="my-4">وظائف جديدة</h3>
           <div class="rounded border jobs-wrap">
-             <a href="job-single.html" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
-              <div class="company-logo blank-logo text-center text-md-left pl-3">
-                <img src="images/company_logo_blank.png" alt="Image" class="img-fluid mx-auto">
-              </div>
-              <div class="job-details h-100">
-                <div class="p-3 align-self-center">
-                  <h3>Restaurant Crew</h3>
-                  <div class="d-block d-lg-flex">
-                    <div class="mr-3"><span class="icon-suitcase mr-1"></span> Resto Bar</div>
-                    <div class="mr-3"><span class="icon-room mr-1"></span> Florida</div>
-                    <div><span class="icon-money mr-1"></span> $55000 &mdash; 70000</div>
-                  </div>
-                </div>
-              </div>
-              <div class="job-category align-self-center">
-                <div class="p-3">
-                  <span class="text-info p-2 rounded border border-info">Full Time</span>
-                </div>
-              </div>
-            </a>
+          @foreach ($jobs as $job)
+             
+            <a href="" onclick="event.preventDefault(); document.getElementById('single-form').submit()" class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
+             <div class="company-logo blank-logo text-center text-md-left pl-3">
+               <img src="{{Storage::url($job->owner->logo)}}" alt="Image" class="img-fluid mx-auto">
+             </div>
+             <div class="job-details h-100">
+               <div class="p-3 align-self-center">
+                 <h3>{{(app()->getLocale() == 'ar') ? $job->ar_role : $job->role }}</h3>
+                 <div class="d-block d-lg-flex">
+                   <div class="mr-3"><span class="icon-suitcase mr-1"></span> {{(app()->getLocale() == 'ar') ? $job->owner->ar_company_name : $job->owner->company_name }}</div>
+                   <div class="mr-3"><span class="icon-room mr-1"></span> {{(app()->getLocale() == 'ar') ? $job->ar_country.' - '.$job->ar_city : $job->country.' - '.$job->city }}</div>
+                   <div><span class="icon-money mr-1"></span> {{$job->selary}}</div>
+                 </div>
+               </div>
+             </div>
+             <div class="job-category align-self-center">
+               <div class="p-3">
+                 <span class="text-info p-2 rounded border border-info">{{(app()->getLocale() == 'ar') ? $job->ar_status :$job->status }}</span>
+               </div>
+             </div>
+           </a>
+
+            <form style="display:none" action="{{route('single.job',app()->getLocale())}}" method="get" id="single-form">
+              
+              <input type="hidden" name="single" value="{{$job->id}}">
+            </form>
+            @endforeach
 
             <a href="job-single.html" class="job-item d-block d-md-flex align-items-center freelance">
               <div class="company-logo blank-logo text-center text-md-left pl-3">

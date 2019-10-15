@@ -20,6 +20,7 @@
 @if(app()->getLocale() == 'ar')
 <link rel="stylesheet" href=" {{asset('asset/css/bootstrap-rtl.css')}} ">
 @endif
+<link href="{{asset('vendor/css/toastr-rtl.min.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href=" {{asset('asset/css/fontawesome.min.css')}} ">  
 <link rel="stylesheet" href=" {{asset('asset/fonts/flaticon/font/flaticon.css')}} ">
 

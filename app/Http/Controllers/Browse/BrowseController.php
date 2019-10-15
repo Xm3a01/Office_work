@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Browse;
 
+use App\Job;
 use App\City;
+use App\Role;
 use App\User;
+use App\About;
 use App\Owner;
 use App\Country;
 use App\Special;
@@ -20,36 +23,35 @@ class BrowseController extends Controller
         $countries = Country::all();
         $sub_specials = SubSpecial::all();
         $owners = Owner::all();
+        $roles = Role::latest()->take(10)->get();
+        $roles->load('specials.sub_specials');
         $countries->load('cities');
+        $jobs = Job::latest()->take(5)->get();
+        $jobs->load('owner');
 
-        return view('pages.home',compact(['countries','sub_specials','owners']));
+        return view('pages.home',compact(['countries','sub_specials','owners','roles','jobs']));
     }
 
-    public function myCv()
+    public function jobSingle(Request $request)
     {
-        if(Auth::guard('web')->check()) {
-        $user = User::findOrFail(Auth::user()->id);
-        $cities = City::all();
-        $specials = Special::all();
-        $sub_specials = SubSpecial::all();
-        $levels = Level::all();
-        $roles = Role::all();
-        $count =  $this->pcount('users' ,'User', $user->id);
+        $job = Job::findOrFail($request->single);
+        return view('pages.jobsingle' , compact('job'));
+
+    }
+
+    public function contact()
+    {
+        $about = About::latest()->take(1)->first();
+
+        return view('pages.contact',compact('about'));
+    }
+
+    public function jobOwner()
+    {
+        $jobs = Job::all();
+        $role = Role::all();
         $countries = Country::all();
-        return view('dashboard.users.my_cv' , compact(['user','count' , 'cities','countries','sub_specials','levels','roles']));
-        } else {
-            return redirect()->route('login' ,app()->getLocale());
-        }
+        return view('pages.jobowner',compact(['countries' , 'role','jobs']));
     }
 
-     public function pcount($table ,$model ,$resource)
-    {
-        $pos_info =  DB::select(DB::raw('SHOW COLUMNS FROM '.$table));
-            $base_columns = count($pos_info);
-            $not_null = 0;
-            foreach ($pos_info as $col){
-                $not_null += app('App\\'.$model)::selectRaw('SUM(CASE WHEN '.$col->Field.' IS NOT NULL THEN 1 ELSE 0 END) AS not_null')->where('id', '=', $resource)->first()->not_null;
-            }
-            return ($not_null/$base_columns)*100;
-    }
 }

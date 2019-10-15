@@ -1,4 +1,4 @@
-@extends('layouts.defult')
+@extends('layouts.defultowner')
 @section('content')
     
 
@@ -9,7 +9,7 @@
                <div class="pb-4">
                    <h1 class="h3 text-center text-white pt-2">
                        وظّف الباحثين عن عمل بسرعة  
-                       ابحث من بين 36,800,000 سيرة ذاتية</h1>
+                       ابحث من بين {{$jobs->count()}} سيرة ذاتية</h1>
                    </div>
                <form action="#">
                    <div class="row mb-3">

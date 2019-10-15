@@ -18,12 +18,8 @@
             <form id="regForm" action="{{route('users.update', [ app()->getLocale(), $user->id ])}}" class="p-5 bg-white shadow rounded" method="POST">     
                 @csrf
                 @method('PUT')
-                @php
-                  $user =  App\User::findOrFail($user->id);
-                  $user->visit_count +=1;
-                  $user->save();
-                @endphp
                 <input type="hidden" name="user_id" value="{{$user->id}}">
+                <input type="hidden" name="new_form" value="{{$user->id}}">
               <!-- Circles which indicates the steps of the form: -->
               <div class="text-center">
                 <span class="step"></span>
@@ -46,26 +42,12 @@
                       </div>
                   </div>
                   <div class="form-row">
-                    <div class="form-group col-md-6 pr-2">
-                        <label for="inputState"
-                          style="vertical-align:bottom; display: table; margin-bottom: 0.5rem;">الجنس</label>
-                        <div class="form-check form-check-inline">
-                          <input {{($user->gender == 'Male') ? 'checked' : '' }}  class="form-check-input" type="radio" name="gender" id="inlineRadio1"
-                            value="Male">
-                          <label class="form-check-label" for="inlineRadio1">{{__('Male')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input {{($user->gender == 'Female') ? 'checked' : '' }} class="form-check-input" type="radio" name="gender" id="inlineRadio2"
-                            value="Female">
-                          <label class="form-check-label" for="inlineRadio2">{{__('Female')}}</label>
-                        </div>
-                      </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <label for="inputEmail4">الجنسية</label>
                     <input list="identity" id="inputState" class="form-control" name="identity" autocomplete="off">
                     <datalist id="identity" dir="rtl" >
                         @foreach ($countries as $country)
-                        <option selected value="{{(app()->getLocale() == "ar") ? $country->ar_name : $country->country}}">      
+                        <option value="{{(app()->getLocale() == "ar") ? $country->ar_name : $country->country}}">      
                         @endforeach
                       </datalist>
                   </div> 
@@ -78,7 +60,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputEmail4">{{__('Brith Place')}}</label>
-                    <input list="country" name="brith_country" id="inputState" class="form-control">
+                    <input list="country" name="brith_country" id="inputState" class="form-control" autocomplete="off">
                     <datalist id="country" dir="rtl" >
                       @foreach ($countries as $country)    
                       <option value="{{(app()->getLocale() == 'ar') ? $country->ar_name : $country->name}}">
@@ -185,14 +167,11 @@
           <div class="col-lg-4">
             <div class="p-4 mb-3 bg-white shadow rounded">
               <h3 class="h5 text-black mb-3">معلومات الإتصال</h3>
-              <p class="mb-0 font-weight-bold">العنوان</p>
-              <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
-
               <p class="mb-0 font-weight-bold">الهاتف</p>
-              <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+              <p class="mb-4"><a href="#">{{$user->phone}}</a></p>
 
               <p class="mb-0 font-weight-bold">البريد الإلكتروني</p>
-              <p class="mb-0"><a href="#">youremail@domain.com</a></p>
+              <p class="mb-0"><a href="#">{{$user->email}}</a></p>
 
             </div>
 
