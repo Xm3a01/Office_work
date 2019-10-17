@@ -7,8 +7,10 @@ use App\Job;
 use App\City;
 use App\Role;
 use App\User;
+use App\About;
 use App\Level;
 use App\Country;
+use App\Education;
 use App\SubSpecial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,12 +67,13 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::user()->id);
         $jobs = Job::where('role', $user->role)->orWhere('country',$user->country)->get();
         if($user->visit_count == 1) {
+            $about = About::latest()->take(1)->first();
             $cities = City::all();
             $sub_specials = SubSpecial::all();
             $levels = Level::all();
             $roles = Role::all();
             $countries = Country::all();
-           return view('dashboard.users.add_new_cv',compact(['user' , 'cities','countries','sub_specials','levels','roles']));
+           return view('dashboard.users.add_new_cv',compact(['about','user' , 'cities','countries','sub_specials','levels','roles']));
         } else {
             return view('dashboard.users.account_result',compact(['jobs','user']));
         }
@@ -85,138 +88,180 @@ class UserController extends Controller
         $sub_specials = SubSpecial::all();
         $levels = Level::all();
         $roles = Role::all();
+        $jobs = Job::where('role', $user->role)->orWhere('country',$user->country)->get();
         $countries = Country::all();
         $count =  $this->pcount('users' ,'User', $user->id);
         if(!is_null($expert)) {
         $expcount =  $this->pcount('exps' ,'Exp', $expert->id);
         $count = $count + $expcount - 79;
         }
-        return view('dashboard.users.my_cv' , compact(['user','result', 'count' , 'cities','countries','sub_specials','levels','roles','expert']));
+        if($user->visit_count == 1) {
+        return view('dashboard.users.account_result',compact(['jobs','user']));
         } else {
+            return view('dashboard.users.my_cv' , compact(['user','result', 'count' , 'cities','countries','sub_specials','levels','roles','expert']));
+        }} else {
             return redirect()->route('login' ,app()->getLocale());
         }
     }
 
     public function store(Request $request)
     {
-            $request->validate([
-                'role' => 'required',
-                'expertspecial' => 'required',
-                'level' => 'required',
-                'cert_pdf' => 'required',
-                'expert_year' => 'required',
-                'start_year' => 'required',
-                'start_month' => 'required',
-                'end_year' => 'required',
-                'end_month' => 'required',
-                ''
+        switch ($request->select) {
+          case 'add_edu':
+              $request->validate([
+                'user_id' => 'required',
+                'qualification' => 'required',
+                'grade_date' => 'required',
+                'grade' => 'required',
+                'ar_university' => 'required',
+                'university' => 'required'
             ]);
 
-         $expert = new Exp();
+            $edu = Education::create([
+                'user_id' => $request->user_id,
+                'qualification' => $request->qualification,
+                'ar_qualification' => $this->qualification[$request->qualification],
+                'grade_date' => $request->grade_date,
+                'grade' => $request->grade,
+                'ar_university' =>$request->ar_university,
+                'university' => $request->university
+            ]);
 
-         $expert->user_id = Auth::user()->id;
-         if($request->has('cert_pdf')) {
-            $expert->expert_pdf = $request->cert_pdf->store('public/certificate');
-        }
-        if($request->has('expert_year')) {
-            $expert->expert_year = $request->expert_year;
-        }
-        if($request->has('summary') || $request->has('summary')) {
-            $expert->summary = $request->summary;
-            $expert->ar_summary = $request->ar_summary;
-        }
-        if($request->has('start_year')){
-            $expert->start_year = $request->start_year;
-        }
-        if($request->has('start_month')){
-            $expert->start_month = $request->start_month;
-        }
-        if($request->has('end_year')){
-            $expert->end_year = $request->end_year;
-        }
-        if($request->has('end_month')){
-            $expert->end_month = $request->end_month;
-        }
+            if($edu->save()) {
+                if(app()->getLocale() == 'ar') {
+                   \Session::flash('success' , 'تم الحفظ بنجاح');
+                } else {
+                 \Session::flash('success' , ' Data saved successfully');
+                }
+                return redirect()->route('web.mycv',app()->getLocale());
+             }
 
-      if(app()->getLocale() == 'ar') {
-
-        if($request->has('role')) {
-            $role = Role::where('ar_name', $request->role)->first();
-            if($role) {
-                $expert->ar_role = $role->ar_name;
-                $expert->role = $role->name;
-            } else {
-                $expert->ar_role = $request->name;
-                $expert->role = $request->name;
+                break;
+            
+          default:
+                $request->validate([
+                    'role' => 'required',
+                    'expertspecial' => 'required',
+                    'level' => 'required',
+                    'cert_pdf' => 'required',
+                    'expert_year' => 'required',
+                    'start_year' => 'required',
+                    'start_month' => 'required',
+                    'end_year' => 'required',
+                    'end_month' => 'required',
+                    'company_name' => 'required'
+                ]);
+    
+             $expert = new Exp();
+    
+             $expert->user_id = Auth::user()->id;
+             if($request->has('cert_pdf')) {
+                $expert->expert_pdf = $request->cert_pdf->store('public/certificate');
             }
-        }
-
-        if($request->has('expertspecial')) {
-            $special = SubSpecial::where('ar_name' , $request->expertspecial)->first();
-            if($special){
-                $expert->ar_sub_special = $special->ar_name;
-                $expert->sub_special = $special->name;
-            } else {
-                $expert->ar_sub_special = $request->expertspecial;
-                $expert->sub_special = $request->expertspecial;
+            if($request->has('expert_year')) {
+                $expert->expert_year = $request->expert_year;
             }
-        }
-
-        if($request->has('level')){
-            $level = Level::where('ar_name' , $request->level)->first();
-            if($level) {
-                $expert->ar_level = $level->ar_name;
-                $expert->level = $level->name;
-            } else {
-               $expert->ar_level = $request->level;
-               $expert->level = $request->level;
+            if($request->has('summary') || $request->has('summary')) {
+                $expert->summary = $request->summary;
+                $expert->ar_summary = $request->ar_summary;
             }
-        }
-
-    } else {//Localization 
-
-        if($request->has('expertspecial')) {
-            $special = SubSpecial::where('ar_name' , $request->expertspecial)->first();
-            if($special){
-                $expert->ar_sub_special = $special->ar_name;
-                $expert->sub_special = $special->name;
-            } else {
-                $expert->ar_sub_special = $request->expertspecial;
-                $expert->sub_special = $request->expertspecial;
+            if($request->has('start_year')){
+                $expert->start_year = $request->start_year;
             }
-        }
-
-        if($request->has('role')) {
-            $role = Role::where('name', $request->role)->first();
-            if($role) {
-                $expert->ar_role = $role->ar_name;
-                $expert->role = $role->name;
-            } else {
-                $expert->ar_role = $request->name;
-                $expert->role = $request->name;
+            if($request->has('company_name')){
+                $expert->company_name = $request->company_name;
             }
-        }
-
-        if($request->has('level')){
-            $level = Level::where('name' , $request->level)->first();
-            if($level) {
-                $expert->ar_level = $level->ar_name;
-                $expert->level = $level->name;
-            } else {
-               $expert->ar_level = $request->level;
-               $expert->level = $request->level;
+            if($request->has('start_month')){
+                $expert->start_month = $request->start_month;
             }
+            if($request->has('end_year')){
+                $expert->end_year = $request->end_year;
+            }
+            if($request->has('end_month')){
+                $expert->end_month = $request->end_month;
+            }
+    
+          if(app()->getLocale() == 'ar') {
+    
+            if($request->has('role')) {
+                $role = Role::where('ar_name', $request->role)->first();
+                if($role) {
+                    $expert->ar_role = $role->ar_name;
+                    $expert->role = $role->name;
+                } else {
+                    $expert->ar_role = $request->name;
+                    $expert->role = $request->name;
+                }
+            }
+    
+            if($request->has('expertspecial')) {
+                $special = SubSpecial::where('ar_name' , $request->expertspecial)->first();
+                if($special){
+                    $expert->ar_sub_special = $special->ar_name;
+                    $expert->sub_special = $special->name;
+                } else {
+                    $expert->ar_sub_special = $request->expertspecial;
+                    $expert->sub_special = $request->expertspecial;
+                }
+            }
+    
+            if($request->has('level')){
+                $level = Level::where('ar_name' , $request->level)->first();
+                if($level) {
+                    $expert->ar_level = $level->ar_name;
+                    $expert->level = $level->name;
+                } else {
+                   $expert->ar_level = $request->level;
+                   $expert->level = $request->level;
+                }
+            }
+    
+        } else {//Localization 
+    
+            if($request->has('expertspecial')) {
+                $special = SubSpecial::where('ar_name' , $request->expertspecial)->first();
+                if($special){
+                    $expert->ar_sub_special = $special->ar_name;
+                    $expert->sub_special = $special->name;
+                } else {
+                    $expert->ar_sub_special = $request->expertspecial;
+                    $expert->sub_special = $request->expertspecial;
+                }
+            }
+    
+            if($request->has('role')) {
+                $role = Role::where('name', $request->role)->first();
+                if($role) {
+                    $expert->ar_role = $role->ar_name;
+                    $expert->role = $role->name;
+                } else {
+                    $expert->ar_role = $request->name;
+                    $expert->role = $request->name;
+                }
+            }
+    
+            if($request->has('level')){
+                $level = Level::where('name' , $request->level)->first();
+                if($level) {
+                    $expert->ar_level = $level->ar_name;
+                    $expert->level = $level->name;
+                } else {
+                   $expert->ar_level = $request->level;
+                   $expert->level = $request->level;
+                }
+            }
+    
         }
-
-    }
-    if($expert->save()) {
-        if(app()->getLocale() == 'ar') {
-           \Session::flash('success' , 'تم الحفظ بنجاح');
-        } else {
-         \Session::flash('success' , ' Data saved successfully');
+        if($expert->save()) {
+            if(app()->getLocale() == 'ar') {
+               \Session::flash('success' , 'تم الحفظ بنجاح');
+            } else {
+             \Session::flash('success' , ' Data saved successfully');
+            }
+            return redirect()->route('web.mycv',app()->getLocale());
+         }
+                break;
         }
-        return redirect()->route('web.mycv',app()->getLocale());
-     }
 
 
     }
@@ -230,9 +275,6 @@ class UserController extends Controller
    
     public function update(Request $request, $id)
     {
-        // return $request->role;
-
-     $user = User::findOrFail($request->user_id);
 
     if($request->has('expert_form')) {
             $request->validate([
@@ -247,7 +289,7 @@ class UserController extends Controller
                 'end_month' => 'required',
                 ''
             ]);
-     $expert = Exp::where('user_id',$request->segment(3))->first();
+     $expert = Exp::findOrFail($request->expert_id);
      if($expert){
                  //Start experinece
         if($request->has('cert_pdf')) {
@@ -262,6 +304,9 @@ class UserController extends Controller
         }
         if($request->has('start_year')){
             $expert->start_year = $request->start_year;
+        }
+        if($request->has('company_name')){
+            $expert->company_name = $request->company_name;
         }
         if($request->has('start_month')){
             $expert->start_month = $request->start_month;
@@ -363,6 +408,9 @@ class UserController extends Controller
         if($request->has('start_year')){
             $expert->start_year = $request->start_year;
         }
+        if($request->has('company_name')){
+            $expert->company_name = $request->company_name;
+        }
         if($request->has('start_month')){
             $expert->start_month = $request->start_month;
         }
@@ -455,8 +503,39 @@ class UserController extends Controller
     }
 
     }
-        
 
+    
+
+    if($request->edit_edu_id == $request->edit_edu_id) {
+
+    $edu = Education::findOrFail($request->edit_edu_id);
+
+    if($request->has('qualification') && $request->qualification !='') {
+        $edu->qualification = $request->qualification;
+        $edu->ar_qualification = $this->qualification[$request->qualification];
+    } 
+    if($request->has('university')) {
+        $edu->university = $request->university;
+    }
+
+    if($request->has('ar_university')) {
+        $edu->ar_university = $request->ar_university;
+    }
+
+    if($request->has('grade_date')) {
+        $edu->grade_date = $request->grade_date;
+    }
+
+    if($request->has('grade')) {
+        $edu->grade = $request->grade;
+    }
+    }
+
+
+    $user = User::findOrFail($request->user_id);
+    
+
+    //    return $user->gender;
         //Personal info
         if($request->has('email')){
             $user->email = $request->email;
@@ -478,7 +557,7 @@ class UserController extends Controller
             $user->avatar = $request->avatar->store('public/avatar');
         }
 
-        if($request->has('gender')) {
+        if($request->has('gender') && $request->gender !="") {
             $user->gender = $request->gender;
             $user->ar_gender = $this->gender[$request->gender];
         }
@@ -495,17 +574,7 @@ class UserController extends Controller
             $user->ar_social_status = $this->social_status[$request->social_status];
         }
         //Eduction info
-        if($request->has('qualification') && $request->qualification !='') {
-            $user->qualification = $request->qualification;
-            $user->ar_qualification = $this->qualification[$request->qualification];
-        } 
-        if($request->has('university')) {
-            $user->university = $request->university;
-        }
-
-        if($request->has('ar_university')) {
-            $user->ar_university = $request->ar_university;
-        }
+     
 
         if($request->has('language') && $request->language !='') {
             $user->language = $request->language;
@@ -515,14 +584,6 @@ class UserController extends Controller
         if($request->has('language_level') && $request->language_level !='' ) {
             $user->language_level = $request->language_level;
             $user->ar_language_level = $this->language_level[$request->language_level];
-        }
-
-        if($request->has('grade_date')) {
-            $user->grade_date = $request->grade_date;
-        }
-
-        if($request->has('grade')) {
-            $user->grade = $request->grade;
         }
 
         if($request->has('brithDate')) {
@@ -670,5 +731,11 @@ class UserController extends Controller
                 $not_null += app('App\\'.$model)::selectRaw('SUM(CASE WHEN '.$col->Field.' IS NOT NULL THEN 1 ELSE 0 END) AS not_null')->where('id', '=', $resource)->first()->not_null;
             }
             return ($not_null/$base_columns)*100;
+    }
+
+    public function search($res) {
+        $result = Education::findOrFail($res);
+
+        return response()->json($result);
     }
 }

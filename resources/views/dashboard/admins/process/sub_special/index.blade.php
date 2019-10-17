@@ -82,9 +82,9 @@
                                             <td>{{$sub_special->ar_name}}</td>
                                             <td>{{$sub_special->name}}</td>
                                             <td>
-                                                <form action="{{route('levels.destroy', $sub_special->id)}}" method="POST">
+                                                <form action="{{route('subspecials.destroy', $sub_special->id)}}" method="POST">
                                                     @csrf {{ method_field('DELETE') }}
-                                                    <a href="{{route('levels.edit', $sub_special->id)}}"
+                                                    <a href="{{route('subspecials.edit', $sub_special->id)}}"
                                                         class="btn dark btn-sm btn-outline sbold uppercase">
                                                         <i class="fa fa-edit"> تعديل </i>
                                                     </a>

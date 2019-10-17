@@ -60,7 +60,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar pull-left">
                             <div class="btn-group">
-                                <a data-toggle="modal" href="#add_level"  id="sample_editable_1_new" class="btn green">  أضف التخصص جديد
+                                <a data-toggle="modal" href="#add-admin"  id="sample_editable_1_new" class="btn green">  أضف التخصص جديد
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -90,9 +90,11 @@
                                                         class="btn dark btn-sm btn-outline sbold uppercase">
                                                         <i class="fa fa-edit"> تعديل </i>
                                                     </a>
+                                                    @if(!$admin->supper)
                                                     <button type="submit" class="btn red btn-sm btn-outline sbold uppercase">
                                                         <i class="fa fa-edit">حذف</i>
                                                     </button>
+                                                    @endif
                                                 </form>
 
                                             </td>
@@ -109,7 +111,7 @@
             <!-- END DATATABLE -->
 
 <!-- BEGIN ADD_company MODEL -->
-    <div class="modal fade" id="add_level" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal fade" id="add-admin" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

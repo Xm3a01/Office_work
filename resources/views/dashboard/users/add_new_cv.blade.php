@@ -19,7 +19,7 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="user_id" value="{{$user->id}}">
-                <input type="hidden" name="new_form" value="{{$user->id}}">
+                <input type="hidden" name="new_form" value="new_form">
               <!-- Circles which indicates the steps of the form: -->
               <div class="text-center">
                 <span class="step"></span>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                      <label for="inputEmail4">الإسم الاول</label>
+                      <label for="inputEmail4">الإسم </label>
                       <input type="text" class="form-control" value="{{$user->ar_name}}"  name="ar_name"  placeholder="ادخل الاسم الاول">
                     </div>
                     <div class="form-group col-md-6">
@@ -168,10 +168,10 @@
             <div class="p-4 mb-3 bg-white shadow rounded">
               <h3 class="h5 text-black mb-3">معلومات الإتصال</h3>
               <p class="mb-0 font-weight-bold">الهاتف</p>
-              <p class="mb-4"><a href="#">{{$user->phone}}</a></p>
+              <p class="mb-4"><a href="#">{{$about->phone}}</a></p>
 
               <p class="mb-0 font-weight-bold">البريد الإلكتروني</p>
-              <p class="mb-0"><a href="#">{{$user->email}}</a></p>
+              <p class="mb-0"><a href="#">{{$about->email}}</a></p>
 
             </div>
 

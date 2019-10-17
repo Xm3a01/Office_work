@@ -33,7 +33,7 @@
                     </div>
                  </div> 
         <div class="portlet-body form">
-            <form class="form-horizontal" role="form" method="POST" action="{{route('subspecials.update',$role->id)}}">
+            <form class="form-horizontal" role="form" method="POST" action="{{route('subspecials.update',$sub_special->id)}}">
                 @csrf
                 @method('PUT')
                 <div class="form-body">

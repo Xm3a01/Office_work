@@ -165,8 +165,8 @@
             <!-- /.modal-dialog -->
             </div>
                 <!-- /.modal-dialog -->
-            </div>
-            <!-- BEGIN ADD_company MODEL -->
+    </div>
+
 
 @endsection
 

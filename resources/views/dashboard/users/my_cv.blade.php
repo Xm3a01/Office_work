@@ -127,39 +127,47 @@
     </div>
 
 {{-- Education info --}}
-    <div class="bg-white mb-3 rounded">
+  <div class="bg-white mb-3 rounded" id = "app">
         <div class="card">
-            <div class="card-header  d-flex justify-content-between">
-              <h5>معلومات التعليم</h5>
-              <a href="" data-toggle="modal" data-target="#educationinfo" ><img src=" {{asset('asset/images/edit.png')}} " alt=""  class="p-1 align-left float-left   cursor-pointer"></a> 
-            </div>
-              <div class="card-body">
+          <div class="card-body">
+              <div class="card-header  d-flex justify-content-between">
+                  <h5>معلومات التعليم</h5>
+                  <a href="" data-toggle="modal" data-target="#addeducation"  > + </a>
+                </div>
+            @foreach ($user->educations as $education)
+                      <div v-if="this.id == {!! $education->id !!}"> {{$education->id}} </div> 
+
+                <div class="card-header  d-flex justify-content-between">
+                  <a @click.prevent="put({{$education->id}})"><img src=" {{asset('asset/images/edit.png')}} " alt=""  class="p-1 align-left float-left   cursor-pointer"></a> 
+                </div>
+
+
                 @if(app()->getLocale() == 'ar')
                 <table class="table table-borderless">
                   <tr> 
-                      <td><span>{{$user->ar_role}}</span> - <span>{{$user->ar_sub_special}}</span>  , <span>{{$user->ar_qualification}}</span>
+                      <td><span>{{$user->ar_role}}</span> - <span>{{$user->ar_sub_special}}</span>  , <span>{{$education->ar_qualification}}</span>
                     <div class="float-right d-flex d-md-flex">
                         <img src=" {{asset('asset/images/pencil2.png')}} " class="pl-2" alt="" srcset=""><img src=" {{asset('asset/images/clear-button.png')}} " alt="" srcset=""> 
                     </div> 
                     </td>  
                   </tr> 
                   <tr> 
-                      <td> <span>{{__('University Of')}}</span> : <span>{{$user->university}}</span></td> 
+                      <td> <span>{{__('University Of')}}</span> : <span>{{$education->ar_university}}</span></td> 
                   </tr>
                   <tr> 
                     <td><span>{{$user->ar_country}}</span>- <span>{{$user->ar_city}}</span></td>
                   </tr> 
-                  <tr> 
+                  {{-- <tr> 
                       <td><span>{{__('Language')}}</span> : <span>{{$user->ar_language}}</span></td>
                     </tr>
                     <tr> 
                         <td><span>{{__('Language level')}}</span> : <span>{{$user->ar_language_level}}</span></td>
-                      </tr>
+                      </tr> --}}
                   <tr> 
-                     <td><span>{{__('Date Of graduation')}}</span> : <span>{{$user->grade_date}}</span></td>
+                     <td><span>{{__('Date Of graduation')}}</span> : <span>{{$education->grade_date}}</span></td>
                     </tr>
                     <tr> 
-                        <td><span>{{__('Rate')}}</span> : <span>{{$user->grade}}</span></td>
+                        <td><span>{{__('Rate')}}</span> : <span>{{$education->grade}}</span></td>
                       </tr>
 
                 </table>
@@ -167,37 +175,38 @@
 
                 <table class="table table-borderless">
                     <tr> 
-                        <td><span>{{$user->role}}</span> , - <span>{{$user->ar_sub_special}}</span> , <span>{{$user->qualification}}</span>
+                        <td><span>{{$user->role}}</span> , - <span>{{$user->ar_sub_special}}</span> , <span>{{$education->qualification}}</span>
                       <div class="float-right d-flex d-md-flex">
                           <img src=" {{asset('asset/images/pencil2.png')}} " class="pl-2" alt="" srcset=""><img src=" {{asset('asset/images/clear-button.png')}} " alt="" srcset=""> 
                       </div> 
                       </td>  
                     </tr> 
                     <tr> 
-                        <td> <span>{{__('University Of')}}</span> : <span>{{$user->university}}</span></td> 
+                        <td> <span>{{__('University Of')}}</span> : <span>{{$education->university}}</span></td> 
                     </tr>
                     <tr> 
                       <td><span>{{$user->country}}</span>- <span>{{$user->city}}</span></td>
                     </tr> 
-                    <tr> 
+                    {{-- <tr> 
                         <td><span>{{__('Language')}}</span> : <span>{{$user->language}}</span></td>
                       </tr>
                       <tr> 
                           <td><span>{{__('Language level')}}</span> : <span>{{$user->language_level}}</span></td>
-                        </tr>
+                        </tr> --}}
                     <tr> 
-                       <td><span>{{__('Date Of graduation')}}</span> : <span>{{$user->grade_date}}</span></td>
+                       <td><span>{{__('Date Of graduation')}}</span> : <span>{{$education->grade_date}}</span></td>
                       </tr>
                       <tr> 
-                          <td><span>{{__('Rate')}}</span> : <span>{{$user->grade}}</span></td>
+                          <td><span>{{__('Rate')}}</span> : <span>{{$education->grade}}</span></td>
                         </tr>
                   </table>
                   @endif
+                @endforeach
             </div>
           </div>
         </div> 
  
-         </div>
+      </div>
 
    {{-- end education info --}}
 
@@ -209,70 +218,54 @@
             <a href="" data-toggle="modal" data-target="#experienceinfo" ><img src=" {{asset('asset/images/edit.png')}} " alt=""  class="p-1 align-left float-left   cursor-pointer"></a> 
           </div>
             <div class="card-body">
-              @if(!is_null($expert))
+              @foreach ($user->exps as $expert)
+              <br>
+              <br>
               @if(app()->getLocale() == 'ar')
-              <table class="table table-borderless">
-                <tr> 
-                  <span>{{('Experience years')}}</span> : <span>{{$expert->end_year - $expert->start_year}} {{__('Years')}}</span> &  <span>{{abs($expert->end_month - $expert->start_month)}} {{__('Months')}}</span>
-                  <div class="float-right d-flex d-md-flex">
-                      <img src=" {{asset('asset/images/pencil2.png')}} " class="pl-2" alt="" srcset=""><img src=" {{asset('asset/images/clear-button.png')}} " alt="" srcset=""> 
-                  </div> 
-                  </td>  
-                </tr> 
-                <tr> 
-                    <td> <span>{{__('University Of')}}</span> : <span>{{$user->university}}</span></td> 
-                </tr>
-                <tr> 
-                  <td><span>{{$user->ar_country}}</span>- <span>{{$user->ar_city}}</span></td>
-                </tr> 
-                <tr> 
-                    <td><span>{{__('Language')}}</span> : <span>{{$user->ar_language}}</span></td>
-                  </tr>
+                <table class="table table-borderless">
                   <tr> 
-                      <td><span>{{__('Language level')}}</span> : <span>{{$user->ar_language_level}}</span></td>
-                    </tr>
-                <tr> 
-                   <td><span>{{__('Date Of graduation')}}</span> : <span>{{$user->grade_date}}</span></td>
-                  </tr>
-                  <tr> 
-                      <td><span>{{__('Rate')}}</span> : <span>{{$user->grade}}</span></td>
-                    </tr>
-
-              </table>
-              @else 
-
-              <table class="table table-borderless">
-                  <tr> 
-                        <span>{{('Experience years')}}</span> : <span>{{$expert->end_year - $expert->start_year}} {{__('Years')}}</span> &  <span>{{abs($expert->end_month - $expert->start_month)}} {{__('Months')}}</span>
-                        <div class="float-right d-flex d-md-flex">
+                    <span>{{('Experience years')}}</span> : <span>{{$expert->end_year - $expert->start_year}} += {{$expert->end_year - $expert->start_year}} {{__('Years')}}</span> &  <span>{{abs($expert->end_month - $expert->start_month)}} +={{abs($expert->end_month - $expert->start_month)}} {{__('Months')}}</span>
+                    <div class="float-right d-flex d-md-flex">
                         <img src=" {{asset('asset/images/pencil2.png')}} " class="pl-2" alt="" srcset=""><img src=" {{asset('asset/images/clear-button.png')}} " alt="" srcset=""> 
                     </div> 
                     </td>  
                   </tr> 
                   <tr> 
-                      <td> <span>{{__('University Of')}}</span> : <span>{{$user->university}}</span></td> 
+                      <td> <span>{{__('University Of')}}</span> : <span>{{$expert->ar_level}}</span></td> 
                   </tr>
                   <tr> 
-                    <td><span>{{$user->country}}</span>- <span>{{$user->city}}</span></td>
+                    <td><span>{{$user->ar_country}}</span> - <span>{{$expert->company_name}}</span></td>
                   </tr> 
                   <tr> 
-                      <td><span>{{__('Language')}}</span> : <span>{{$user->language}}</span></td>
+                     <td><span>{{__('Date Of graduation')}}</span> : <span>{{$expert->ar_summary}}</span></td>
                     </tr>
-                    <tr> 
-                        <td><span>{{__('Language level')}}</span> : <span>{{$user->language_level}}</span></td>
-                      </tr>
-                  <tr> 
-                     <td><span>{{__('Date Of graduation')}}</span> : <span>{{$user->grade_date}}</span></td>
-                    </tr>
-                    <tr> 
-                        <td><span>{{__('Rate')}}</span> : <span>{{$user->grade}}</span></td>
-                      </tr>
+  
                 </table>
-                @endif
                 @else
-                <a href="" data-toggle= "modal" data-target="#addexperience"><h3  >{{__('Add experience')}}</h3></a>
-                @endif
-          </div>
+  
+                <table class="table table-borderless">
+                   <tr> 
+                    <span>{{('Experience years')}}</span> : <span>{{$expert->end_year - $expert->start_year}} += {{$expert->end_year - $expert->start_year}} {{__('Years')}}</span> &  <span>{{abs($expert->end_month - $expert->start_month)}} +={{abs($expert->end_month - $expert->start_month)}} {{__('Months')}}</span>
+                    <div class="float-right d-flex d-md-flex">
+                        <img src=" {{asset('asset/images/pencil2.png')}} " class="pl-2" alt="" srcset=""><img src=" {{asset('asset/images/clear-button.png')}} " alt="" srcset=""> 
+                    </div> 
+                    </td>  
+                  </tr> 
+                  <tr> 
+                      <td> <span>{{__('Experience Level')}}</span> : <span>{{$expert->level}}</span></td> 
+                  </tr>
+                  <tr> 
+                    <td><span>{{$user->country}}</span>- <span>{{$expert->company_name}}</span></td>
+                  </tr> 
+                  <tr> 
+                     <td><span>{{__('Description')}}</span> : <span>{{$expert->summary}}</span></td>
+                    </tr>
+                </table>
+                  @endif
+              @endforeach
+             <a href="" data-toggle= "modal" data-target="#addexperience"><h3  >{{__('Add experience')}}</h3></a>
+
+            </div>
         </div>
       </div> 
 
@@ -284,7 +277,7 @@
   
 
 <!-- change password model -->
-<div class="modal fade" id="editimage" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal fade" id="editimage" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full" role="document">
         <div class="modal-content fill-cont">
             <div class="modal-header">
@@ -314,9 +307,162 @@
             </div>
         </div> 
     </div>
-  </div>
+</div>
   <!-- end change password model -->
  
+
+<!-- education model -->
+<div class="modal fade" id="educationinfo" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content fill-cont">
+            <div class="modal-header">
+                <h5 class="modal-title"> {{__('Edit Education')}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-4" id="result"> 
+                <div class="row justify-content-center">
+                    <form method="POST" class="form-row col-md-6" action="{{route('users.update' , [app()->getLocale() , $education->id])}}" enctype="multipart/form-data">
+                      @csrf
+                      @method('PUT')
+                      <h3> @{{id}} </h3>
+                      <input type="hidden" name="edit_edu_id" value="@{{id}}">
+                        <div class="form-group col-md-12">
+                          <label for="inputEmail4">{{__('Certificates')}}</label>
+                          <select id="inputState" class="form-control" name="qualification">
+                            <option  hidden>اختر نوع الشهادة</option>
+                            <option selected hidden value=" {{ $education->qualification }} ">{{ $education->ar_qualification }}</option>
+                            <option value="Diploma">{{__('Diploma')}}</option>
+                            <option value="Bachelor">{{__('Bachelor')}}</option>
+                            <option value="Master">{{__('Master')}}</option>
+                            <option value="PH">{{__('PH')}}</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label for="inputEmail4">{{__('Arabic university')}}</label>
+                              <input type="text" class="form-control" name="ar_university" id="inputAddress2" placeholder="مثال: جامعة هارفورد"value="{{$education->ar_university}}" >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputEmail4"> University</label>
+                                <input type="text" class="form-control" name="university" id="inputAddress2" placeholder="eg. Harvard "value="{{$education->university}}" >
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>تاريخ التخرج</label>
+                            <input type="date" id="datepicker" width="276" class="form-control" name="grade_date"  value="{{$education->grade_date}}"/>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">المعدل</label>
+                          <input type="text" class="form-control" id="inputAddress2" placeholder="مثال: 3.50 من 4.00" name="grade" value="{{$education->grade}}">
+                          </div>
+                        
+                          <button class="btn btn-primary btn-outline" type="submit">save</button>
+                      </div>
+                    </form>
+
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+<!-- end education model -->
+
+
+<!-- education model -->
+ <div class="modal fade" id="addeducation" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-full" role="document">
+    <div class="modal-content fill-cont">
+        <div class="modal-header">
+            <h5 class="modal-title"> {{__('Education info')}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body p-4" id="result"> 
+            <div class="row justify-content-center">
+                <form method="POST" class="form-row col-md-6" action="{{route('users.store' ,app()->getLocale())}}" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="user_id" value="{{$user->id}}">
+                  <input type="hidden" name="select" value="add_edu">
+                    <div class="form-group col-md-12">
+                      <label for="inputEmail4">{{__('Certificates')}}</label>
+                      <select id="inputState" class="form-control" name="qualification">
+                        <option selected hidden value="">اختر نوع الشهادة</option>
+                        <option value="Diploma">{{__('Diploma')}}</option>
+                        <option value="Bachelor">{{__('Bachelor')}}</option>
+                        <option value="Master">{{__('Master')}}</option>
+                        <option value="PH">{{__('PH')}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="inputEmail4">{{__('Arabic university')}}</label>
+                          <input type="text" class="form-control" name="ar_university" id="inputAddress2" placeholder="مثال: جامعة هارفورد"value="{{$user->ar_university}}" >
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEmail4"> University</label>
+                            <input type="text" class="form-control" name="university" id="inputAddress2" placeholder="eg. Harvard "value="{{$user->university}}" >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>تاريخ التخرج</label>
+                        <input type="date" id="datepicker" width="276" class="form-control" name="grade_date"  value="{{$user->grade_date}}"/>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail4">المعدل</label>
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="مثال: 3.50 من 4.00" name="grade">
+                      </div>
+
+                      
+
+                    <div class="form-group col-md-12">
+                      <label for="inputEmail4">{{__('Sub specialization')}}</label>
+                      <input list ="subspecial" id="inputState" class="form-control" name="subspecial">
+                      <datalist id="subspecial">
+                        @foreach ($sub_specials as $special)     
+                        <option aria-checked="true" value="{{(app()->getLocale() == 'ar') ? $user->ar_special : $user->special }}">
+                        <option value=" {{(app()->getLocale() == 'ar') ? $special->ar_name : $special->name }}">
+                        @endforeach
+                      </datalist>
+                      </div>
+
+                    <div class="form-group col-md-6">
+                    <label for="inputEmail4" >{{__('Language')}}</label>
+                        <select id="inputState" class="form-control" name="language">
+                            <option  selected value="{{$user->language}}" >{{$user->ar_language}}</option>
+                            <option value="Arabic">{{__('Arabic')}}</option>
+                            <option value="English">{{__('English')}}</option>
+                            </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  >{{__('Language level')}}</label>
+                            <select  id="inputState" class="form-control" name="language_level">
+                                <option value="{{$user->language_level}}" selected>{{$user->ar_language_level}}</option>
+                                <option value="Beginner">{{__('Beginner')}}</option>
+                                <option value="Intermediate">{{__('Intermediate')}}</option>
+                                <option value="Mother tounge">{{__('Mother tounge')}}</option>
+                                </select>
+                      </div> 
+                    
+                      <button class="btn btn-primary btn-outline" type="submit">save</button>
+                  </div>
+                </form>
+
+            </div>
+        </div>
+    </div> 
+  </div>
+</div>
+<!-- end education model -->
+
 <!-- change password model -->
 <div class="modal fade" id="changepassword" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-full" role="document">
@@ -549,96 +695,6 @@
     </div>
 </div>
 <!-- end experience model -->
-
-<!-- education model -->
-<div class="modal fade" id="educationinfo" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-full" role="document">
-        <div class="modal-content fill-cont">
-            <div class="modal-header">
-                <h5 class="modal-title"> {{__('Education info')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body p-4" id="result"> 
-                <div class="row justify-content-center">
-                    <form method="POST" class="form-row col-md-6" action="{{route('users.update' , [app()->getLocale() , $user->id])}}" enctype="multipart/form-data">
-                      @csrf
-                      @method('PUT')
-                      <input type="hidden" name="user_id" value="{{$user->id}}">
-                        <div class="form-group col-md-12">
-                          <label for="inputEmail4">{{__('Certificates')}}</label>
-                          <select id="inputState" class="form-control" name="qualification">
-                            <option selected hidden value="">اختر نوع الشهادة</option>
-                            <option value="Diploma">{{__('Diploma')}}</option>
-                            <option value="Bachelor">{{__('Bachelor')}}</option>
-                            <option value="Master">{{__('Master')}}</option>
-                            <option value="PH">{{__('PH')}}</option>
-                          </select>
-                        </div>
-                        <div class="form-group col-md-12">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <label for="inputEmail4">{{__('Arabic university')}}</label>
-                              <input type="text" class="form-control" name="ar_university" id="inputAddress2" placeholder="مثال: جامعة هارفورد"value="{{$user->ar_university}}" >
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail4"> University</label>
-                                <input type="text" class="form-control" name="university" id="inputAddress2" placeholder="eg. Harvard "value="{{$user->university}}" >
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label>تاريخ التخرج</label>
-                            <input type="date" id="datepicker" width="276" class="form-control" name="grade_date"  value="{{$user->grade_date}}"/>
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="inputEmail4">المعدل</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="مثال: 3.50 من 4.00" name="grade">
-                          </div>
-
-                          
-
-                        <div class="form-group col-md-12">
-                          <label for="inputEmail4">{{__('Sub specialization')}}</label>
-                          <input list ="subspecial" id="inputState" class="form-control" name="subspecial">
-                          <datalist id="subspecial">
-                            @foreach ($sub_specials as $special)     
-                            <option aria-checked="true" value="{{(app()->getLocale() == 'ar') ? $user->ar_special : $user->special }}">
-                            <option value=" {{(app()->getLocale() == 'ar') ? $special->ar_name : $special->name }}">
-                            @endforeach
-                          </datalist>
-                          </div>
-
-                        <div class="form-group col-md-6">
-                        <label for="inputEmail4" >{{__('Language')}}</label>
-                            <select id="inputState" class="form-control" name="language">
-                                <option  selected value="{{$user->language}}" >{{$user->ar_language}}</option>
-                                <option value="Arabic">{{__('Arabic')}}</option>
-                                <option value="English">{{__('English')}}</option>
-                                </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label  >{{__('Language level')}}</label>
-                                <select  id="inputState" class="form-control" name="language_level">
-                                    <option value="{{$user->language_level}}" selected>{{$user->ar_language_level}}</option>
-                                    <option value="Beginner">{{__('Beginner')}}</option>
-                                    <option value="Intermediate">{{__('Intermediate')}}</option>
-                                    <option value="Mother tounge">{{__('Mother tounge')}}</option>
-                                    </select>
-                          </div> 
-                        
-                          <button class="btn btn-primary btn-outline" type="submit">save</button>
-                      </div>
-                    </form>
-
-                </div>
-            </div>
-        </div> 
-    </div>
-</div>
-<!-- end education model -->
  
 <!-- personal info model -->
   <div class="modal fade" id="personalinfo" style="padding-right: 0;" tabindex="-1" role="dialog" aria-hidden="true">
@@ -809,6 +865,42 @@
     </div>
 </div>
 <!-- end contact model -->
+<div v-for ="r in re">
+  <ul>
+    <li>
+      @{{re.ar_qualification}}
+    </li>
+  </ul>
+</div>
+ @endsection
 
-{{-- changepassword --}}
+ @section('scripts')
+ <script src="{{asset('js/app.js')}}"></script>
+
+ <script>
+ const app = new Vue({
+      el: '#app',
+
+
+      data: {
+
+          tag:false,
+          id: '',
+          re: []
+        
+      },
+      mounted(){
+          
+          },
+      methods: {
+          put(value) {
+            axios.get('/search/' + value)
+              .then((res)=>{
+                console.log(res.data);
+            })
+          },
+      }
+
+      });
+</script>
  @endsection

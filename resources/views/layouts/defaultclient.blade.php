@@ -27,6 +27,7 @@
 
    
 @include('_include.jsfile') 
+@yield('scripts')
 @include('_include.message')
 <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>

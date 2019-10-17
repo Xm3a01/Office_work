@@ -39,6 +39,7 @@
             <form class="form-horizontal" role="form" method="POST" action="{{route('abouts.store')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="select_one" value="whyus">
+                <input type="hidden" name="about_id" value="{{$about->id}}">
                 <div class="form-body">  
     <div class="form-group">
         <label class="col-md-3 control-label"> العنوان  </label>

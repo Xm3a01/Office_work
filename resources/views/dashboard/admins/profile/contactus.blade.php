@@ -73,3 +73,90 @@
 
 
 @endsection
+
+
+
+
+
+
+  <div class="modal fade" id="add_user" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> <img src=" {{asset('vendor/img/remove-icon-small.png')}} " alt="" srcset=""> </button>
+                    <h4 class="modal-title">إضافة مستخدم جديد</h4>
+                </div>
+                <div class="modal-body">
+                                <!-- BEGIN PAGE BASE CONTENT --> 
+            <div class="row"> 
+                <div class="col-md-12 ">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="p-3"> 
+            <div class="portlet-body form">
+             <form class="form-horizontal" id="user-form-add" role="form" method="POST" action="{{route('cv.store')}}">
+                @csrf
+                <input type="hidden" name="select" value="edu" >
+                <input type="hidden" name="select_form" value="{{$user->id}}" >
+                <div class="form-body">
+                        <br><h4 class="text-left m-3"> معلومات التعليم</h4><br>
+                        <div class="form-group">
+                                <label class="col-md-2 control-label" >المؤهلات</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" name="qualification">
+                                            <option selected disabled>اختر المؤهل</option>
+                                            <option value="Diploma ">دبلوم</option>
+                                            <option value="Bachelor">بكالريوس</option>
+                                            <option value="Master">ماجستير</option>
+                                            <option value="PH">دكتوراه</option>
+                                            </select>
+                                    </div>
+
+                            <label class="col-md-1 control-label">الجامعة</label>
+                            <div class="col-md-4">
+                                    <input type="text" class="form-control" name="university" placeholder="مثال: جامعة الجزيرة" id="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">التخصص</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" name="special_id">
+                                            <option disabled selected>اختر التخصص</option>
+                                            @foreach ($sub_specials as $sub)
+                                            <option value="{{$sub->id}}">{{$sub->ar_name}}</option>
+                                            @endforeach
+                                            </select>
+                                    </div>
+
+                            <label class="col-md-1 control-label">تاريخ التخرج</label>
+                            <div class="col-md-4">
+                                    <input type="date" class="form-control" name="grade_date" id="">
+                                </div>
+                                </div>
+
+                        <div class="form-group">
+                    <label class="col-md-2 control-label">المعدل</label>
+                    <div class="col-md-4">
+                            <input type="text" class="form-control" name="grade" placeholder="مثال: 3.00 من 4.00" id="">
+                            </div>
+                            </div> 
+                         </div>    
+                        </form>
+                    </div>
+                </div> 
+            </div>
+            </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn green" onclick="event.preventDefault(); document.getElementById('user-form-add').submit();">حفظ</button>
+        </div>
+        </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        </div>
+            <!-- /.modal-dialog -->
+ </div>
+<!-- BEGIN ADD_company MODEL --> 

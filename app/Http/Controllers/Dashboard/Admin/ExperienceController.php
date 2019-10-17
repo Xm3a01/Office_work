@@ -63,8 +63,7 @@ class ExperienceController extends Controller
         $level = Level::findOrFail($request->level_id);
 
         $experience->user_id = $request->user_id;
-        $experience->ar_name = $user->ar_name;
-        $experience->name = $user->name;
+        $experience->company_name = $request->last_company;
         $experience->ar_role = $role->ar_name;
         $experience->role = $role->name;
         $experience->ar_sub_special = $sub_special->ar_name;
@@ -76,6 +75,7 @@ class ExperienceController extends Controller
         $experience->start_year = $request->start_year;
         $experience->end_year = $request->end_year;
         $experience->end_month = $request->end_month;
+        $experience->ar_summary = $request->ar_description;
 
         if($request->has('expert_pdf')){
         $experience->expert_pdf = $request->expert_pdf->store('public/expert_cv');
@@ -139,8 +139,7 @@ class ExperienceController extends Controller
         $sub_special = SubSpecial::findOrFail($request->sub_special_id);
         $level = Level::findOrFail($request->level_id);
 
-        $experience->ar_name = $user->ar_name;
-        $experience->name = $user->aname;
+        $experience->company_name = $request->last_company;
         $experience->ar_role = $role->ar_name;
         $experience->role = $role->name;
         $experience->ar_sub_special = $sub_special->ar_name;
@@ -152,6 +151,7 @@ class ExperienceController extends Controller
         $experience->start_year = $request->start_year;
         $experience->end_year = $request->end_year;
         $experience->end_month = $request->end_month;
+        $experience->ar_summary = $request->ar_description;
 
         if($request->has('expert_pdf')){
             \Storage::delete($experience->expert_pdf);

@@ -22,7 +22,6 @@ class CreateJobsTable extends Migration
             $table->string('ar_country');
             $table->string('city');
             $table->string('ar_city');
-            $table->string('company_name');
             $table->string('special');
             $table->string('ar_special');
             $table->string('sub_special');

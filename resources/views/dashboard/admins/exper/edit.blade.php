@@ -64,7 +64,7 @@
                             <select class="form-control" name="sub_special_id">
                                 <option disabled selected>التخصص</option>
                                 @foreach ($sub_specials as $sub_special)     
-                                <option value="{{$sub_special->id}}" {{($experience->user_id == $user->id) ? 'selected' : ''}}>{{$sub_special->ar_name}}</option>
+                                <option value="{{$sub_special->id}}" {{($experience->ar_sub_special == $sub_special->ar_name) ? 'selected' : ''}}>{{$sub_special->ar_name}}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -72,7 +72,7 @@
                       <div class="form-group">
                             <label class="col-md-2 control-label"> سنين الخبرة</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control  " placeholder="مثال: 1 شهر و2 سنة " name ="expert_year">
+                                <input type="text" class="form-control  " placeholder="مثال: 1 شهر و2 سنة " name ="expert_year" value="{{$experience->expert_year}}">
                              </div>
                         
                             <label class="col-md-1 control-label">المستوي الوظيفي</label>
@@ -110,10 +110,16 @@
                                         </div>
                                         </div>
                                 </div>
+                                <div class="form-group">
+                                        <label class="col-md-2 control-label">الشركه التي عملتا بها</label>
+                                        <div class="col-md-9">
+                                            <input  class="form-control" rows="3" name="last_company" placeholder=" مثال : السودان اليوم " value="{{$experience->last_company}}">
+                                        </div>
+                                    </div>
                             <div class="form-group">
                                     <label class="col-md-2 control-label">الوصف</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control" rows="3" name="ar_description"> {{$experience->ar_description}} </textarea>
+                                        <textarea class="form-control" rows="3" name="ar_description"> {{$experience->ar_summary}} </textarea>
                                     </div>
                                 </div>
                     

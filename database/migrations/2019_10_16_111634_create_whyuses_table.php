@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAboutsTable extends Migration
+class CreateWhyusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateAboutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('abouts', function (Blueprint $table) {
+        Schema::create('whyuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->longText('about')->nullable();
-            $table->string('location')->nullable();
-            $table->string('video')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('about_id');
+            $table->string('why_title')->nullable();
+            $table->string('why_details')->nullable();
             $table->timestamps();
+            $table->foreign('about_id')->references('id')->on('abouts')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateAboutsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abouts');
+        Schema::dropIfExists('whyuses');
     }
 }

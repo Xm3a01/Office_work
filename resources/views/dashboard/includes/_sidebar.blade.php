@@ -27,6 +27,16 @@
             <span class="title">الخبرات</span>
         </a>
     </li>
+    <li class="nav-item ">
+        <a href="{{route('education.index')}}" class="nav-link ">
+            <span class="title">التعليم</span>
+        </a>
+    </li>
+    <li class="nav-item ">
+        <a href="{{route('language.index')}}" class="nav-link ">
+            <span class="title">اللغه</span>
+        </a>
+    </li>
 </ul>
 </li>  
 

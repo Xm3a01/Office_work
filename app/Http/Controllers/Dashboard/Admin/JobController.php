@@ -84,13 +84,13 @@ class JobController extends Controller
 
             // $job->company_name = $owner->company_name;
             $job->selary = $request->selary;
-            // $job->owner_id = $request->owner_id;
+            $job->owner_id = $request->owner_id;
             $job->ar_role = $role->ar_name;
             $job->role = $role->name;
-            // $job->ar_country = $country->ar_name;
-            // $job->country = $country->name;
-            // $job->ar_city = $city->ar_name;
-            // $job->city = $city->name;
+            $job->ar_country = $country->ar_name;
+            $job->country = $country->name;
+            $job->ar_city = $city->ar_name;
+            $job->city = $city->name;
             $job->yearsOfExper = $request->experinse;
             $job->ar_special = $special->ar_name;
             $job->special = $special->name;

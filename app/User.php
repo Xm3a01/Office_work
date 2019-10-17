@@ -37,7 +37,9 @@ class User extends Authenticatable
         'ar_level_of_work',
         'visit_count',
         'available',
-        'avatar'
+        'avatar',
+        'ar_gender',
+        'gender'
     ];
 
     /**
@@ -68,5 +70,10 @@ class User extends Authenticatable
     public function exps()
     {
         return $this->hasMany(Exp::class);
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(Education::class);
     }
 }

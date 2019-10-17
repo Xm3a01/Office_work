@@ -1,5 +1,5 @@
 @extends('dashboard.metronic')
-@section('title', ' جدول الخبرات')
+@section('title', ' جدول المستخدمين')
 <!-- BEGIN CSS -->
 @section('stylesheets')
 <link rel="stylesheet" href="{{ asset('vendor/plugins/datatables/datatables.min.css') }}">
@@ -11,7 +11,7 @@
 <div class="page-head">
         <!-- BEGIN PAGE TITLE -->
         <div class="page-title">
-            <h1> جدول الخبرات
+            <h1> جدول المستخدمين
             </h1>
         </div> 
     </div>
@@ -23,7 +23,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span class="active">جدول الخبرات</span>
+            <span class="active">جدول المستخدمين</span>
         </li>
     </ul>
     <!-- END PAGE BREADCRUMB -->
@@ -35,7 +35,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-social-dribbble font-green hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">جدول الخبرات</span>
+                            <span class="caption-subject font-dark bold uppercase">جدول المستخدمين</span>
                         </div>
                         <div class="actions">
                             <div class="btn-group pull-left">
@@ -60,56 +60,51 @@
                     <div class="portlet-body">
                         <div class="table-toolbar pull-left">
                             <div class="btn-group">
-                                <a data-toggle="modal" href="#add_level"  id="sample_editable_1_new" class="btn green">  أضف مجال جديد
-                                    <i class="fa fa-plus"></i>
-                                </a>
                             </div>
                         </div>
                         <table id="users-table" class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th> # </th>
-                                <th>صاحب الخبره</th>
-                                <th>الدور الوظيفي</th>
-                                <th>التخصص</th>
-                                <th>سنيت الخبره</th>
-                                <th>المستوى الوظيفي</th>
-                                <th>بدية العمل  في الخبره</th>
-                                <th>نهايه العمل في الخبر</th>
-                                <th>الوصف</th>
-                                <th>العمليات</th>
-                            </tr>
-                        </thead>
-                    
-                        <tbody>
-                            @foreach($experiences as $experience)
-                            <tr>
-                                <td>{{$experience->id}}</td>
-                                <td>{{$experience->user->ar_name}}</td>
-                                <td>{{$experience->ar_role}}</td>
-                                <td>{{$experience->ar_sub_special}}</td>
-                                <td>{{$experience->expert_years}}</td>
-                                <td>{{$experience->ar_level}}</td>
-                                <td>{{$experience->start_month .'/'.$experience->start_year }}</td>
-                                <td>{{$experience->end_month .'/'.$experience->end_year }}</td>
-                                <td>{{ $experience->ar_summary }}</td>
-                                <td>
-                                <form action="{{route('experiences.destroy', $experience->id)}}" method="POST">
-                                    @csrf {{ method_field('DELETE') }}
-                                    <a href="{{route('experiences.edit', $experience->id)}}"
-                                        class="btn dark btn-sm btn-outline sbold uppercase">
-                                        <i class="fa fa-edit"> تعديل </i>
-                                    </a>
-                                    <button type="submit" class="btn red btn-sm btn-outline sbold uppercase">
-                                        <i class="fa fa-edit">حذف</i>
-                                    </button>
-                                </form>
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th>الجامعه</th>
+                                        <th>المؤهل</th>
+                                        <th>المعدل</th>
+                                        <th>تاريخ التخرج</th>
+                                        <th>العمليات</th>
+                                    </tr>
+                                </thead>
+                         
+                                    <tbody>
+                                        @foreach($educations as $education)
+                                        <tr>
+                                            <td>{{$education->id}}</td>
+                                            <td>{{$education->ar_university}}</td>
+                                            <td>{{$education->ar_qualification}}</td>
+                                            <td>{{$education->grade}}</td>
+                                            <td>{{$education->grade_date}}</td>
+                                            
+                                            <td style="width:auto">
+                                                <form action="{{route('cv.destroy', $education->id)}}" method="POST">
+                                                    @csrf {{ method_field('DELETE') }}
+                                                    <input type="hidden" name="select" value="delete">
 
-                                    </td>
-                                </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                        <a data-toggle="model" href="{{route('education.edit',$education->id)}}"
+                                                                class="btn dark btn-sm btn-outline sbold uppercase">
+                                                                <i class="fa fa-edit"> تعديل </i>
+                                                            </a>
+                                                
+                                                        <button type="submit" class="btn red">
+                                                                <i class="fa fa-edit">حذف</i>
+                                                        </button>
+                                                            
+                                                    
+                                                </form>
+                                            </td>
+                                        </tr>
+                                                    
+                           @endforeach
+                                 </tbody>
+                          </table>
                     </div>
                 </div>
             </div>

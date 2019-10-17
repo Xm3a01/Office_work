@@ -50,6 +50,8 @@
     </div>
     <!-- END CONTAINER -->
 
+
+
     @include('dashboard.includes._footer')
 
     @include('dashboard.includes._javascript')
@@ -64,7 +66,6 @@
 
     </script>
     @yield('scripts')
-
 
 </body>
 

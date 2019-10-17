@@ -18,6 +18,7 @@ class CreateExpsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('role');
             $table->string('ar_role');
+            $table->string('company_name');
             $table->string('sub_special'); 
             $table->string('ar_sub_special');
             $table->string('expert_year');

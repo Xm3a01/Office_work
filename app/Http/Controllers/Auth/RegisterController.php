@@ -102,13 +102,21 @@ class RegisterController extends Controller
             'email' => $request->email,
             'visit_count' => 1,
             'phone' => $request->phone,
-            'ar_role' => $role->ar_name,
-            'role' => $role->name,
             'gender' => $request->gender,
             'ar_gender' => $gender[$request->gender],
             'avatar' => $avatar,
             'password' => Hash::make($request->password),            
         ]);
+
+        if(!is_null($role)) {
+            $user->ar_role = $role->ar_name;
+            $user->role = $role->name;
+        } else {
+            $user->ar_role = $request->role;
+            $user->role = $request->role;
+        }
+
+        $user->save();
         
          Auth::guard('web')->login($user);
          return redirect()->route('users.index' , app()->getLocale());

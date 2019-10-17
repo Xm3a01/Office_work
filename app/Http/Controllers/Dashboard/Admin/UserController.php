@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\City;
 use App\Role;
 use App\User;
+use App\Level;
 use App\Country;
+use App\Language;
+use App\Education;
 use App\SubSpecial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -25,7 +29,32 @@ class UserController extends Controller
         $cities = City::all();
         $countries = Country::all();
         $sub_specials = SubSpecial::all();
-        return view('dashboard.admins.users.index',compact(['roles' , 'cities','countries', 'users', 'sub_specials']));
+        $levels = Level::all();
+        return view('dashboard.admins.users.index',compact(['roles' , 'cities','countries', 'users', 'sub_specials', 'levels']));
+    }
+
+    public function index_edu()
+    {
+        $educations = Education::all();
+        $roles = Role::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $sub_specials = SubSpecial::all();
+        $levels = Level::all();
+        return view('dashboard.admins.users.education',compact(['educations','roles' , 'cities','countries', 'sub_specials', 'levels']));
+    }
+
+
+    public function index_lang()
+    {
+        
+        $languages =Language::all();
+        $roles = Role::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $sub_specials = SubSpecial::all();
+        $levels = Level::all();
+        return view('dashboard.admins.users.language',compact(['languages','roles' , 'cities','countries', 'sub_specials', 'levels']));
     }
 
     /**
@@ -46,29 +75,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-         'ar_name' =>'required',
-         'email' => 'required|email|unique:users',
-         'phone' => 'required',
-         'password' => 'required',
-         'country_id' => 'required',
-         'city_id' =>'required',
-         'birth_id' =>'required',
-         'special_id' =>'required',
-        ]);
-        $language = [
-            'Arabic' => 'العربيه',
-            'English' => 'الانجليزيه',
-        ];
-
-        $language_level = [
-            'Beginner' => 'مبتدئي',
-            'Intermediate' => 'متوسط',
-            'Mother tounge' => 'اللغه الاساسيه',
-        ];
-
+        
         $qualification = [
-           'Diploma' => 'دبلوم',
+            'Diploma' => 'دبلوم',
            'Bachelor' => 'بكلاريوس',
            'Master' => 'ماجستير',
            'PH' => 'دكتوراة',
@@ -84,13 +93,70 @@ class UserController extends Controller
             'Gushin' => 'يهودي',
             'Other' => 'اخرى'
         ];
+        
+        if($request->select == "lang") {
+
+            $language = [
+                'Arabic' => 'العربيه',
+                'English' => 'الانجليزيه',
+            ];
+    
+            $language_level = [
+                'Beginner' => 'مبتدئي',
+                'Intermediate' => 'متوسط',
+                'Mother tounge' => 'اللغه الاساسيه',
+            ];
+
+            $lang = new Language();
+            $lang->user_id = $request->select_form;
+            $lang->ar_language =$language[$request->language];
+            $lang->ar_language_level = $language_level[$request->language_level];
+            $lang->language = $request->language;
+            $lang->language_level = $request->language_level;
+            if($lang->save()) {
+                \Session::flash('success', 'تمت الاضافه بنجاح');
+                return Redirect()->route('cv.index');
+            }
+        }
+
+        $request->validate([
+            'special_id' =>'required',
+            ]);
+        $sub_special = SubSpecial::findOrFail($request->special_id);
+        
+        if($request->select == "edu") {
+        $education =new Education();
+        $education->user_id = $request->select_form;
+        $education->qualification = $request->qualification;
+        $education->ar_qualification = $qualification[$request->qualification];
+        $education->grade_date = $request->grade_date;
+        $education->grade = $request->grade;
+        $education->ar_university = $request->ar_university;
+        $education->ar_university = $request->university;
+        $education->university = $request->university;
+        if($education->save()) {
+            \Session::flash('success', 'تمت الاضافه بنجاح');
+            return Redirect()->route('educations.index',app()->getLocale());
+        }
+        }
+
+        if($request->select_user) {
+        $request->validate([
+            'ar_name' =>'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required',
+            'country_id' => 'required',
+            'city_id' =>'required',
+            'birth_id' =>'required',
+            'special_id' =>'required',
+           ]);
 
         $user = new User();
         $country = Country::findOrFail($request->country_id);
         $city = City::findOrFail($request->city_id);
         $birth = City::findOrFail($request->birth_id);
-        $sub_special = SubSpecial::findOrFail($request->special_id);
-
+        $role = Role::findOrFail($request->role_id);
         $user->ar_name = $request->ar_name;
         $user->email = $request->email;
         $user->phone = $request->phone;
@@ -99,36 +165,26 @@ class UserController extends Controller
         $user->city = $city->name;
         $user->ar_country = $country->ar_name;
         $user->country = $country->name;
-        $user->ar_university = $request->ar_university;
-        $user->university = $request->university;
-        $user->grade_date = $request->grade_date;
-        $user->ar_brith = $request->ar_brith;
-        $user->ar_brith = $request->ar_brith;
-        $user->ar_sub_special = $sub_special->ar_nwme;
-        $user->sub_special = $sub_special->nwme;
+        $user->brith = $birth->name;
+        $user->ar_brith = $birth->ar_name;
+        $user->ar_role = $role->ar_name;
+        $user->role = $role->name;
+        $user->ar_sub_special = $sub_special->ar_name;
+        $user->sub_special = $sub_special->name;
         $user->ar_religion = $religion[$request->religion];
         $user->religion = $request->religion;
-        $user->ar_social_status = $request->email;
-        $user->ar_social_status = $social_status[$request->social_status];
         $user->social_status = $request->social_status;
-        $user->ar_qualification = $qualification[$request->qualification];
-        $user->qualification = $request->qualification;
-        $user->ar_language_level = $language_level[$request->language_level];
-        $user->language_level = $request->language_level;
-        $user->ar_language = $language[$request->language];
-        $user->language = $request->language;
+        $user->ar_social_status = $social_status[$request->social_status];
         $user->idint_1 = $request->idint_1;
         $user->idint_2 = $request->idint_2;
         $user->birthdate = $request->birthdate;
-        $user->grade = $request->grade;
-        $user->grade_date = $request->grade_date;
-        $user->email = $request->email;
-        $user->email = $request->email;
+
         if($user->save()) {
             \Session::flash('success', 'تمت الاضافه بنجاح');
-            return Redirect()->route('users.index');
+            return Redirect()->route('cv.index' ,app()->getLocale());
         }
      }
+    }
 
     /**
      * Display the specified resource.
@@ -157,6 +213,26 @@ class UserController extends Controller
         return view('dashboard.admins.users.edit', compact(['roles' , 'cities','countries', 'user', 'sub_specials']));
     }
 
+    public function edu_edit($id)
+    {
+        $education = Education::findOrFail($id);
+        $roles = Role::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $sub_specials = SubSpecial::all();
+        return view('dashboard.admins.users.edit_edu', compact(['education','roles' , 'cities','countries', 'user', 'sub_specials']));
+    }
+
+    public function lang_edit($id)
+    {
+        $language = Language::findOrFail($id);
+        $roles = Role::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $sub_specials = SubSpecial::all();
+        return view('dashboard.admins.users.edit_lang', compact(['language','roles' , 'cities','countries', 'user', 'sub_specials']));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -166,15 +242,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'ar_name' =>'required',
-            'email' => 'required|email|',
-            'phone' => 'required',
-            'country_id' => 'required',
-            'city_id' =>'required',
-            'birth_id' =>'required',
-            'special_id' =>'required',
-           ]);
            $language = [
                'Arabic' => 'العربيه',
                'English' => 'الانجليزيه',
@@ -204,54 +271,82 @@ class UserController extends Controller
                'Other' => 'اخرى'
            ];
    
-           $user = User::findOrFail($id);
-           $country = Country::findOrFail($request->country_id);
-           $city = City::findOrFail($request->city_id);
-           $birth = City::findOrFail($request->birth_id);
-           $sub_special = SubSpecial::findOrFail($request->special_id);
-   
-           $user->ar_name = $request->ar_name;
-           $user->name = $request->name;
-           $user->email = $request->email;
-           $user->phone = $request->phone;
-           $user->ar_city = $city->ar_name;
-           $user->city = $city->name;
-           $user->ar_country = $country->ar_name;
-           $user->country = $country->name;
-           $user->ar_university = $request->ar_university;
-           $user->university = $request->university;
-           $user->grade_date = $request->grade_date;
-           $user->ar_brith = $request->ar_brith;
-           $user->ar_brith = $request->ar_brith;
-           $user->ar_sub_special = $sub_special->ar_nwme;
-           $user->sub_special = $sub_special->nwme;
-           $user->ar_religion = $religion[$request->religion];
-           $user->religion = $request->religion;
-           $user->ar_social_status = $request->email;
-           $user->ar_social_status = $social_status[$request->social_status];
-           $user->social_status = $request->social_status;
-           $user->ar_qualification = $qualification[$request->qualification];
-           $user->qualification = $request->qualification;
-           $user->ar_language_level = $language_level[$request->language_level];
-           $user->language_level = $request->language_level;
-           $user->ar_language = $language[$request->language];
-           $user->language = $request->language;
-           $user->idint_1 = $request->idint_1;
-           $user->idint_2 = $request->idint_2;
-           $user->birthdate = $request->birthdate;
-           $user->grade = $request->grade;
-           $user->grade_date = $request->grade_date;
-           $user->email = $request->email;
-           $user->email = $request->email;
-
-           if($request->has('passowrd')) {
-            $user->password = Hash::make($request->password);
+           if($request->select == "lang") {
+            $language = Language::findOrFail($id);
+            $lang->ar_language =$language[$request->language];
+            $lang->ar_language_level = $language_level[$request->language_level];
+            $lang->language = $request->language;
+            $lang->language_level = $request->language_level;
+            if($lang->save()) {
+                \Session::flash('success', 'تمت الاضافه بنجاح');
+                return Redirect()->route('language.index');
             }
+        }
 
-           if($user->save()) {
-               \Session::flash('success', 'تم التعديل  بنجاح');
-               return Redirect()->route('users.index');
-           }
+        $request->validate([
+            'special_id' =>'required',
+            ]);
+        $sub_special = SubSpecial::findOrFail($request->special_id);
+        
+        if($request->select == "edu") {
+        $education = Education::findOrFail($id);
+        $education->qualification = $request->qualification;
+        $education->ar_qualification = $qualification[$request->qualification];
+        $education->grade_date = $request->grade_date;
+        $education->grade = $request->grade;
+        $education->ar_university = $request->university;
+        $education->university = $request->university;
+        if($education->save()) {
+            \Session::flash('success', 'تمت الاضافه بنجاح');
+            return Redirect()->route('education.index');
+        }
+        }
+
+        if($request->select_user) {
+        $request->validate([
+            'ar_name' =>'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required',
+            'country_id' => 'required',
+            'city_id' =>'required',
+            'birth_id' =>'required',
+            'special_id' =>'required',
+            'role' =>'required',
+           ]);
+
+        $user =  User::findOrFail($id);
+        $country = Country::findOrFail($request->country_id);
+        $city = City::findOrFail($request->city_id);
+        $birth = City::findOrFail($request->birth_id);
+        $role = Role::findOrFail($request->role_id);
+        $user->ar_name = $request->ar_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+        $user->ar_city = $city->ar_name;
+        $user->city = $city->name;
+        $user->ar_country = $country->ar_name;
+        $user->country = $country->name;
+        $user->brith = $birth->name;
+        $user->ar_brith = $birth->ar_name;
+        $user->ar_sub_special = $sub_special->ar_name;
+        $user->sub_special = $sub_special->name;
+        $user->ar_role = $role->ar_name;
+        $user->role = $role->name;
+        $user->ar_religion = $religion[$request->religion];
+        $user->religion = $request->religion;
+        $user->social_status = $request->social_status;
+        $user->ar_social_status = $social_status[$request->social_status];
+        $user->idint_1 = $request->idint_1;
+        $user->idint_2 = $request->idint_2;
+        $user->birthdate = $request->birthdate;
+
+        if($user->save()) {
+            \Session::flash('success', 'تمت الاضافه بنجاح');
+            return Redirect()->route('cv.index' ,app()->getLocale());
+        }
+     }
     }
 
     /**
@@ -260,13 +355,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        if($request->select == "delete"){
+            $education = Education::findOrFail($id);
+            $education->delete();
+            \Session::flash('success' , 'تم الحذف');
+            return Redirect()->route('education.index');
+        }
+
+        if($request->select == "lang-delete"){
+            $language = Language::findOrFail($id);
+            $language->delete();
+            \Session::flash('success' , 'تم الحذف');
+            return Redirect()->route('language.index');
+        }
+
         $user = User::findOrFail($id);
         $user->delete();
 
         \Session::flash('success', 'تم الحذف  بنجاح');
-        return Redirect()->route('users.index');
+        return Redirect()->route('cv.index');
 
     }
 }

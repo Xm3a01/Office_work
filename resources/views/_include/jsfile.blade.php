@@ -55,7 +55,11 @@
       dd.setAttribute('type' ,'submit');
       dd.removeAttribute('onclick');
     } else {
-      document.getElementById("nextBtn").innerHTML = "التالي";
+      dd = document.getElementById("nextBtn")
+      dd.innerHTML = "التالي";
+      dd.setAttribute('type' ,'button');
+      dd.removeAttribute('onclick');
+      dd.setAttribute('onclick' ,'event.preventDefault(); nextPrev(1)');
     }
     // ... and run a function that displays the correct step indicator:
     fixStepIndicator(n)

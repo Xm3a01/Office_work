@@ -36,6 +36,10 @@ Route::group(['prefix' => 'dashboard' , 'middleware' => 'auth:admin'] , function
     Route::get('cities/{id}/edit','Dashboard\Admin\LocationController@cityEdit')->name('cities.edit');
     Route::get('cities/create','Dashboard\Admin\LocationController@cityCreate')->name('cities.create');
     Route::delete('cities/{id}','Dashboard\Admin\LocationController@cityDestroy')->name('cities.destroy');
+    Route::get('educations/index','Dashboard\Admin\UserController@index_edu')->name('education.index');
+    Route::get('languages/index','Dashboard\Admin\UserController@index_lang')->name('language.index');
+    Route::get('languages/{id}/edit','Dashboard\Admin\UserController@lang_edit')->name('language.edit');
+    Route::get('educations/{id}/edit','Dashboard\Admin\UserController@edu_edit')->name('education.edit');
 
 
 });
@@ -69,8 +73,11 @@ function() {
      Route::get('/','Browse\BrowseController@home_page')->name('home');
      Route::get('contact','Browse\BrowseController@contact')->name('web.contact');
      Route::get('job/owner','Browse\BrowseController@jobOwner')->name('job.owner');
+     Route::get('company/about','Browse\BrowseController@about')->name('company.about');
      Route::get('single/job','Browse\BrowseController@jobsingle')->name('single.job');
 
 });
 
-Route::view('test' , 'pages.contact')->name('test');
+Route::view('test' , 'test.search')->name('test');
+
+Route::view('search' , 'Dashboard\User\UserController@search');

@@ -54,4 +54,9 @@ class BrowseController extends Controller
         return view('pages.jobowner',compact(['countries' , 'role','jobs']));
     }
 
+    public function about()
+    {
+        
+    }
+
 }

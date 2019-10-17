@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\About;
+use App\Whyus;
+use App\Employee;
+use App\Partener;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -32,22 +35,26 @@ class AboutController extends Controller
 
     public function createContact()
     {
-       return view('dashboard.admins.profile.contactus');
+        $about = About::latest()->take(1)->first();
+       return view('dashboard.admins.profile.contactus',compact('about'));
     }
 
     public function createPartner()
     {
-       return view('dashboard.admins.profile.partnersSuccess');
+        $about = About::latest()->take(1)->first();
+       return view('dashboard.admins.profile.partnersSuccess',compact('about'));
     }
 
     public function createTeam()
     {
-       return view('dashboard.admins.profile.team');
+        $about = About::latest()->take(1)->first();
+       return view('dashboard.admins.profile.team',compact('about'));
     }
 
     public function createwhyUs()
     {
-       return view('dashboard.admins.profile.whychooseUs');
+        $about = About::latest()->take(1)->first();
+       return view('dashboard.admins.profile.whychooseUs',compact('about'));
     }
 
     /**
@@ -59,6 +66,10 @@ class AboutController extends Controller
     public function store(Request $request)
     {
         $about = new About();
+        $partener = new Partener();
+        $employee = new Employee();
+        $whyus = new Whyus();
+
         switch ($request->select_one) {
             case 'about_company':
                 $this->validate($request, [
@@ -74,7 +85,7 @@ class AboutController extends Controller
                 $about->email = $request->email;
                 $about->phone = $request->phone;
                 $about->save();
-                return "hi";
+                return redirect()->route('admin.dashboard');
                 break;
 
             case 'partner':
@@ -82,10 +93,11 @@ class AboutController extends Controller
                 'partner_name' => 'required',
                 'partner_logo' => 'required|image',
                 ]);
-                $about->partner_name = $request->partner_name;
-                $about->partner_logo = $request->partner_logo->store('public/partnerLogo');
-                $about->save();
-                return "hi";
+                $partener->about_id = $request->about_id;
+                $partener->partner_name = $request->partner_name;
+                $partener->partner_logo = $request->partner_logo->store('public/partnerLogo');
+                $partener->save();
+                return redirect()->route('admin.dashboard');
                 break;
 
             case 'team':
@@ -94,11 +106,12 @@ class AboutController extends Controller
                 'employee_photo' => 'required|image',
                 'employee_position' => 'required',
                 ]);
-                $about->employee_name = $request->employee_name;
-                $about->employee_photo = $request->employee_photo->store('public/employee');
-                $about->employee_position = $request->employee_position;
-                $about->save();
-                return "hi";
+                $employee->about_id = $request->about_id;
+                $employee->employee_name = $request->employee_name;
+                $employee->employee_photo = $request->employee_photo->store('public/employee');
+                $employee->employee_position = $request->employee_position;
+                $employee->save();
+                return redirect()->route('admin.dashboard');
                 break;
 
             case 'whyus':
@@ -106,10 +119,11 @@ class AboutController extends Controller
                 'why_title' => 'required|max:255',
                 'why_details' => 'required|max:1024',
                 ]);
-                $about->why_title = $request->why_title;
-                $about->why_details = $request->why_details;
-                $about->save();
-                return "hi";
+                $whyus->about_id = $request->about_id;
+                $whyus->why_title = $request->why_title;
+                $whyus->why_details = $request->why_details;
+                $whyus->save();
+                return redirect()->route('admin.dashboard');
                 break;
         }
     }
@@ -122,7 +136,24 @@ class AboutController extends Controller
      */
     public function show($id)
     {
-        //
+        switch ($request->select_one) {
+            case 'about_company':
+                return view('');
+                break;
+            case 'partner':
+                return view('');            
+                break;
+            case 'team':
+               return view('');
+                break;
+            case 'whyus':
+                return view('');
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     /**
@@ -145,7 +176,65 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        switch ($request->select_one) {
+            case 'about_company':
+            $this->validate($request, [
+                'about_company' => 'required',
+                'video' => 'required',
+                'location' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required|max:20'
+                ]);
+                $about = About::findOrFail($id);
+                $about->about = $request->about_company;
+                $about->video = $request->video->store('public/about_video');
+                $about->location = $request->location;
+                $about->email = $request->email;
+                $about->phone = $request->phone;
+                $about->save();
+                \Session::flash('success' , 'تم التعديل بنجاح');
+                break;
+
+            case 'partner':
+                $this->validate($request, [
+                'partner_name' => 'required',
+                'partner_logo' => 'required|image',
+                ]);
+                $partener = Partener::findOrFail($id);
+                $partener->partner_name = $request->partner_name;
+                $partener->partner_logo = $request->partner_logo->store('public/partnerLogo');
+                $partener->save();
+                \Session::flash('success' , 'تم التعديل بنجاح');
+                break;
+
+            case 'team':
+                $this->validate($request, [
+                'employee_name' => 'required',
+                'employee_photo' => 'required|image',
+                'employee_position' => 'required',
+                ]);
+
+                $employee = Employee::findOrFail($id);
+                $employee->employee_name = $request->employee_name;
+                $employee->employee_photo = $request->employee_photo->store('public/employee');
+                $employee->employee_position = $request->employee_position;
+                $employee->save();
+                \Session::flash('success' , 'تم التعديل بنجاح');
+                break;
+
+            case 'whyus':
+                $this->validate($request, [
+                'why_title' => 'required|max:255',
+                'why_details' => 'required|max:1024',
+                ]);
+                $whyus =    Whyus::findOrFail($id);
+                $whyus->why_title = $request->why_title;
+                $whyus->why_details = $request->why_details;
+                $whyus->save();
+                \Session::flash('success' , 'تم التعديل بنجاح');
+                break;
+        }
     }
 
     /**

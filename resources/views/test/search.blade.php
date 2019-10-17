@@ -24,7 +24,7 @@
             @endforeach
       </datalist>  --}}
 
-      <div class="container vue">
+      {{-- <div class="container vue">
             <div v-if="index < a.length" v-for="index in list"> 
               <div>@{{a[--index].name}}</div>
               <i><div>@{{a[index].description}}</div></i>
@@ -32,25 +32,34 @@
             </div>
             <button @click="list += 1">show more reviews</button>
           </div>
-    </div>
+    </div> --}}
    <script src="{{asset('js/app.js')}}"></script>
+
     <script>
     const app = new Vue({
     el: '#app',
 
+
     data: {
+
+        tag:false,
+        
 
         // search: '',
         // result: [],
         // list: 0,
-        a: [{name: 'Omer' , logo: 'logo', des: 'hello'},{name: 'Ali' , logo: 'logo', des: 'hello'}, {name: 'Hasn' , logo: 'logo', des: 'hello'}],
+        // a: [{name: 'Omer' , logo: 'logo', des: 'hello'},{name: 'Ali' , logo: 'logo', des: 'hello'}, {name: 'Hasn' , logo: 'logo', des: 'hello'}],
         // a: [{name: 'Derek', description: 'Some comment'}, {name: 'Joe', description: 'Some comment'},{name: 'Mike', description: 'Some comment'}, {name: 'Ron', description: 'Some comment'},{name: 'Dii', description: 'Some comment'}, {name: 'Lonnie', description: 'Some comment'},{name: 'Paul', description: 'Some comment'}, {name: 'Mike', description: 'Some comment'},{name: 'Jody', description: 'Some comment'}, {name: 'Ryn', description: 'Some comment'},{name: 'Jord', description: 'Some comment'}, {name: 'Milly', description: 'Some comment'},{name: 'Judy', description: 'Some comment'}, {name: 'Vanilly', description: 'Some comment'},{name: 'Nolan', description: 'Some comment'}, {name: 'Pino', description: 'Some comment'},{name: 'Ryne', description: 'Some comment'}, {name: 'Scott', description: 'Some comment'},{name: 'Son', description: 'Some comment'}, {name: 'Bann', description: 'Some comment'},],
-        list: 1
+        // list: 1
     },
     mounted(){
         //    this.fetchData()
+        this.put();
         },
     methods: {
+        put() {
+        console.log(this.tag);
+        },
 
         // resu(){
         //         return this.result.filter(res =>{ return res.ar_name.toLowerCase().includes(this.search.toLowerCase())});
@@ -68,8 +77,8 @@
         //    }
     }
 
-    })
-    </script>
+    });
+</script>
 
 </body>
 </html>
